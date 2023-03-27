@@ -5,14 +5,14 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const initialData = [
   {
-    date: "2023-03-27",
+    date: "2023-03-28",
     id: "1235",
     clienteMin: "Cliente2",
     obraMin: "Obra2",
     index: 1,
   },
   {
-    date: "2023-03-27",
+    date: "2023-03-28",
     id: "1234",
     clienteMin: "Cliente1",
     obraMin: "Obra1",
@@ -23,14 +23,14 @@ const initialData = [
     id: "1237",
     clienteMin: "Cliente4",
     obraMin: "Obra4",
-    index: 1,
+    index: 3,
   },
   {
     date: "2023-03-28",
     id: "1236",
     clienteMin: "Cliente3",
     obraMin: "Obra3",
-    index: 0,
+    index: 2,
   },
 ];
 
@@ -69,8 +69,42 @@ function App() {
     data[modifiedTaskIndex].index = destination.index;
 
     sortTasks(data);
+    //modify indexes
+    if (source.droppableId === destination.droppableId) {
+      for (let i = 0; i < data.length; i++) {
+        let currTask = data[i];
+        if (
+          currTask.date === destination.droppableId &&
+          currTask.id !== draggableId
+        ) {
+          if (
+            currTask.index === destination.index ||
+            (currTask.index < source.index &&
+              currTask.index > destination.index)
+          ) {
+            data[i].index++;
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        let currTask = data[i];
+        if (currTask.id === draggableId) continue;
+        if (currTask.date === destination.droppableId) {
+          if (currTask.index >= destination.index) {
+            data[i].index++;
+          }
+        } else if (currTask.date === source.droppableId) {
+          if (currTask.index > source.index) {
+            data[i].index--;
+          }
+        }
+      }
+    }
+
+    sortTasks(data);
     setData([...data]);
-    console.log(modifiedTaskIndex);
+    console.log(destination.index);
     console.log(data);
   };
 
