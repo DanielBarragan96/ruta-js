@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 export default function Task({ task, index }) {
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable draggableId={"" + task.date + index} index={index}>
       {(provided, snapshot) => (
         <div
           className="task"
@@ -12,7 +12,7 @@ export default function Task({ task, index }) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {task.clienteMin + task.obraMin}
+          {task.clienteMin + task.obraMin + "\n" + task.date + index}
         </div>
       )}
     </Draggable>

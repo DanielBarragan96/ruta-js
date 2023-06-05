@@ -3,16 +3,16 @@ import "./Column.css";
 import Task from "./Task";
 import { Droppable } from "react-beautiful-dnd";
 
-export default function Column({ date, tasks }) {
+export default function Column({ date, tasks, index }) {
   return (
     <div className="column_container">
       <div className="task_list">
         <h2>{date}</h2>
-        <Droppable droppableId={date}>
+        <Droppable droppableId={index.toString()}>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
-              {tasks.map((task) => (
-                <Task key={task.id} task={task} index={task.index}></Task>
+              {tasks.map((task, i) => (
+                <Task key={task.id} task={task} index={i}></Task>
               ))}
               {provided.placeholder}
             </div>
