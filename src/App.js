@@ -23,19 +23,62 @@ const initialData = [
     id: "1237",
     clienteMin: "Cliente4",
     obraMin: "Obra4",
-    index: 3,
+    index: 2,
   },
   {
-    date: "2023-03-28",
+    date: "2023-03-29",
     id: "1236",
     clienteMin: "Cliente3",
     obraMin: "Obra3",
-    index: 2,
+    index: 0,
+  },
+  {
+    date: "2023-03-31",
+    id: "1238",
+    clienteMin: "C9",
+    obraMin: "O9",
+    index: 0,
   },
 ];
 
+const DAYS_OF_WEEK = 7;
+const currWeek = [];
+
 function App() {
-  let [data, setData] = useState(initialData);
+  function formatDate(date) {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
+  function getMonday(d) {
+    d = new Date(d);
+    var day = d.getDay(),
+      diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+    return new Date(d.setDate(diff));
+  }
+
+  function castData(initialData) {
+    sortTasks(initialData);
+    let nextDay = getMonday(Date.parse(initialData[0].date));
+    let week = [];
+    for (let index = 0; index < DAYS_OF_WEEK; index++) {
+      let currDate = formatDate(nextDay);
+      week.push(initialData.filter((task) => task.date === currDate));
+      currWeek.push(currDate);
+      let date = nextDay.getDate();
+      nextDay.setDate(date + 1);
+    }
+    return week;
+  }
+
+  let [data, setData] = useState(castData(initialData));
 
   function sortTasks(array) {
     array.sort((task1, task2) => {
@@ -51,78 +94,28 @@ function App() {
   }
 
   let onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-
-    if (!destination) {
-      return;
-    }
+    const { destination, source } = result;
+    console.log(source);
+    console.log(destination);
 
     if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
+      !destination ||
+      (destination.droppableId === source.droppableId &&
+        destination.index === source.index)
     ) {
       return;
     }
-    let modifiedTaskIndex = data.findIndex((task) => task.id === draggableId);
 
-    data[modifiedTaskIndex].date = destination.droppableId;
-    data[modifiedTaskIndex].index = destination.index;
-
-    sortTasks(data);
-    //modify indexes
-    if (source.droppableId === destination.droppableId) {
-      for (let i = 0; i < data.length; i++) {
-        let currTask = data[i];
-        if (
-          currTask.date === destination.droppableId &&
-          currTask.id !== draggableId
-        ) {
-          if (
-            currTask.index === destination.index ||
-            (currTask.index < source.index &&
-              currTask.index > destination.index)
-          ) {
-            data[i].index++;
-          }
-        }
-      }
-    } else {
-      for (let i = 0; i < data.length; i++) {
-        let currTask = data[i];
-        if (currTask.id === draggableId) continue;
-        if (currTask.date === destination.droppableId) {
-          if (currTask.index >= destination.index) {
-            data[i].index++;
-          }
-        } else if (currTask.date === source.droppableId) {
-          if (currTask.index > source.index) {
-            data[i].index--;
-          }
-        }
-      }
-    }
-
-    sortTasks(data);
+    //TODO implement re order
     setData([...data]);
-    console.log(destination.index);
-    console.log(data);
+    return;
   };
-
-  let dates = [];
-  for (let index in data) {
-    if (!dates.includes(data[index].date)) dates.push(data[index].date);
-  }
-  sortTasks(data);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="app">
-        {dates.map((date) => (
-          <Column
-            key={date}
-            date={date}
-            tasks={data.filter((task) => task.date === date)}
-          />
+        {data.map((date, i) => (
+          <Column key={i} date={currWeek[i]} tasks={date} index={i} />
         ))}
       </div>
     </DragDropContext>
