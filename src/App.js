@@ -108,6 +108,15 @@ function App() {
     task.date = currWeek[destination.droppableId];
     data[source.droppableId].splice(source.index, 1);
     data[destination.droppableId].splice(destination.index, 0, task);
+
+    //recalculate tasks indexes
+    for (let day in currWeek) {
+      if (data[day] === undefined) continue;
+      for (let currTask = 0; currTask < data[day].length; currTask++) {
+        data[day][currTask].index = currTask;
+      }
+    }
+
     setData([...data]);
     return;
   };
