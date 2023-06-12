@@ -95,8 +95,6 @@ function App() {
 
   let onDragEnd = (result) => {
     const { destination, source } = result;
-    console.log(source);
-    console.log(destination);
 
     if (
       !destination ||
@@ -106,7 +104,10 @@ function App() {
       return;
     }
 
-    //TODO implement re order
+    let task = data[source.droppableId][source.index];
+    task.date = currWeek[destination.droppableId];
+    data[source.droppableId].splice(source.index, 1);
+    data[destination.droppableId].splice(destination.index, 0, task);
     setData([...data]);
     return;
   };
