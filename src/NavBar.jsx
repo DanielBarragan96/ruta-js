@@ -3,12 +3,8 @@ import React from "react";
 import "./NavBar.css";
 
 export default function NavBar({ date }) {
-  let newDate = new Date(
-    date.substring(0, 4),
-    date.substring(5, 7),
-    date.substring(8, 10)
-  );
-  newDate.setMonth(newDate.getMonth() - 1);
+  let newDate = new Date(date);
+  newDate.setMonth(newDate.getMonth());
   const month = newDate
     .toLocaleString("ES-MX", { month: "short" })
     .toUpperCase();
