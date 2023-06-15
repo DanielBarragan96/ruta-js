@@ -2,6 +2,21 @@ import { useState, useEffect } from "react";
 import React from "react";
 import "./NavBar.css";
 
+function ModalCreateNewTask({ displayModal, closeModal }) {
+  return (
+    <div
+      id="myModal"
+      className="modal"
+      style={{ display: displayModal ? "block" : "none" }}
+    >
+      <div className="modal-content">
+        <p>Some text in the Modal..</p>
+        <button onClick={closeModal}>Close</button>
+      </div>
+    </div>
+  );
+}
+
 export default function NavBar({ date }) {
   let newDate = new Date(date);
   newDate.setMonth(newDate.getMonth());
@@ -39,16 +54,7 @@ export default function NavBar({ date }) {
       <button disabled></button>
       <button className="date">{month + year}</button>
       <button onClick={showModal}>Add</button>
-      <div
-        id="myModal"
-        className="modal"
-        style={{ display: displayModal ? "block" : "none" }}
-      >
-        <div className="modal-content">
-          <p>Some text in the Modal..</p>
-          <button onClick={closeModal}>Close</button>
-        </div>
-      </div>
+      <ModalCreateNewTask displayModal={displayModal} closeModal={closeModal} />
     </div>
   );
 }
