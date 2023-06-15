@@ -1,5 +1,6 @@
 import "./App.css";
 import Column from "./Column";
+import NavBar from "./NavBar";
 import React, { useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -42,7 +43,7 @@ const initialData = [
 ];
 
 const DAYS_OF_WEEK = 7;
-const currWeek = [];
+let currWeek = [];
 
 function App() {
   function formatDate(date) {
@@ -68,6 +69,7 @@ function App() {
     sortTasks(initialData);
     let nextDay = getMonday(Date.parse(initialData[0].date));
     let week = [];
+    currWeek = [];
     for (let index = 0; index < DAYS_OF_WEEK; index++) {
       let currDate = formatDate(nextDay);
       week.push(initialData.filter((task) => task.date === currDate));
@@ -123,6 +125,7 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <NavBar date={currWeek[0]} />
       <div className="app">
         {data.map((date, i) => (
           <Column key={i} date={currWeek[i]} tasks={date} index={i} />

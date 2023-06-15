@@ -1,0 +1,8 @@
+.navbar_container {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 7px;
+  min-height: 5vw;
+  background-color: blue;
+  text-align: center;
+}
