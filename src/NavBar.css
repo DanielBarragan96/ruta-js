@@ -3,6 +3,12 @@
   border: 1px solid lightgrey;
   border-radius: 7px;
   min-height: 5vw;
-  background-color: blue;
+  background-color: coral;
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+button {
+  background-color: transparent;
 }

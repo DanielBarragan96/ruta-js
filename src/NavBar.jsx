@@ -16,10 +16,16 @@ export default function NavBar({ date }) {
     .getFullYear()
     .toString()
     .substring(2, 4);
+
+  let addTask = () => {
+    console.log("press");
+  };
+
   return (
     <div className="navbar_container">
-      <h1>{month + year}</h1>
-      <button>Add</button>
+      <button disabled></button>
+      <button className="date">{month + year}</button>
+      <button onClick={addTask}>Add</button>
     </div>
   );
 }
