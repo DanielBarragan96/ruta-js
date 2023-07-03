@@ -33,6 +33,9 @@
 .bandera {
   background-color: yellow;
   border: 1px transparent;
-  border-radius: 8px;
+  border-radius: 5px;
+  margin-bottom: 5px;
   padding: 5px;
+  text-align: center;
+  font-size: smaller;
 }

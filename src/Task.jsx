@@ -58,21 +58,15 @@ export default function Task({ task, index }) {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
-        <>
-          <div
-            className={"task " + taskType}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-          >
-            {task.bandera ? (
-              <div className="bandera">{task.bandera}</div>
-            ) : (
-              <></>
-            )}
-            <div>{text}</div>
-          </div>
-        </>
+        <div
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          {task.bandera ? <div className="bandera">{task.bandera}</div> : <></>}
+
+          <div className={"task " + taskType}>{text}</div>
+        </div>
       )}
     </Draggable>
   );
