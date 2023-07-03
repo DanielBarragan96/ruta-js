@@ -12,7 +12,7 @@ export default function Task({ task, index }) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {task.clienteMin + task.obraMin}
+          {[task.clienteMin, task.obraMin].join(" ")}
         </div>
       )}
     </Draggable>
