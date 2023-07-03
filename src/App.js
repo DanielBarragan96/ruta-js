@@ -21,6 +21,7 @@ const initialData = [
     index: 1,
     type: "E",
     equipo: "1Dem",
+    bandera: "X.Confirmar",
   },
   {
     date: "2023-03-28",
