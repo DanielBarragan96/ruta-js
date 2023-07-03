@@ -24,7 +24,11 @@ export default function Column({ date, tasks, index }) {
         <div className="title">{getColumnTitle(date)}</div>
         <Droppable droppableId={index.toString()}>
           {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="extra"
+            >
               {tasks.map((task, i) => (
                 <Task key={task.id} task={task} index={i}></Task>
               ))}
