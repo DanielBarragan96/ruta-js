@@ -1,7 +1,7 @@
 .task {
-  border: 1px solid;
-  border-radius: 2px;
-  padding: 2px;
+  border: 1px transparent;
+  border-radius: 8px;
+  padding: 5px;
   margin-bottom: 8px;
 }
 
@@ -28,4 +28,11 @@
 .task.taskType_none {
   background-color: black;
   color: white;
+}
+
+.bandera {
+  background-color: yellow;
+  border: 1px transparent;
+  border-radius: 8px;
+  padding: 5px;
 }

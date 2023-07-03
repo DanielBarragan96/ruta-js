@@ -21,35 +21,58 @@ function getTaskType(taskType) {
 export default function Task({ task, index }) {
   //let text = {[task.clienteMin, task.obraMin].join(<br />)};
   let taskType = getTaskType(task.type);
-  let text = [];
+  let text = <></>;
   if (taskType === "taskType_none") {
-    text = ["NONE"];
+    text = <>NONE</>;
   } else {
-    if (task.clienteMin) {
-      text.push(<>{task.clienteMin}</>);
-      text.push(<br />);
-    }
-    if (task.obraMin) {
-      text.push(<>{task.obraMin}</>);
-      text.push(<br />);
-    }
+    text = (
+      <>
+        {task.clienteMin ? (
+          <>
+            {task.clienteMin}
+            <br></br>
+          </>
+        ) : (
+          <></>
+        )}{" "}
+        {task.obraMin ? (
+          <>
+            {task.obraMin}
+            <br></br>
+          </>
+        ) : (
+          <></>
+        )}
+        {task.equipo ? (
+          <>
+            {task.equipo}
+            <br></br>
+          </>
+        ) : (
+          <></>
+        )}
+      </>
+    );
   }
 
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
-        <div
-          className={"task " + taskType}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
-          <div>
-            {text.map((item, i) => (
-              <div key={i.toString() + task.id}>{item}</div>
-            ))}
+        <>
+          <div
+            className={"task " + taskType}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            {task.bandera ? (
+              <div className="bandera">{task.bandera}</div>
+            ) : (
+              <></>
+            )}
+            <div>{text}</div>
           </div>
-        </div>
+        </>
       )}
     </Draggable>
   );
