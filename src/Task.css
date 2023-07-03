@@ -1,7 +1,31 @@
 .task {
-  border: 1px solid lightgrey;
+  border: 1px solid;
   border-radius: 2px;
-  padding: 8px;
+  padding: 2px;
   margin-bottom: 8px;
-  background-color: wheat;
+}
+
+.task.taskType_entrada {
+  background-color: chartreuse;
+}
+
+.task.taskType_salida {
+  background-color: coral;
+}
+
+.task.taskType_mantenimiento {
+  background-color: yellow;
+}
+
+.task.taskType_proveedor {
+  background-color: turquoise;
+}
+
+.task.taskType_divisor {
+  background-color: red;
+}
+
+.task.taskType_none {
+  background-color: black;
+  color: white;
 }
