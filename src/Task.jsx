@@ -21,11 +21,11 @@ function getTaskType(taskType) {
 export default function Task({ task, index }) {
   //let text = {[task.clienteMin, task.obraMin].join(<br />)};
   let taskType = getTaskType(task.type);
-  let text = <></>;
+  let innerComponent = <></>;
   if (taskType === "taskType_none") {
-    text = <>NONE</>;
+    innerComponent = <>{task.date}</>;
   } else {
-    text = (
+    innerComponent = (
       <>
         {task.clienteMin ? (
           <>
@@ -34,7 +34,7 @@ export default function Task({ task, index }) {
           </>
         ) : (
           <></>
-        )}{" "}
+        )}
         {task.obraMin ? (
           <>
             {task.obraMin}
@@ -65,7 +65,7 @@ export default function Task({ task, index }) {
         >
           {task.bandera ? <div className="bandera">{task.bandera}</div> : <></>}
 
-          <div className={"task " + taskType}>{text}</div>
+          <div className={"task " + taskType}>{innerComponent}</div>
         </div>
       )}
     </Draggable>

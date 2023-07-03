@@ -5,6 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 function getColumnTitle(date) {
   let newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + 1);
   let title = "";
   title += newDate.getDate().toString();
   title += Intl.DateTimeFormat("es", { month: "short" })

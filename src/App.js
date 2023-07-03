@@ -6,10 +6,10 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const initialData = [
   {
-    date: "2023-03-27",
+    date: "2023-03-29",
     id: "1",
     clienteMin: "MARCO",
-    index: 0,
+    index: 1,
     type: "P",
     equipo: "Bailarinas",
   },
@@ -67,9 +67,9 @@ const initialData = [
     equipo: "1Dem",
   },
   {
-    date: "2023-03-27",
+    date: "2023-03-29",
     id: "1400",
-    index: 1,
+    index: 2,
     type: "N",
     equipo: "1Dem",
   },
@@ -94,13 +94,15 @@ function App() {
   function getMonday(d) {
     d = new Date(d);
     var day = d.getDay();
-    let diff = d.getDate() - day + (day === 1 ? -6 : 1); // adjust when day is monday
+    //TODO error fecha
+    let diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
     return new Date(d.setDate(diff));
   }
 
   function castData(initialData) {
     sortTasks(initialData);
     let nextDay = getMonday(Date.parse(initialData[0].date));
+    console.log(nextDay.toString());
     let week = [];
     currWeek = [];
     for (let index = 0; index < DAYS_OF_WEEK; index++) {
