@@ -27,7 +27,7 @@ export default function Column({ date, tasks, index }) {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="extra"
+              className="draggable"
             >
               {tasks.map((task, i) => (
                 <Task key={task.id} task={task} index={i}></Task>
