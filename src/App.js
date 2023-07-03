@@ -6,6 +6,12 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const initialData = [
   {
+    date: "2023-03-27",
+    id: "1",
+    clienteMin: "MARCO",
+    index: 0,
+  },
+  {
     date: "2023-03-28",
     id: "1235",
     clienteMin: "Cliente2",
@@ -60,8 +66,8 @@ function App() {
 
   function getMonday(d) {
     d = new Date(d);
-    var day = d.getDay(),
-      diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+    var day = d.getDay();
+    let diff = d.getDate() - day + (day === 1 ? -6 : 1); // adjust when day is monday
     return new Date(d.setDate(diff));
   }
 
