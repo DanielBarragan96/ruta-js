@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import "./NavBar.css";
+import ReactModal from "react-modal";
 
-function ModalCreateNewTask({ displayModal, closeModal }) {
+function ModalCreateNewTask({
+  showModal,
+  setShowModal,
+  handleOpenModal,
+  handleCloseModal,
+}) {
+  ReactModal.setAppElement("#root");
   return (
-    <div
-      id="myModal"
-      className="modal"
-      style={{ display: displayModal ? "block" : "none" }}
+    <ReactModal
+      isOpen={showModal}
+      contentLabel="onRequestClose"
+      onRequestClose={handleCloseModal}
     >
-      <div className="modal-content">
-        <p>Some text in the Modal..</p>
-        <button onClick={closeModal}>Close</button>
-      </div>
-    </div>
+      <p>Modal text!</p>
+      <button onClick={handleCloseModal}>Close Modal</button>
+    </ReactModal>
   );
 }
 
@@ -23,38 +28,27 @@ export default function NavBar({ date }) {
   const month = newDate
     .toLocaleString("ES-MX", { month: "short" })
     .toUpperCase();
-  let year = newDate
-    .getFullYear()
-    .toString()
-    .substring(2, 4);
+  let year = newDate.getFullYear().toString().substring(2, 4);
 
-  let [displayModal, setDisplayModal] = useState(false);
-  let showModal = () => {
-    setDisplayModal(!displayModal);
+  let [showModal, setShowModal] = useState(false);
+  let handleOpenModal = () => {
+    setShowModal(true);
   };
-  let closeModal = () => {
-    setDisplayModal(false);
+  let handleCloseModal = () => {
+    setShowModal(false);
   };
-
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27) {
-        setDisplayModal(false);
-      }
-    };
-    window.addEventListener("keydown", handleEsc);
-
-    return () => {
-      window.removeEventListener("keydown", handleEsc);
-    };
-  }, []);
 
   return (
     <div className="navbar_container">
       <button disabled></button>
       <button className="date">{month + year}</button>
-      <button onClick={showModal}>Add</button>
-      <ModalCreateNewTask displayModal={displayModal} closeModal={closeModal} />
+      <button onClick={handleOpenModal}>Add</button>
+      <ModalCreateNewTask
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handleOpenModal={handleOpenModal}
+        handleCloseModal={handleCloseModal}
+      />
     </div>
   );
 }
