@@ -73,6 +73,12 @@ const initialData = [
     type: "N",
     equipo: "1Dem",
   },
+  {
+    date: "2023-03-29",
+    id: "1401",
+    index: 3,
+    type: "B",
+  },
 ];
 
 const DAYS_OF_WEEK = 7;
