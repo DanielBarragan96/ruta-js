@@ -6,23 +6,27 @@
 }
 
 .task.taskType_entrada {
-  background-color: chartreuse;
+  background-color: #a6d46f;
 }
 
 .task.taskType_salida {
-  background-color: coral;
+  background-color: #f58e6c;
 }
 
 .task.taskType_mantenimiento {
-  background-color: yellow;
+  background-color: #b88a16;
 }
 
 .task.taskType_proveedor {
-  background-color: turquoise;
+  background-color: #48abcf;
 }
 
 .task.taskType_divisor {
-  background-color: red;
+  background-color: #ff1500;
+}
+
+.task.taskType_bodega {
+  background-color: green;
 }
 
 .task.taskType_none {

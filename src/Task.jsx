@@ -14,6 +14,8 @@ function getTaskType(taskType) {
       return "taskType_mantenimiento";
     case "D":
       return "taskType_divisor";
+    case "B":
+      return "taskType_bodega";
     default:
       return "taskType_none";
   }
@@ -24,6 +26,8 @@ export default function Task({ task, index }) {
   let innerComponent = <></>;
   if (taskType === "taskType_none") {
     innerComponent = <>{task.date}</>;
+  } else if (taskType === "taskType_bodega") {
+    innerComponent = <>Bodega</>;
   } else {
     innerComponent = (
       <>
