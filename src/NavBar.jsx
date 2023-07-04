@@ -11,7 +11,7 @@ export default function NavBar({ date }) {
     .toUpperCase();
   let year = newDate.getFullYear().toString().substring(2, 4);
 
-  let [showModal, setShowModal] = useState(false);
+  let [showModal, setShowModal] = useState(true);
   let handleOpenModal = () => {
     setShowModal(true);
   };
@@ -26,8 +26,6 @@ export default function NavBar({ date }) {
       <button onClick={handleOpenModal}>Add</button>
       <ModalCreateNewTask
         showModal={showModal}
-        setShowModal={setShowModal}
-        handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
       />
     </div>
