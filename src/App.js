@@ -94,7 +94,6 @@ function App() {
   function getMonday(d) {
     d = new Date(d);
     var day = d.getDay();
-    //TODO error fecha
     let diff = d.getDate() + 1;
     if (day !== 0) {
       diff = d.getDate() - day + (day === 0 ? -6 : 1);
