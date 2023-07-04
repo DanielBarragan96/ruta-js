@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import "./CreateNewTask.css";
 
 export default function ModalCreateNewTask({
   showModal,
@@ -13,9 +14,13 @@ export default function ModalCreateNewTask({
       isOpen={showModal}
       contentLabel="onRequestClose"
       onRequestClose={handleCloseModal}
+      overlayClassName="Overlay"
+      className="Modal"
     >
-      <p>Modal text!</p>
-      <button onClick={handleCloseModal}>Close Modal</button>
+      <div className="InnerModal">
+        <p>Modal text!</p>
+        <button onClick={handleCloseModal}>Close Modal</button>
+      </div>
     </ReactModal>
   );
 }
