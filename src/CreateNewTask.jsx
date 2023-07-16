@@ -129,7 +129,7 @@ export default function ModalCreateNewTask({
         <div>
           <label htmlFor="index">Index:</label>
           <input
-            type="int"
+            type="number"
             id="index"
             placeholder="Index"
             value={index}
