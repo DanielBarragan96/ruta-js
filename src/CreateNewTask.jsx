@@ -5,7 +5,7 @@ import "./CreateNewTask.css";
 export default function ModalCreateNewTask({
   showModal,
   handleCloseModal,
-  taskIn,
+  task,
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -16,8 +16,8 @@ export default function ModalCreateNewTask({
     month < 10 ? "0" + month : month,
     day < 10 ? "0" + day : day,
   ].join("-");
-  if (taskIn === undefined)
-    taskIn = {
+  if (task === undefined)
+    task = {
       date: todayString,
       id: currDate.toString(),
       clienteMin: "",
@@ -31,7 +31,7 @@ export default function ModalCreateNewTask({
   ReactModal.setAppElement("#root");
   let maxYear = currDate.getFullYear() + 1;
 
-  let [task, setTask] = useState(taskIn);
+  let [formTask, setFormTask] = useState(task);
 
   return (
     <ReactModal
@@ -52,9 +52,9 @@ export default function ModalCreateNewTask({
             min="2017-01-01"
             max={maxYear + "-12-31"}
             onChange={(e) => {
-              setTask({ ...task, date: e.target.value });
+              setFormTask({ ...formTask, date: e.target.value });
             }}
-            value={task.date}
+            value={formTask.date}
           />
         </div>
         <div>
@@ -63,9 +63,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="cliente"
             placeholder="Cliente"
-            value={task.clienteMin}
+            value={formTask.clienteMin}
             onChange={(e) => {
-              setTask({ ...task, clienteMin: e.target.value });
+              setFormTask({ ...formTask, clienteMin: e.target.value });
             }}
           />
           <label htmlFor="obra">Obra:</label>
@@ -73,9 +73,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="obra"
             placeholder="Obra"
-            value={task.obraMin}
+            value={formTask.obraMin}
             onChange={(e) => {
-              setTask({ ...task, obraMin: e.target.value });
+              setFormTask({ ...formTask, obraMin: e.target.value });
             }}
           />
         </div>
@@ -85,9 +85,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="ES"
             placeholder="ES"
-            value={task.type}
+            value={formTask.type}
             onChange={(e) => {
-              setTask({ ...task, type: e.target.value });
+              setFormTask({ ...formTask, type: e.target.value });
             }}
           />
         </div>
@@ -97,9 +97,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="equipo"
             placeholder="Equipo"
-            value={task.equipo}
+            value={formTask.equipo}
             onChange={(e) => {
-              setTask({ ...task, equipo: e.target.value });
+              setFormTask({ ...formTask, equipo: e.target.value });
             }}
           />
         </div>
@@ -109,9 +109,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="bandera"
             placeholder="Bandera"
-            value={task.bandera}
+            value={formTask.bandera}
             onChange={(e) => {
-              setTask({ ...task, bandera: e.target.value });
+              setFormTask({ ...formTask, bandera: e.target.value });
             }}
           />
         </div>
@@ -121,9 +121,9 @@ export default function ModalCreateNewTask({
             type="number"
             id="index"
             placeholder="Index"
-            value={task.index}
+            value={formTask.index}
             onChange={(e) => {
-              setTask({ ...task, index: e.target.value });
+              setFormTask({ ...formTask, index: e.target.value });
             }}
           />
           <label htmlFor="id">Id:</label>
@@ -131,15 +131,15 @@ export default function ModalCreateNewTask({
             type="text"
             id="id"
             placeholder="Id"
-            value={task.id}
+            value={formTask.id}
             onChange={(e) => {
-              setTask({ ...task, id: e.target.value });
+              setFormTask({ ...formTask, id: e.target.value });
             }}
           />
         </div>
         <button
           onClick={() => {
-            console.log(task);
+            console.log(formTask);
           }}
         >
           Results
