@@ -5,7 +5,7 @@ import "./CreateNewTask.css";
 export default function ModalCreateNewTask({
   showModal,
   handleCloseModal,
-  task,
+  taskIn,
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -16,8 +16,8 @@ export default function ModalCreateNewTask({
     month < 10 ? "0" + month : month,
     day < 10 ? "0" + day : day,
   ].join("-");
-  if (task === undefined)
-    task = {
+  if (taskIn === undefined)
+    taskIn = {
       date: todayString,
       id: currDate.toString(),
       clienteMin: "",
@@ -25,18 +25,13 @@ export default function ModalCreateNewTask({
       index: 99,
       type: "E",
       equipo: "",
+      bandera: "",
     };
-  let [taskDate, setTaskDate] = useState(task.date);
+
   ReactModal.setAppElement("#root");
   let maxYear = currDate.getFullYear() + 1;
 
-  let [clienteMin, setClienteMin] = useState(task.clienteMin);
-  let [obraMin, setObraMin] = useState(task.obraMin);
-  let [equipo, setEquipo] = useState(task.equipo);
-  let [type, setType] = useState(task.type);
-  let [bandera, setBandera] = useState(task.type);
-  let [id, setId] = useState(task.id);
-  let [index, setIndex] = useState(task.index);
+  let [task, setTask] = useState(taskIn);
 
   return (
     <ReactModal
@@ -57,10 +52,9 @@ export default function ModalCreateNewTask({
             min="2017-01-01"
             max={maxYear + "-12-31"}
             onChange={(e) => {
-              task.date = e.target.value;
-              setTaskDate(e.target.value);
+              setTask({ ...task, date: e.target.value });
             }}
-            value={taskDate}
+            value={task.date}
           />
         </div>
         <div>
@@ -69,10 +63,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="cliente"
             placeholder="Cliente"
-            value={clienteMin}
+            value={task.clienteMin}
             onChange={(e) => {
-              task.clienteMin = e.target.value;
-              setClienteMin(e.target.value);
+              setTask({ ...task, clienteMin: e.target.value });
             }}
           />
           <label htmlFor="obra">Obra:</label>
@@ -80,10 +73,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="obra"
             placeholder="Obra"
-            value={obraMin}
+            value={task.obraMin}
             onChange={(e) => {
-              task.obraMin = e.target.value;
-              setObraMin(e.target.value);
+              setTask({ ...task, obraMin: e.target.value });
             }}
           />
         </div>
@@ -93,10 +85,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="ES"
             placeholder="ES"
-            value={type}
+            value={task.type}
             onChange={(e) => {
-              task.type = e.target.value;
-              setType(e.target.value);
+              setTask({ ...task, type: e.target.value });
             }}
           />
         </div>
@@ -106,10 +97,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="equipo"
             placeholder="Equipo"
-            value={equipo}
+            value={task.equipo}
             onChange={(e) => {
-              task.equipo = e.target.value;
-              setEquipo(e.target.value);
+              setTask({ ...task, equipo: e.target.value });
             }}
           />
         </div>
@@ -119,10 +109,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="bandera"
             placeholder="Bandera"
-            value={bandera}
+            value={task.bandera}
             onChange={(e) => {
-              task.bandera = e.target.value;
-              setBandera(e.target.value);
+              setTask({ ...task, bandera: e.target.value });
             }}
           />
         </div>
@@ -132,10 +121,9 @@ export default function ModalCreateNewTask({
             type="number"
             id="index"
             placeholder="Index"
-            value={index}
+            value={task.index}
             onChange={(e) => {
-              task.index = e.target.value;
-              setIndex(e.target.value);
+              setTask({ ...task, index: e.target.value });
             }}
           />
           <label htmlFor="id">Id:</label>
@@ -143,10 +131,9 @@ export default function ModalCreateNewTask({
             type="text"
             id="id"
             placeholder="Id"
-            value={id}
+            value={task.id}
             onChange={(e) => {
-              task.id = e.target.value;
-              setId(e.target.value);
+              setTask({ ...task, id: e.target.value });
             }}
           />
         </div>
