@@ -28,7 +28,7 @@ export default function ModalCreateNewTask({
     };
   let [taskDate, setTaskDate] = useState(task.date);
   ReactModal.setAppElement("#root");
-  let maxYear = currDate.getFullYear() + 100;
+  let maxYear = currDate.getFullYear() + 1;
 
   return (
     <ReactModal
