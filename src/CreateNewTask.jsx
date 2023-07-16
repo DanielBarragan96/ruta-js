@@ -42,7 +42,7 @@ export default function ModalCreateNewTask({
       className="Modal"
     >
       <div className="InnerModal">
-        <div>
+        <div className="row">
           <label htmlFor="date">Start date:</label>
 
           <input
@@ -57,7 +57,7 @@ export default function ModalCreateNewTask({
             value={formTask.date}
           />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="cliente">Cliente:</label>
           <input
             type="text"
@@ -79,7 +79,7 @@ export default function ModalCreateNewTask({
             }}
           />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="ES">ES:</label>
           <input
             type="text"
@@ -91,7 +91,7 @@ export default function ModalCreateNewTask({
             }}
           />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="equipo">Equipo:</label>
           <input
             type="text"
@@ -103,7 +103,7 @@ export default function ModalCreateNewTask({
             }}
           />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="bandera">Bandera:</label>
           <input
             type="text"
@@ -115,7 +115,7 @@ export default function ModalCreateNewTask({
             }}
           />
         </div>
-        <div>
+        <div className="row">
           <label htmlFor="index">Index:</label>
           <input
             type="number"
