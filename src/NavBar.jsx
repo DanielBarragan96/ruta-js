@@ -27,6 +27,17 @@ export default function NavBar({ date }) {
       <ModalCreateNewTask
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+        //TODO remove dummy data
+        task={{
+          date: "2023-03-28",
+          id: "1235",
+          clienteMin: "Cliente2",
+          obraMin: "Obra2",
+          index: 1,
+          type: "E",
+          equipo: "1Dem",
+          bandera: "X.Confirmar",
+        }}
       />
     </div>
   );
