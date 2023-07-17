@@ -1,7 +1,7 @@
 .navbar_container {
   min-height: 5vh;
   flex: 2;
-  background-color: coral;
+  background-color: #2d2d2d;
   text-align: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -9,4 +9,7 @@
 
 button {
   background-color: transparent;
+  color: white;
+  border: none;
+  background: none;
 }
