@@ -21,7 +21,6 @@ function getTaskType(taskType) {
   }
 }
 export default function Task({ task, index }) {
-  //let text = {[task.clienteMin, task.obraMin].join(<br />)};
   let taskType = getTaskType(task.type);
   let innerComponent = <></>;
   if (taskType === "taskType_none") {
