@@ -7,7 +7,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 const initialData = [
   {
     date: "2023-03-27",
-    id: "1",
+    id: "id1",
     clienteMin: "MARCO",
     index: 1,
     type: "P",
@@ -137,6 +137,16 @@ function App() {
     });
   }
 
+  function restartIndexes() {
+    //recalculate tasks indexes
+    for (let day in currWeek) {
+      if (data[day] === undefined) continue;
+      for (let currTask = 0; currTask < data[day].length; currTask++) {
+        data[day][currTask].index = currTask;
+      }
+    }
+  }
+
   let onDragEnd = (result) => {
     const { destination, source } = result;
 
@@ -153,21 +163,29 @@ function App() {
     data[source.droppableId].splice(source.index, 1);
     data[destination.droppableId].splice(destination.index, 0, task);
 
-    //recalculate tasks indexes
-    for (let day in currWeek) {
-      if (data[day] === undefined) continue;
-      for (let currTask = 0; currTask < data[day].length; currTask++) {
-        data[day][currTask].index = currTask;
-      }
-    }
+    restartIndexes();
 
     setData([...data]);
     return;
   };
 
+  let insertTask = (task) => {
+    let currDateIndex = currWeek.indexOf(task.date);
+    let taskIndex = data[currDateIndex].find(
+      (element) => element.id === task.id
+    );
+    if (taskIndex !== undefined) {
+      data[currDateIndex][taskIndex.index] = task;
+    } else {
+      data[currDateIndex].splice(task.index, 0, task);
+    }
+    restartIndexes();
+    setData(data);
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <NavBar date={currWeek[0]} />
+      <NavBar date={currWeek[0]} insertTask={insertTask} />
       <div className="app">
         {data.map((date, i) => (
           <Column key={i} date={currWeek[i]} tasks={date} index={i} />
