@@ -180,7 +180,7 @@ function App() {
       data[currDateIndex].splice(task.index, 0, task);
     }
     restartIndexes();
-    setData(data);
+    setData([...data]);
   };
 
   return (
