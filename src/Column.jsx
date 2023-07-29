@@ -11,10 +11,7 @@ function getColumnTitle(date) {
   title += Intl.DateTimeFormat("es", { month: "short" })
     .format(newDate)
     .toUpperCase();
-  title += newDate
-    .getFullYear()
-    .toString()
-    .substring(2);
+  title += newDate.getFullYear().toString().substring(2);
   return title;
 }
 
