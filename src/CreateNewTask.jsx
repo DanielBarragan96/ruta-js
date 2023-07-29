@@ -6,6 +6,7 @@ export default function ModalCreateNewTask({
   showModal,
   handleCloseModal,
   task,
+  insertTask,
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -139,12 +140,12 @@ export default function ModalCreateNewTask({
         </div>
         <button
           onClick={() => {
-            console.log(formTask);
+            insertTask(formTask);
           }}
         >
-          Results
+          UPDATE
         </button>
-        <button onClick={handleCloseModal}>Cancelar</button>
+        <button onClick={handleCloseModal}>CANCEL</button>
       </div>
     </ReactModal>
   );
