@@ -21,7 +21,7 @@ function getTaskType(taskType) {
   }
 }
 
-export default function Task({ task, index, onEdit }) {
+export default function Task({ task, index, onEdit, wasDragging }) {
   let taskType = getTaskType(task.type);
   let innerComponent = <></>;
   if (taskType === "taskType_none") {
@@ -66,7 +66,7 @@ export default function Task({ task, index, onEdit }) {
             className={"task " + taskType}
             onClick={(e) => {
               e.stopPropagation();
-              if (onEdit) onEdit(task);
+              if (!wasDragging?.current && onEdit) onEdit(task);
             }}
           >
             {innerComponent}

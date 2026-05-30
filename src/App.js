@@ -3,7 +3,7 @@ import Column from "./Column";
 import NavBar from "./NavBar";
 import TrashZone from "./TrashZone";
 import ModalCreateNewTask from "./CreateNewTask";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const initialData = [
@@ -164,6 +164,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const wasDragging = useRef(false);
 
   useEffect(() => {
     setData(castData(loadTasks(), anchorDate));
@@ -177,10 +178,14 @@ function App() {
     });
   };
 
-  let onDragStart = () => setIsDragging(true);
+  let onDragStart = () => {
+    wasDragging.current = true;
+    setIsDragging(true);
+  };
 
   let onDragEnd = (result) => {
     setIsDragging(false);
+    setTimeout(() => { wasDragging.current = false; }, 0);
     const { destination, source } = result;
 
     if (!destination) return;
@@ -267,6 +272,7 @@ function App() {
             onAddCard={() => openCreate(i)}
             onEdit={openEdit}
             isDragging={isDragging}
+            wasDragging={wasDragging}
           />
         ))}
       </div>

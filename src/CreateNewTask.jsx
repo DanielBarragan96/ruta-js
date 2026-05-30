@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import "./CreateNewTask.css";
 
@@ -43,6 +43,17 @@ export default function ModalCreateNewTask({
   let maxYear = currDate.getFullYear() + 1;
 
   let [formTask, setFormTask] = useState(task);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Enter") {
+        insertTask(formTask);
+        handleCloseModal();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [formTask, insertTask, handleCloseModal]);
 
   return (
     <ReactModal

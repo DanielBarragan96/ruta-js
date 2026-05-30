@@ -17,7 +17,7 @@ function getColumnParts(date) {
   return { dayInitial, dateLabel };
 }
 
-export default function Column({ date, tasks, index, onAddCard, onEdit, isDragging }) {
+export default function Column({ date, tasks, index, onAddCard, onEdit, isDragging, wasDragging }) {
   const { dayInitial, dateLabel } = getColumnParts(date);
   return (
     <div className="column_container">
@@ -39,7 +39,7 @@ export default function Column({ date, tasks, index, onAddCard, onEdit, isDraggi
               }}
             >
               {tasks.map((task, i) => (
-                <Task key={task.id} task={task} index={i} onEdit={onEdit} />
+                <Task key={task.id} task={task} index={i} onEdit={onEdit} wasDragging={wasDragging} />
               ))}
               {provided.placeholder}
             </div>
