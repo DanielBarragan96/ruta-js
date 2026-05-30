@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactModal from "react-modal";
 import "./CreateNewTask.css";
 
@@ -44,6 +44,9 @@ export default function ModalCreateNewTask({
   let maxYear = currDate.getFullYear() + 1;
 
   let [formTask, setFormTask] = useState(task);
+  const clienteRef = useRef(null);
+
+  useEffect(() => { clienteRef.current?.focus(); }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -78,26 +81,6 @@ export default function ModalCreateNewTask({
             value={formTask.date}
           />
         </div>
-        <div className="row">
-          <label htmlFor="cliente">Cliente:</label>
-          <input
-            type="text"
-            id="cliente"
-            placeholder="Cliente"
-            value={formTask.clienteMin}
-            onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
-          />
-        </div>
-        <div className="row">
-          <label htmlFor="obra">Obra:</label>
-          <input
-            type="text"
-            id="obra"
-            placeholder="Obra / Dirección"
-            value={formTask.obraMin}
-            onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
-          />
-        </div>
 
         <div className="tipo-section">
           <label>Tipo:</label>
@@ -117,6 +100,27 @@ export default function ModalCreateNewTask({
         </div>
 
         <div className="row">
+          <label htmlFor="cliente">Cliente:</label>
+          <input
+            ref={clienteRef}
+            type="text"
+            id="cliente"
+            placeholder="Cliente"
+            value={formTask.clienteMin}
+            onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
+          />
+        </div>
+        <div className="row">
+          <label htmlFor="obra">Obra:</label>
+          <input
+            type="text"
+            id="obra"
+            placeholder="Obra / Dirección"
+            value={formTask.obraMin}
+            onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
+          />
+        </div>
+        <div className="row">
           <label htmlFor="equipo">Equipo:</label>
           <input
             type="text"
@@ -134,24 +138,6 @@ export default function ModalCreateNewTask({
             placeholder="Notas"
             value={formTask.notas}
             onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
-          />
-        </div>
-        <div className="row">
-          <label htmlFor="index">Orden:</label>
-          <input
-            type="number"
-            id="index"
-            placeholder="Orden"
-            value={formTask.index}
-            onChange={(e) => setFormTask({ ...formTask, index: parseInt(e.target.value, 10) })}
-          />
-          <label htmlFor="id">Id:</label>
-          <input
-            type="text"
-            id="id"
-            placeholder="Id"
-            value={formTask.id}
-            readOnly
           />
         </div>
         <div className="modal-actions">
