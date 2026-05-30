@@ -23,7 +23,7 @@ const initialData = [
     index: 1,
     type: "E",
     equipo: "1Dem",
-    bandera: "X.Confirmar",
+    notas: "X.Confirmar",
   },
   {
     date: "2023-03-28",
@@ -90,7 +90,11 @@ const STORAGE_KEY = "ruta-js-tasks";
 function loadTasks() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : initialData;
+    if (!stored) return initialData;
+    const tasks = JSON.parse(stored);
+    // migrate old field name
+    tasks.forEach((t) => { if ("bandera" in t) { t.notas = t.bandera; delete t.bandera; } });
+    return tasks;
   } catch {
     return initialData;
   }
@@ -312,7 +316,7 @@ function App() {
       index: data[dayIndex].length,
       type: "E",
       equipo: "",
-      bandera: "",
+      notas: "",
       _isNew: true,
     });
     setShowModal(true);

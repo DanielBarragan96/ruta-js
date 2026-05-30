@@ -61,7 +61,7 @@ export default function Task({ task, index, onEdit, wasDragging }) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {task.bandera ? <div className="bandera">{task.bandera}</div> : null}
+          {task.notas ? <div className="notas">{task.notas}</div> : null}
           <div
             className={"task " + taskType}
             onClick={(e) => {

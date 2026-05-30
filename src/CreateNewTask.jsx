@@ -37,7 +37,7 @@ export default function ModalCreateNewTask({
       index: 99,
       type: "E",
       equipo: "",
-      bandera: "",
+      notas: "",
     };
 
   ReactModal.setAppElement("#root");
@@ -127,13 +127,13 @@ export default function ModalCreateNewTask({
           />
         </div>
         <div className="row">
-          <label htmlFor="bandera">Bandera:</label>
+          <label htmlFor="notas">Notas:</label>
           <input
             type="text"
-            id="bandera"
-            placeholder="Bandera"
-            value={formTask.bandera}
-            onChange={(e) => setFormTask({ ...formTask, bandera: e.target.value })}
+            id="notas"
+            placeholder="Notas"
+            value={formTask.notas}
+            onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
           />
         </div>
         <div className="row">

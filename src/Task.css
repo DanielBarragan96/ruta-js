@@ -37,7 +37,7 @@
 
 @media (max-width: 768px) {
   .task,
-  .bandera {
+  .notas {
     max-width: 88%;
     margin-left: auto;
     margin-right: auto;
@@ -47,7 +47,7 @@
   }
 }
 
-.bandera {
+.notas {
   background-color: yellow;
   border: 1px transparent;
   border-radius: 5px;
