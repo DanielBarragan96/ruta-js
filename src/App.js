@@ -171,6 +171,22 @@ function App() {
   const [editingTask, setEditingTask] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const wasDragging = useRef(false);
+  const lastPointerPos = useRef({ x: 0, y: 0 });
+
+  // Track pointer position during drag for manual day-tab hit detection on mobile
+  useEffect(() => {
+    if (!isDragging) return;
+    const track = (e) => {
+      const src = e.touches ? e.touches[0] : e;
+      lastPointerPos.current = { x: src.clientX, y: src.clientY };
+    };
+    document.addEventListener("mousemove", track);
+    document.addEventListener("touchmove", track, { passive: true });
+    return () => {
+      document.removeEventListener("mousemove", track);
+      document.removeEventListener("touchmove", track);
+    };
+  }, [isDragging]);
 
   useEffect(() => {
     setData(castData(loadTasks(), anchorDate));
@@ -188,33 +204,47 @@ function App() {
   let onDragStart = () => {
     wasDragging.current = true;
     setIsDragging(true);
+    lastPointerPos.current = { x: -1, y: -1 }; // reset so a stationary drop doesn't match tab-0
   };
+
+  // Check if the last pointer position is over any day tab element
+  function getDayTabUnderPointer() {
+    const { x, y } = lastPointerPos.current;
+    const tabs = document.querySelectorAll("[data-day-tab]");
+    for (const tab of tabs) {
+      const r = tab.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) continue; // hidden on desktop
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+        return parseInt(tab.getAttribute("data-day-tab"), 10);
+      }
+    }
+    return -1;
+  }
 
   let onDragEnd = (result) => {
     setIsDragging(false);
     setTimeout(() => { wasDragging.current = false; }, 0);
     const { destination, source } = result;
 
-    if (!destination) return;
-
-    // Dropped on a day tab — move to that day and navigate there
-    if (destination.droppableId.startsWith("tab-")) {
-      const destDayIndex = parseInt(destination.droppableId.split("-")[1], 10);
+    // Pointer-based day tab detection — works on mobile where rbd Droppable
+    // hit detection is unreliable (hidden columns corrupt the Droppable registry)
+    const tabDayIndex = getDayTabUnderPointer();
+    if (tabDayIndex !== -1) {
       const srcDayIndex = parseInt(source.droppableId, 10);
-      if (destDayIndex === srcDayIndex) {
-        setSelectedDayIndex(destDayIndex);
-        return;
+      if (tabDayIndex !== srcDayIndex) {
+        const task = data[srcDayIndex][source.index];
+        task.date = currWeek[tabDayIndex];
+        data[srcDayIndex].splice(source.index, 1);
+        data[tabDayIndex].push(task);
+        restartIndexes();
+        saveTasks(data.flat());
+        setData([...data]);
       }
-      const task = data[srcDayIndex][source.index];
-      task.date = currWeek[destDayIndex];
-      data[srcDayIndex].splice(source.index, 1);
-      data[destDayIndex].push(task);
-      setSelectedDayIndex(destDayIndex);
-      restartIndexes();
-      saveTasks(data.flat());
-      setData([...data]);
+      setSelectedDayIndex(tabDayIndex);
       return;
     }
+
+    if (!destination) return;
 
     // Dropped on the trash zone — delete the task
     if (destination.droppableId === "trash") {
@@ -299,7 +329,7 @@ function App() {
   };
 
   return (
-    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd} enableUserSelectHack={false}>
       <NavBar
         date={currWeek[0]}
         onPrevWeek={() => shiftWeek(-1)}
@@ -311,6 +341,7 @@ function App() {
         currWeek={currWeek}
         selectedDayIndex={selectedDayIndex}
         onSelectDay={setSelectedDayIndex}
+        isDragging={isDragging}
       />
       <div className="app">
         {data.map((tasks, i) => (
