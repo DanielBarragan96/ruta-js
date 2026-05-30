@@ -146,3 +146,60 @@ button:disabled {
 .react-calendar__month-view__weekdays abbr {
   text-decoration: none;
 }
+
+/* Mobile-only day tab strip */
+.day-tab-strip {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .day-tab-strip {
+    display: flex;
+    grid-column: 1 / -1; /* span all 3 navbar grid columns */
+    width: 100%;
+    gap: 2px;
+    padding: 4px 0;
+  }
+
+  .day-tab {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px; /* minimum tap/drop target per iOS HIG */
+    padding: 10px 2px;
+    border: none;
+    border-radius: 6px;
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.12s;
+    user-select: none;
+  }
+
+  .day-tab--active {
+    background: var(--accent);
+    color: #0f0f1a;
+    font-weight: 600;
+  }
+
+  .day-tab--today {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .day-tab--today.day-tab--active {
+    color: #0f0f1a;
+  }
+
+  .day-tab--drop {
+    background: var(--accent);
+    color: #0f0f1a;
+    font-weight: 700;
+    transform: scaleY(1.15);
+    opacity: 1;
+  }
+}

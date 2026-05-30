@@ -59,3 +59,18 @@
 .draggable:hover {
   background-color: rgba(255, 255, 255, 0.03);
 }
+
+@media (max-width: 768px) {
+  .column_container {
+    display: none;
+  }
+  .column_container--active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .draggable {
+    /* 100vh on iOS Safari excludes browser chrome; tune during testing if content clips */
+    min-height: calc(100vh - 120px);
+  }
+}

@@ -120,6 +120,11 @@ function getMonday(d) {
   return date;
 }
 
+function getTodayDayIndex() {
+  const day = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+  return day === 0 ? 6 : day - 1; // ISO Mon=0, Tue=1, ..., Sun=6
+}
+
 function sortTasks(array) {
   array.sort((task1, task2) => {
     const task1Date = Date.parse(task1.date);
@@ -161,6 +166,7 @@ function App() {
   const todayMonday = formatDate(getMonday(new Date()));
   const [anchorDate, setAnchorDate] = useState(todayMonday);
   const [data, setData] = useState(() => castData(loadTasks(), todayMonday));
+  const [selectedDayIndex, setSelectedDayIndex] = useState(getTodayDayIndex);
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -176,6 +182,7 @@ function App() {
       d.setDate(d.getDate() + dir * 7);
       return formatDate(d);
     });
+    setSelectedDayIndex(0);
   };
 
   let onDragStart = () => {
@@ -189,6 +196,25 @@ function App() {
     const { destination, source } = result;
 
     if (!destination) return;
+
+    // Dropped on a day tab — move to that day and navigate there
+    if (destination.droppableId.startsWith("tab-")) {
+      const destDayIndex = parseInt(destination.droppableId.split("-")[1], 10);
+      const srcDayIndex = parseInt(source.droppableId, 10);
+      if (destDayIndex === srcDayIndex) {
+        setSelectedDayIndex(destDayIndex);
+        return;
+      }
+      const task = data[srcDayIndex][source.index];
+      task.date = currWeek[destDayIndex];
+      data[srcDayIndex].splice(source.index, 1);
+      data[destDayIndex].push(task);
+      setSelectedDayIndex(destDayIndex);
+      restartIndexes();
+      saveTasks(data.flat());
+      setData([...data]);
+      return;
+    }
 
     // Dropped on the trash zone — delete the task
     if (destination.droppableId === "trash") {
@@ -263,7 +289,13 @@ function App() {
         date={currWeek[0]}
         onPrevWeek={() => shiftWeek(-1)}
         onNextWeek={() => shiftWeek(1)}
-        onSelectDate={(date) => setAnchorDate(formatDate(getMonday(date)))}
+        onSelectDate={(date) => {
+          setAnchorDate(formatDate(getMonday(date)));
+          setSelectedDayIndex(0);
+        }}
+        currWeek={currWeek}
+        selectedDayIndex={selectedDayIndex}
+        onSelectDay={setSelectedDayIndex}
       />
       <div className="app">
         {data.map((tasks, i) => (
@@ -277,6 +309,7 @@ function App() {
             isDragging={isDragging}
             wasDragging={wasDragging}
             isToday={currWeek[i] === formatDate(new Date())}
+            isActive={i === selectedDayIndex}
           />
         ))}
       </div>
