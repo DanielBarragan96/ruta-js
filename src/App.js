@@ -3,8 +3,10 @@ import Column from "./Column";
 import NavBar from "./NavBar";
 import TrashZone from "./TrashZone";
 import ModalCreateNewTask from "./CreateNewTask";
+import LoginForm from "./LoginForm";
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
+import supabase from "./supabaseClient";
 
 const initialData = [
   {
@@ -86,13 +88,13 @@ const initialData = [
 const DAYS_OF_WEEK = 7;
 let currWeek = [];
 const STORAGE_KEY = "ruta-js-tasks";
+const CACHE_KEY = "ruta-js-cache";
 
 function loadTasks() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) return initialData;
     const tasks = JSON.parse(stored);
-    // migrate old field name
     tasks.forEach((t) => { if ("bandera" in t) { t.notas = t.bandera; delete t.bandera; } });
     return tasks;
   } catch {
@@ -102,6 +104,15 @@ function loadTasks() {
 
 function saveTasks(flatTasks) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(flatTasks));
+}
+
+function loadCache() {
+  try {
+    const stored = localStorage.getItem(CACHE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
 }
 
 function formatDate(date) {
@@ -118,15 +129,15 @@ function formatDate(date) {
 
 function getMonday(d) {
   const date = new Date(d);
-  const day = date.getDay(); // 0=Sun, 1=Mon … 6=Sat
-  const diff = day === 0 ? -6 : 1 - day; // ISO 8601: week starts Monday
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
   date.setDate(date.getDate() + diff);
   return date;
 }
 
 function getTodayDayIndex() {
-  const day = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
-  return day === 0 ? 6 : day - 1; // ISO Mon=0, Tue=1, ..., Sun=6
+  const day = new Date().getDay();
+  return day === 0 ? 6 : day - 1;
 }
 
 function sortTasks(array) {
@@ -169,13 +180,66 @@ function App() {
 
   const todayMonday = formatDate(getMonday(new Date()));
   const [anchorDate, setAnchorDate] = useState(todayMonday);
-  const [data, setData] = useState(() => castData(loadTasks(), todayMonday));
+  const [data, setData] = useState(() => castData(loadCache(), todayMonday));
+  const [session, setSession] = useState(null);
   const [selectedDayIndex, setSelectedDayIndex] = useState(getTodayDayIndex);
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
+  const localMutating = useRef(false);
+  const anchorDateRef = useRef(anchorDate);
+  const saveQueue = useRef(Promise.resolve());
+
+  async function loadTasksAsync() {
+    const { data: rows, error } = await supabase.from('rutas').select('*').order('fecha').order('index');
+    if (error) {
+      try { const cached = localStorage.getItem(CACHE_KEY); return cached ? JSON.parse(cached) : []; } catch { return []; }
+    }
+    const tasks = rows.map(row => ({ id: row.id, date: row.fecha, index: row.index, type: row.tipo, clienteMin: row.clientemin, obraMin: row.obramin, equipo: row.equipo, notas: row.notas }));
+    localStorage.setItem(CACHE_KEY, JSON.stringify(tasks));
+    return tasks;
+  }
+
+  function saveTasks(flatTasks) {
+    if (!session) return;
+    saveQueue.current = saveQueue.current.then(async () => {
+      localMutating.current = true;
+      const rows = flatTasks.map(t => ({ id: t.id || undefined, fecha: t.date, index: t.index, tipo: t.type, clientemin: t.clienteMin, obramin: t.obraMin, equipo: t.equipo, notas: t.notas }));
+      await supabase.from('rutas').delete().gte('fecha', '1900-01-01');
+      if (rows.length > 0) {
+        const { error } = await supabase.from('rutas').insert(rows);
+        if (error) { console.error('saveTasks error:', error); }
+        else { localStorage.setItem(CACHE_KEY, JSON.stringify(flatTasks)); }
+      }
+      localMutating.current = false;
+    });
+  }
+
+  useEffect(() => { anchorDateRef.current = anchorDate; }, [anchorDate]);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => setSession(session));
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!session) return;
+    loadTasksAsync().then(tasks => { setData([...castData(tasks, anchorDate)]); });
+  }, [anchorDate, session]);
+
+  useEffect(() => {
+    if (!session) return;
+    const channel = supabase.channel('tasks-changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'rutas' }, () => {
+        if (localMutating.current) return;
+        loadTasksAsync().then(tasks => setData([...castData(tasks, anchorDateRef.current)]));
+      })
+      .subscribe();
+    return () => supabase.removeChannel(channel);
+  }, [session]);
 
   // Track pointer position during drag for manual day-tab hit detection on mobile
   useEffect(() => {
@@ -192,10 +256,6 @@ function App() {
     };
   }, [isDragging]);
 
-  useEffect(() => {
-    setData(castData(loadTasks(), anchorDate));
-  }, [anchorDate]);
-
   const shiftWeek = (dir) => {
     setAnchorDate(prev => {
       const d = new Date(prev + "T00:00:00");
@@ -208,7 +268,7 @@ function App() {
   let onDragStart = () => {
     wasDragging.current = true;
     setIsDragging(true);
-    lastPointerPos.current = { x: -1, y: -1 }; // reset so a stationary drop doesn't match tab-0
+    lastPointerPos.current = { x: -1, y: -1 };
   };
 
   // Check if the last pointer position is over any day tab element
@@ -310,7 +370,7 @@ function App() {
   let openCreate = (dayIndex) => {
     setEditingTask({
       date: currWeek[dayIndex],
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       clienteMin: "",
       obraMin: "",
       index: data[dayIndex].length,
@@ -332,6 +392,8 @@ function App() {
     setEditingTask(null);
   };
 
+  if (!session) return <LoginForm />;
+
   return (
     <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd} enableUserSelectHack={false}>
       <NavBar
@@ -346,6 +408,7 @@ function App() {
         selectedDayIndex={selectedDayIndex}
         onSelectDay={setSelectedDayIndex}
         isDragging={isDragging}
+        onSignOut={() => supabase.auth.signOut()}
       />
       <div className="app">
         {data.map((tasks, i) => (

@@ -31,7 +31,7 @@ export default function ModalCreateNewTask({
   if (task == null)
     task = {
       date: todayString,
-      id: currDate.toString(),
+      id: crypto.randomUUID(),
       clienteMin: "",
       obraMin: "",
       index: 99,
@@ -151,7 +151,7 @@ export default function ModalCreateNewTask({
             id="id"
             placeholder="Id"
             value={formTask.id}
-            onChange={(e) => setFormTask({ ...formTask, id: e.target.value })}
+            readOnly
           />
         </div>
         <div className="modal-actions">

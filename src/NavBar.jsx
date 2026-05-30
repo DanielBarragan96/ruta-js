@@ -25,6 +25,7 @@ export default function NavBar({
   selectedDayIndex,
   onSelectDay,
   isDragging,
+  onSignOut,
 }) {
   const [showCal, setShowCal] = useState(false);
   const [hoveredWeek, setHoveredWeek] = useState(null);
@@ -118,7 +119,17 @@ export default function NavBar({
       <button className="date" onClick={() => setShowCal((v) => !v)}>
         {month + year}
       </button>
-      <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "8px", paddingRight: "8px" }}>
+        <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
+        <button
+          className="nav-btn"
+          onClick={onSignOut}
+          style={{ fontSize: "1rem", opacity: 0.7 }}
+          title="Sign out"
+        >
+          ↩
+        </button>
+      </div>
 
       {showCal && (
         <div className="cal-overlay">
