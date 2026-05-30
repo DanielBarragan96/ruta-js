@@ -193,7 +193,7 @@ function App() {
   const saveQueue = useRef(Promise.resolve());
 
   async function loadTasksAsync() {
-    const { data: rows, error } = await supabase.from('rutas').select('*').order('fecha').order('index');
+    const { data: rows, error } = await supabase.from('Rutas').select('*').order('fecha').order('index');
     if (error) {
       try { const cached = localStorage.getItem(CACHE_KEY); return cached ? JSON.parse(cached) : []; } catch { return []; }
     }
@@ -207,9 +207,9 @@ function App() {
     saveQueue.current = saveQueue.current.then(async () => {
       localMutating.current = true;
       const rows = flatTasks.map(t => ({ id: t.id || undefined, fecha: t.date, index: t.index, tipo: t.type, clientemin: t.clienteMin, obramin: t.obraMin, equipo: t.equipo, notas: t.notas }));
-      await supabase.from('rutas').delete().gte('fecha', '1900-01-01');
+      await supabase.from('Rutas').delete().gte('fecha', '1900-01-01');
       if (rows.length > 0) {
-        const { error } = await supabase.from('rutas').insert(rows);
+        const { error } = await supabase.from('Rutas').insert(rows);
         if (error) { console.error('saveTasks error:', error); }
         else { localStorage.setItem(CACHE_KEY, JSON.stringify(flatTasks)); }
       }
@@ -233,7 +233,7 @@ function App() {
   useEffect(() => {
     if (!session) return;
     const channel = supabase.channel('tasks-changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'rutas' }, () => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'Rutas' }, () => {
         if (localMutating.current) return;
         loadTasksAsync().then(tasks => setData([...castData(tasks, anchorDateRef.current)]));
       })
