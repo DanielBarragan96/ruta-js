@@ -55,6 +55,16 @@ export default function ModalCreateNewTask({
         insertTask(taskToSave);
         handleCloseModal();
       }
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        const tag = document.activeElement?.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA") return;
+        e.preventDefault();
+        const idx = TIPOS.findIndex(t => t.code === formTask.type);
+        const next = e.key === "ArrowRight"
+          ? (idx + 1) % TIPOS.length
+          : (idx - 1 + TIPOS.length) % TIPOS.length;
+        setFormTask({ ...formTask, type: TIPOS[next].code });
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -82,7 +92,7 @@ export default function ModalCreateNewTask({
           />
         </div>
 
-        <div className="tipo-section">
+        <div className="row">
           <label>Tipo:</label>
           <div className="tipo-buttons">
             {TIPOS.map(({ code, label, color }) => (

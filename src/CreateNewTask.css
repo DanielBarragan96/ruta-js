@@ -65,33 +65,26 @@ input:focus {
   border-bottom-color: var(--accent);
 }
 
-.tipo-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.tipo-section > label {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
 .tipo-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  flex: 1;
 }
 
 .tipo-btn {
-  padding: 6px 14px;
+  flex: 1;
+  padding: 5px 2px;
   border-radius: 6px;
   border: 2px solid transparent;
   background: rgba(255, 255, 255, 0.07);
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
-  padding-top: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tipo-btn:hover {
