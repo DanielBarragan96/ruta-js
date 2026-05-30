@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import "./CreateNewTask.css";
 
+const TIPOS = [
+  { code: "E", label: "Entrada",   color: "#a6d46f" },
+  { code: "S", label: "Salida",    color: "#f58e6c" },
+  { code: "P", label: "Proveedor", color: "#48abcf" },
+  { code: "M", label: "Mantenim.", color: "#b88a16" },
+  { code: "D", label: "Divisor",   color: "#ff1500" },
+  { code: "B", label: "Bodega",    color: "#00a550" },
+];
+
 export default function ModalCreateNewTask({
   showModal,
   handleCloseModal,
@@ -50,12 +59,9 @@ export default function ModalCreateNewTask({
           <input
             type="date"
             id="date"
-            name="trip-start"
             min="2017-01-01"
             max={maxYear + "-12-31"}
-            onChange={(e) => {
-              setFormTask({ ...formTask, date: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, date: e.target.value })}
             value={formTask.date}
           />
         </div>
@@ -66,9 +72,7 @@ export default function ModalCreateNewTask({
             id="cliente"
             placeholder="Cliente"
             value={formTask.clienteMin}
-            onChange={(e) => {
-              setFormTask({ ...formTask, clienteMin: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
           />
         </div>
         <div className="row">
@@ -76,25 +80,29 @@ export default function ModalCreateNewTask({
           <input
             type="text"
             id="obra"
-            placeholder="Obra / Direccion"
+            placeholder="Obra / Dirección"
             value={formTask.obraMin}
-            onChange={(e) => {
-              setFormTask({ ...formTask, obraMin: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
           />
         </div>
-        <div className="row">
-          <label htmlFor="ES">Tipo:</label>
-          <input
-            type="text"
-            id="ES"
-            placeholder="E / S / P / M / D / B"
-            value={formTask.type}
-            onChange={(e) => {
-              setFormTask({ ...formTask, type: e.target.value });
-            }}
-          />
+
+        <div className="tipo-section">
+          <label>Tipo:</label>
+          <div className="tipo-buttons">
+            {TIPOS.map(({ code, label, color }) => (
+              <button
+                key={code}
+                type="button"
+                className={"tipo-btn" + (formTask.type === code ? " tipo-btn--active" : "")}
+                style={{ "--tipo-color": color }}
+                onClick={() => setFormTask({ ...formTask, type: code })}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
+
         <div className="row">
           <label htmlFor="equipo">Equipo:</label>
           <input
@@ -102,9 +110,7 @@ export default function ModalCreateNewTask({
             id="equipo"
             placeholder="Equipo"
             value={formTask.equipo}
-            onChange={(e) => {
-              setFormTask({ ...formTask, equipo: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
           />
         </div>
         <div className="row">
@@ -114,9 +120,7 @@ export default function ModalCreateNewTask({
             id="bandera"
             placeholder="Bandera"
             value={formTask.bandera}
-            onChange={(e) => {
-              setFormTask({ ...formTask, bandera: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, bandera: e.target.value })}
           />
         </div>
         <div className="row">
@@ -126,9 +130,7 @@ export default function ModalCreateNewTask({
             id="index"
             placeholder="Orden"
             value={formTask.index}
-            onChange={(e) => {
-              setFormTask({ ...formTask, index: parseInt(e.target.value, 10) });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, index: parseInt(e.target.value, 10) })}
           />
           <label htmlFor="id">Id:</label>
           <input
@@ -136,9 +138,7 @@ export default function ModalCreateNewTask({
             id="id"
             placeholder="Id"
             value={formTask.id}
-            onChange={(e) => {
-              setFormTask({ ...formTask, id: e.target.value });
-            }}
+            onChange={(e) => setFormTask({ ...formTask, id: e.target.value })}
           />
         </div>
         <div className="modal-actions">

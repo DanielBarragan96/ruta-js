@@ -10,6 +10,7 @@
 .date {
   text-align: center;
   justify-self: center;
+  padding-top: 0;
 }
 
 button {

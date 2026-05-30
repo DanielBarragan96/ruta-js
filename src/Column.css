@@ -42,10 +42,6 @@
   cursor: pointer;
 }
 
-/* During an active drag, cap height so the trash zone at the bottom has clear space */
-.draggable--drag-active {
-  max-height: calc(100vh - 160px);
-}
 
 .draggable:hover {
   background-color: rgba(255, 255, 255, 0.03);

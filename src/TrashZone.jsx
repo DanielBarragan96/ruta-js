@@ -15,7 +15,7 @@ export default function TrashZone({ isDragging }) {
             (snapshot.isDraggingOver ? " trash-zone--over" : "")
           }
         >
-          🗑 BORRAR
+          🗑
           {provided.placeholder}
         </div>
       )}

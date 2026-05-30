@@ -85,6 +85,20 @@ const initialData = [
 
 const DAYS_OF_WEEK = 7;
 let currWeek = [];
+const STORAGE_KEY = "ruta-js-tasks";
+
+function loadTasks() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : initialData;
+  } catch {
+    return initialData;
+  }
+}
+
+function saveTasks(flatTasks) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(flatTasks));
+}
 
 function formatDate(date) {
   var d = new Date(date),
@@ -146,13 +160,13 @@ function App() {
 
   const todayMonday = formatDate(getMonday(new Date()));
   const [anchorDate, setAnchorDate] = useState(todayMonday);
-  const [data, setData] = useState(() => castData(initialData, todayMonday));
+  const [data, setData] = useState(() => castData(loadTasks(), todayMonday));
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    setData(castData(initialData, anchorDate));
+    setData(castData(loadTasks(), anchorDate));
   }, [anchorDate]);
 
   const shiftWeek = (dir) => {
@@ -175,6 +189,7 @@ function App() {
     if (destination.droppableId === "trash") {
       data[source.droppableId].splice(source.index, 1);
       restartIndexes();
+      saveTasks(data.flat());
       setData([...data]);
       return;
     }
@@ -192,6 +207,7 @@ function App() {
     data[destination.droppableId].splice(destination.index, 0, task);
 
     restartIndexes();
+    saveTasks(data.flat());
     setData([...data]);
   };
 
@@ -205,6 +221,7 @@ function App() {
       data[currDateIndex].splice(task.index, 0, task);
     }
     restartIndexes();
+    saveTasks(data.flat());
     setData([...data]);
   };
 
