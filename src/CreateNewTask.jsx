@@ -17,7 +17,8 @@ export default function ModalCreateNewTask({
     month < 10 ? "0" + month : month,
     day < 10 ? "0" + day : day,
   ].join("-");
-  if (task === undefined)
+
+  if (task == null)
     task = {
       date: todayString,
       id: currDate.toString(),
@@ -43,9 +44,9 @@ export default function ModalCreateNewTask({
       className="Modal"
     >
       <div className="InnerModal">
+        <h2>TAREA</h2>
         <div className="row">
-          <label htmlFor="date">Start date:</label>
-
+          <label htmlFor="date">Fecha:</label>
           <input
             type="date"
             id="date"
@@ -69,11 +70,13 @@ export default function ModalCreateNewTask({
               setFormTask({ ...formTask, clienteMin: e.target.value });
             }}
           />
+        </div>
+        <div className="row">
           <label htmlFor="obra">Obra:</label>
           <input
             type="text"
             id="obra"
-            placeholder="Obra"
+            placeholder="Obra / Direccion"
             value={formTask.obraMin}
             onChange={(e) => {
               setFormTask({ ...formTask, obraMin: e.target.value });
@@ -81,11 +84,11 @@ export default function ModalCreateNewTask({
           />
         </div>
         <div className="row">
-          <label htmlFor="ES">ES:</label>
+          <label htmlFor="ES">Tipo:</label>
           <input
             type="text"
             id="ES"
-            placeholder="ES"
+            placeholder="E / S / P / M / D / B"
             value={formTask.type}
             onChange={(e) => {
               setFormTask({ ...formTask, type: e.target.value });
@@ -117,14 +120,14 @@ export default function ModalCreateNewTask({
           />
         </div>
         <div className="row">
-          <label htmlFor="index">Index:</label>
+          <label htmlFor="index">Orden:</label>
           <input
             type="number"
             id="index"
-            placeholder="Index"
+            placeholder="Orden"
             value={formTask.index}
             onChange={(e) => {
-              setFormTask({ ...formTask, index: e.target.value });
+              setFormTask({ ...formTask, index: parseInt(e.target.value, 10) });
             }}
           />
           <label htmlFor="id">Id:</label>
@@ -138,14 +141,20 @@ export default function ModalCreateNewTask({
             }}
           />
         </div>
-        <button
-          onClick={() => {
-            insertTask(formTask);
-          }}
-        >
-          UPDATE
-        </button>
-        <button onClick={handleCloseModal}>CANCEL</button>
+        <div className="modal-actions">
+          <button
+            className="btn-primary"
+            onClick={() => {
+              insertTask(formTask);
+              handleCloseModal();
+            }}
+          >
+            GUARDAR
+          </button>
+          <button className="btn-secondary" onClick={handleCloseModal}>
+            CANCELAR
+          </button>
+        </div>
       </div>
     </ReactModal>
   );

@@ -20,7 +20,8 @@ function getTaskType(taskType) {
       return "taskType_none";
   }
 }
-export default function Task({ task, index }) {
+
+export default function Task({ task, index, onEdit }) {
   let taskType = getTaskType(task.type);
   let innerComponent = <></>;
   if (taskType === "taskType_none") {
@@ -33,42 +34,43 @@ export default function Task({ task, index }) {
         {task.clienteMin ? (
           <>
             {task.clienteMin}
-            <br></br>
+            <br />
           </>
-        ) : (
-          <></>
-        )}
+        ) : null}
         {task.obraMin ? (
           <>
             {task.obraMin}
-            <br></br>
+            <br />
           </>
-        ) : (
-          <></>
-        )}
+        ) : null}
         {task.equipo ? (
           <>
             {task.equipo}
-            <br></br>
+            <br />
           </>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </>
     );
   }
 
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {task.bandera ? <div className="bandera">{task.bandera}</div> : <></>}
-
-          <div className={"task " + taskType}>{innerComponent}</div>
+          {task.bandera ? <div className="bandera">{task.bandera}</div> : null}
+          <div
+            className={"task " + taskType}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onEdit) onEdit(task);
+            }}
+          >
+            {innerComponent}
+          </div>
         </div>
       )}
     </Draggable>

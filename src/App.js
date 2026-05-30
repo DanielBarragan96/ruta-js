@@ -1,7 +1,9 @@
 import "./App.css";
 import Column from "./Column";
 import NavBar from "./NavBar";
-import React, { useState } from "react";
+import TrashZone from "./TrashZone";
+import ModalCreateNewTask from "./CreateNewTask";
+import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const initialData = [
@@ -84,61 +86,56 @@ const initialData = [
 const DAYS_OF_WEEK = 7;
 let currWeek = [];
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
+
+function getMonday(d) {
+  const date = new Date(d);
+  const day = date.getDay(); // 0=Sun, 1=Mon … 6=Sat
+  const diff = day === 0 ? -6 : 1 - day; // ISO 8601: week starts Monday
+  date.setDate(date.getDate() + diff);
+  return date;
+}
+
+function sortTasks(array) {
+  array.sort((task1, task2) => {
+    const task1Date = Date.parse(task1.date);
+    const task2Date = Date.parse(task2.date);
+    let dateDiff = task1Date - task2Date;
+    if (dateDiff === 0) {
+      return task1.index - task2.index;
+    }
+    return dateDiff;
+  });
+}
+
+function castData(tasks, anchorDate) {
+  sortTasks(tasks);
+  // "T00:00:00" prevents UTC midnight from shifting to previous day in negative UTC offsets
+  let monday = new Date(anchorDate + "T00:00:00");
+  let week = [];
+  currWeek = [];
+  for (let i = 0; i < DAYS_OF_WEEK; i++) {
+    let currDate = formatDate(monday);
+    week.push(tasks.filter((task) => task.date === currDate));
+    currWeek.push(currDate);
+    monday.setDate(monday.getDate() + 1);
+  }
+  return week;
+}
+
 function App() {
-  function formatDate(date) {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
-  }
-
-  function getMonday(d) {
-    d = new Date(d);
-    var day = d.getDay();
-    let diff = d.getDate() + 1;
-    if (day !== 0) {
-      diff = d.getDate() - day + (day === 0 ? -6 : 1);
-    }
-    return new Date(d.setDate(diff));
-  }
-
-  function castData(initialData) {
-    sortTasks(initialData);
-    let nextDay = getMonday(Date.parse(initialData[0].date));
-    let week = [];
-    currWeek = [];
-    for (let index = 0; index < DAYS_OF_WEEK; index++) {
-      let currDate = formatDate(nextDay);
-      week.push(initialData.filter((task) => task.date === currDate));
-      currWeek.push(currDate);
-      let date = nextDay.getDate();
-      nextDay.setDate(date + 1);
-    }
-    return week;
-  }
-
-  let [data, setData] = useState(castData(initialData));
-
-  function sortTasks(array) {
-    array.sort((task1, task2) => {
-      const task1Date = Date.parse(task1.date);
-      const task2Date = Date.parse(task2.date);
-      let dateDiff = task1Date - task2Date;
-
-      if (dateDiff === 0) {
-        return task1.index - task2.index;
-      }
-      return dateDiff;
-    });
-  }
 
   function restartIndexes() {
-    //recalculate tasks indexes
     for (let day in currWeek) {
       if (data[day] === undefined) continue;
       for (let currTask = 0; currTask < data[day].length; currTask++) {
@@ -147,13 +144,44 @@ function App() {
     }
   }
 
+  const todayMonday = formatDate(getMonday(new Date()));
+  const [anchorDate, setAnchorDate] = useState(todayMonday);
+  const [data, setData] = useState(() => castData(initialData, todayMonday));
+  const [showModal, setShowModal] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    setData(castData(initialData, anchorDate));
+  }, [anchorDate]);
+
+  const shiftWeek = (dir) => {
+    setAnchorDate(prev => {
+      const d = new Date(prev + "T00:00:00");
+      d.setDate(d.getDate() + dir * 7);
+      return formatDate(d);
+    });
+  };
+
+  let onDragStart = () => setIsDragging(true);
+
   let onDragEnd = (result) => {
+    setIsDragging(false);
     const { destination, source } = result;
 
+    if (!destination) return;
+
+    // Dropped on the trash zone — delete the task
+    if (destination.droppableId === "trash") {
+      data[source.droppableId].splice(source.index, 1);
+      restartIndexes();
+      setData([...data]);
+      return;
+    }
+
     if (
-      !destination ||
-      (destination.droppableId === source.droppableId &&
-        destination.index === source.index)
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
     ) {
       return;
     }
@@ -164,18 +192,15 @@ function App() {
     data[destination.droppableId].splice(destination.index, 0, task);
 
     restartIndexes();
-
     setData([...data]);
-    return;
   };
 
   let insertTask = (task) => {
     let currDateIndex = currWeek.indexOf(task.date);
-    let taskIndex = data[currDateIndex].find(
-      (element) => element.id === task.id
-    );
-    if (taskIndex !== undefined) {
-      data[currDateIndex][taskIndex.index] = task;
+    if (currDateIndex === -1) return;
+    let existing = data[currDateIndex].find((el) => el.id === task.id);
+    if (existing !== undefined) {
+      data[currDateIndex][existing.index] = task;
     } else {
       data[currDateIndex].splice(task.index, 0, task);
     }
@@ -183,14 +208,60 @@ function App() {
     setData([...data]);
   };
 
+  let openCreate = (dayIndex) => {
+    setEditingTask({
+      date: currWeek[dayIndex],
+      id: Date.now().toString(),
+      clienteMin: "",
+      obraMin: "",
+      index: data[dayIndex].length,
+      type: "E",
+      equipo: "",
+      bandera: "",
+    });
+    setShowModal(true);
+  };
+
+  let openEdit = (task) => {
+    setEditingTask({ ...task });
+    setShowModal(true);
+  };
+
+  let closeModal = () => {
+    setShowModal(false);
+    setEditingTask(null);
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <NavBar date={currWeek[0]} insertTask={insertTask} />
+    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+      <NavBar
+        date={currWeek[0]}
+        onPrevWeek={() => shiftWeek(-1)}
+        onNextWeek={() => shiftWeek(1)}
+        onSelectDate={(date) => setAnchorDate(formatDate(getMonday(date)))}
+      />
       <div className="app">
-        {data.map((date, i) => (
-          <Column key={i} date={currWeek[i]} tasks={date} index={i} />
+        {data.map((tasks, i) => (
+          <Column
+            key={i}
+            date={currWeek[i]}
+            tasks={tasks}
+            index={i}
+            onAddCard={() => openCreate(i)}
+            onEdit={openEdit}
+            isDragging={isDragging}
+          />
         ))}
       </div>
+      <TrashZone isDragging={isDragging} />
+      {showModal && editingTask && (
+        <ModalCreateNewTask
+          showModal={showModal}
+          handleCloseModal={closeModal}
+          task={editingTask}
+          insertTask={insertTask}
+        />
+      )}
     </DragDropContext>
   );
 }

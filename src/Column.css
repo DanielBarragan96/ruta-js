@@ -8,7 +8,7 @@
 .task_list {
   padding: 8px;
   transition: background-color 0.2s ease;
-  background-color: #2d2d2d;
+  background-color: var(--bg-surface);
   flex-grow: 1;
   flex: 4;
   min-height: 0vw;
@@ -19,10 +19,34 @@
   padding: 4px;
   margin-bottom: 8px;
   text-align: center;
-  display: grid;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-primary);
+}
+
+.title-day {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.title-date {
+  font-size: 0.85rem;
+  line-height: 1.2;
 }
 
 .draggable {
   min-height: 91vh;
+  cursor: pointer;
+}
+
+/* During an active drag, cap height so the trash zone at the bottom has clear space */
+.draggable--drag-active {
+  max-height: calc(100vh - 160px);
+}
+
+.draggable:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }

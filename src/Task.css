@@ -3,6 +3,7 @@
   border-radius: 8px;
   padding: 5px;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .task.taskType_entrada {

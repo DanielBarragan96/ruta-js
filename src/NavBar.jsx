@@ -1,44 +1,89 @@
-import { useState } from "react";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import "./NavBar.css";
-import ModalCreateNewTask from "./CreateNewTask";
 
-export default function NavBar({ date, insertTask }) {
-  let newDate = new Date(date);
-  newDate.setMonth(newDate.getMonth());
-  const month = newDate
+export default function NavBar({ date, onPrevWeek, onNextWeek, onSelectDate }) {
+  const [showCal, setShowCal] = useState(false);
+  const [hoveredWeek, setHoveredWeek] = useState(null);
+  const calRef = useRef(null);
+
+  // Single close mechanism: click anywhere outside the calendar container
+  useEffect(() => {
+    if (!showCal) return;
+    const handler = (e) => {
+      if (calRef.current && !calRef.current.contains(e.target)) {
+        setShowCal(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [showCal]);
+
+  // Returns the ISO Monday of the week containing date d (Monday-anchored)
+  const getWeekStart = (d) => {
+    const copy = new Date(d);
+    const day = copy.getDay();
+    copy.setDate(copy.getDate() - (day === 0 ? 6 : day - 1));
+    return copy.toISOString().slice(0, 10);
+  };
+
+  const tileClassName = ({ date: tileDate }) => {
+    if (!hoveredWeek) return null;
+    return getWeekStart(tileDate) === hoveredWeek ? "week-highlight" : null;
+  };
+
+  const tileContent = ({ date: tileDate }) => (
+    // Full-coverage div so onMouseEnter fires across the entire tile hit area
+    <div
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        top: 0,
+        left: 0,
+      }}
+      onMouseEnter={() => setHoveredWeek(getWeekStart(tileDate))}
+    />
+  );
+
+  // date prop is "YYYY-MM-DD"; parsing without time component can shift back
+  // 1 day in negative UTC offsets — +1 corrects for display only
+  const displayDate = new Date(date);
+  displayDate.setDate(displayDate.getDate() + 1);
+  const month = displayDate
     .toLocaleString("ES-MX", { month: "short" })
     .toUpperCase();
-  let year = newDate.getFullYear().toString().substring(2, 4);
-
-  //TODO remove force modal
-  let [showModal, setShowModal] = useState(true);
-  let handleOpenModal = () => {
-    setShowModal(true);
-  };
-  let handleCloseModal = () => {
-    setShowModal(false);
-  };
+  const year = displayDate.getFullYear().toString().substring(2, 4);
 
   return (
     <div className="navbar_container">
-      <button disabled></button>
-      <button className="date">{month + year}</button>
-      <button onClick={handleOpenModal}>Add</button>
-      <ModalCreateNewTask
-        showModal={showModal}
-        handleCloseModal={handleCloseModal}
-        //TODO remove dummy data
-        task={{
-          date: "2023-03-27",
-          id: "basuraid",
-          clienteMin: "MARCO",
-          index: 99,
-          type: "P",
-          equipo: "Bailarinas",
-        }}
-        insertTask={insertTask}
-      />
+      <button onClick={onPrevWeek}>&#8249;</button>
+      <button className="date" onClick={() => setShowCal((v) => !v)}>
+        {month + year}
+      </button>
+      <button onClick={onNextWeek}>&#8250;</button>
+
+      {showCal && (
+        <div className="cal-overlay">
+          <div
+            ref={calRef}
+            className="cal-container"
+            onMouseLeave={() => setHoveredWeek(null)}
+          >
+            <Calendar
+              calendarType="iso8601"
+              onClickDay={(date) => {
+                onSelectDate(date);
+                setShowCal(false);
+              }}
+              tileClassName={tileClassName}
+              tileContent={tileContent}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
