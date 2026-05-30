@@ -59,11 +59,11 @@ export default function NavBar({ date, onPrevWeek, onNextWeek, onSelectDate }) {
 
   return (
     <div className="navbar_container">
-      <button onClick={onPrevWeek}>&#8249;</button>
+      <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
       <button className="date" onClick={() => setShowCal((v) => !v)}>
         {month + year}
       </button>
-      <button onClick={onNextWeek}>&#8250;</button>
+      <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
 
       {showCal && (
         <div className="cal-overlay">

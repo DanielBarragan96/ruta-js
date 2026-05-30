@@ -2,9 +2,14 @@
   min-height: 5vh;
   flex: 2;
   background-color: var(--bg-elevated);
-  text-align: center;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+}
+
+.date {
+  text-align: center;
+  justify-self: center;
 }
 
 button {
@@ -20,6 +25,32 @@ button {
 button:disabled {
   opacity: 0.3;
   cursor: default;
+}
+
+.nav-btn {
+  font-size: 2.2rem;
+  padding: 0 16px;
+  padding-top: 0;
+  margin: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--text-primary);
+  transition: background 0.15s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  transform: scale(1.08);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+  background: var(--accent) !important;
+  color: #0f0f1a;
 }
 
 /* Calendar overlay */
