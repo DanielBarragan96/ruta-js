@@ -29,6 +29,10 @@
   background-color: #252540;
 }
 
+.task_list--weekend {
+  background-color: #252540;
+}
+
 .title--today .title-day {
   color: var(--accent);
 }

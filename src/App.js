@@ -422,6 +422,7 @@ function App() {
             isDragging={isDragging}
             wasDragging={wasDragging}
             isToday={currWeek[i] === formatDate(new Date())}
+            isWeekend={i >= 5}
             isActive={i === selectedDayIndex}
           />
         ))}
