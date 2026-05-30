@@ -202,7 +202,7 @@ button:disabled {
     color: #0f0f1a;
   }
 
-  /* All tabs pulse a border when a drag is in progress — signals they are drop targets */
+  /* All tabs show accent border while a drag is in progress */
   .day-tab--dragging {
     border-color: var(--accent);
     opacity: 0.85;
@@ -210,5 +210,14 @@ button:disabled {
 
   .day-tab--dragging.day-tab--active {
     opacity: 1;
+  }
+
+  /* Tab the pointer is currently over during a drag */
+  .day-tab--drop {
+    background: var(--accent);
+    color: #0f0f1a;
+    font-weight: 700;
+    opacity: 1;
+    transform: scaleY(1.12);
   }
 }
