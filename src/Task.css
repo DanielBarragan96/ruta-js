@@ -36,10 +36,13 @@
 }
 
 @media (max-width: 768px) {
-  .task {
+  .task,
+  .bandera {
     max-width: 88%;
     margin-left: auto;
     margin-right: auto;
+  }
+  .task {
     margin-bottom: 8px;
   }
 }

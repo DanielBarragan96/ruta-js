@@ -259,6 +259,20 @@ function App() {
     setData([...data]);
   };
 
+  let deleteTask = (task) => {
+    for (let day = 0; day < data.length; day++) {
+      const idx = data[day].findIndex((el) => el.id === task.id);
+      if (idx !== -1) {
+        data[day].splice(idx, 1);
+        restartIndexes();
+        saveTasks(data.flat());
+        setData([...data]);
+        break;
+      }
+    }
+    closeModal();
+  };
+
   let openCreate = (dayIndex) => {
     setEditingTask({
       date: currWeek[dayIndex],
@@ -269,12 +283,13 @@ function App() {
       type: "E",
       equipo: "",
       bandera: "",
+      _isNew: true,
     });
     setShowModal(true);
   };
 
   let openEdit = (task) => {
-    setEditingTask({ ...task });
+    setEditingTask({ ...task, _isNew: false });
     setShowModal(true);
   };
 
@@ -320,6 +335,7 @@ function App() {
           handleCloseModal={closeModal}
           task={editingTask}
           insertTask={insertTask}
+          onDelete={editingTask._isNew ? undefined : deleteTask}
         />
       )}
     </DragDropContext>

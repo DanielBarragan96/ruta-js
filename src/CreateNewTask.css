@@ -133,3 +133,25 @@ input:focus {
   font-size: 0.95rem;
   cursor: pointer;
 }
+
+.btn-danger {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .modal-actions {
+    flex-wrap: wrap;
+  }
+  .btn-danger {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 4px;
+  }
+}

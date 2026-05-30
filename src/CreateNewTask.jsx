@@ -16,6 +16,7 @@ export default function ModalCreateNewTask({
   handleCloseModal,
   task,
   insertTask,
+  onDelete,
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -47,7 +48,8 @@ export default function ModalCreateNewTask({
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Enter") {
-        insertTask(formTask);
+        const { _isNew, ...taskToSave } = formTask;
+        insertTask(taskToSave);
         handleCloseModal();
       }
     };
@@ -156,7 +158,8 @@ export default function ModalCreateNewTask({
           <button
             className="btn-primary"
             onClick={() => {
-              insertTask(formTask);
+              const { _isNew, ...taskToSave } = formTask;
+              insertTask(taskToSave);
               handleCloseModal();
             }}
           >
@@ -165,6 +168,11 @@ export default function ModalCreateNewTask({
           <button className="btn-secondary" onClick={handleCloseModal}>
             CANCELAR
           </button>
+          {onDelete && (
+            <button className="btn-danger" onClick={() => onDelete(formTask)}>
+              ELIMINAR
+            </button>
+          )}
         </div>
       </div>
     </ReactModal>
