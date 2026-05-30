@@ -207,7 +207,7 @@ function App() {
     saveQueue.current = saveQueue.current.then(async () => {
       localMutating.current = true;
       const rows = flatTasks.map(t => ({ id: t.id || undefined, fecha: t.date, index: t.index, tipo: t.type, clientemin: t.clienteMin, obramin: t.obraMin, equipo: t.equipo, notas: t.notas }));
-      await supabase.from('Rutas').delete().gte('fecha', '1900-01-01');
+      await supabase.from('Rutas').delete().in('fecha', currWeek);
       if (rows.length > 0) {
         const { error } = await supabase.from('Rutas').insert(rows);
         if (error) { console.error('saveTasks error:', error); }
