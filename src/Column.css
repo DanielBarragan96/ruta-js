@@ -25,6 +25,19 @@
   color: var(--text-primary);
 }
 
+.task_list--today {
+  background-color: #252540;
+}
+
+.title--today .title-day {
+  color: var(--accent);
+}
+
+.title--today .title-date {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .title-day {
   font-size: 0.7rem;
   color: var(--text-muted);

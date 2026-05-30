@@ -273,6 +273,7 @@ function App() {
             onEdit={openEdit}
             isDragging={isDragging}
             wasDragging={wasDragging}
+            isToday={currWeek[i] === formatDate(new Date())}
           />
         ))}
       </div>

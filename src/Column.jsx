@@ -17,12 +17,12 @@ function getColumnParts(date) {
   return { dayInitial, dateLabel };
 }
 
-export default function Column({ date, tasks, index, onAddCard, onEdit, isDragging, wasDragging }) {
+export default function Column({ date, tasks, index, onAddCard, onEdit, isDragging, wasDragging, isToday }) {
   const { dayInitial, dateLabel } = getColumnParts(date);
   return (
     <div className="column_container">
-      <div className="task_list">
-        <div className="title">
+      <div className={"task_list" + (isToday ? " task_list--today" : "")}>
+        <div className={"title" + (isToday ? " title--today" : "")}>
           <span className="title-day">{dayInitial}</span>
           <span className="title-date">{dateLabel}</span>
         </div>
@@ -33,7 +33,7 @@ export default function Column({ date, tasks, index, onAddCard, onEdit, isDraggi
               {...provided.droppableProps}
               className={"draggable" + (isDragging ? " draggable--drag-active" : "")}
               onClick={(e) => {
-                if (e.target === e.currentTarget && onAddCard) {
+                if (e.target === e.currentTarget && !wasDragging?.current && onAddCard) {
                   onAddCard();
                 }
               }}
