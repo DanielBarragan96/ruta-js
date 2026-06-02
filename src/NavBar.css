@@ -69,6 +69,15 @@ button:disabled {
   cursor: default;
 }
 
+.nav-side {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-side--left  { justify-content: flex-start; padding-left: 8px; }
+.nav-side--right { justify-content: flex-end;   padding-right: 8px; }
+
 .nav-btn {
   font-size: 2.2rem;
   padding: 0 16px;
@@ -82,6 +91,20 @@ button:disabled {
   align-items: center;
   justify-content: center;
   line-height: 1;
+}
+
+@media (min-width: 769px) {
+  .nav-side {
+    padding: 0 !important;
+  }
+
+  .nav-btn {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+  }
 }
 
 .nav-btn:hover {
@@ -120,6 +143,28 @@ button:disabled {
 .signout-btn:hover {
   opacity: 1;
   transform: scale(1.1);
+}
+
+.signout-btn::after {
+  content: "Cerrar sesión";
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.signout-btn:hover::after {
+  opacity: 1;
 }
 
 .signout-btn--hidden {

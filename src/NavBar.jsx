@@ -115,7 +115,7 @@ export default function NavBar({
 
   return (
     <div className="navbar_container">
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", paddingLeft: "8px" }}>
+      <div className="nav-side nav-side--left">
         <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
       </div>
       <div className="date-center">
@@ -141,7 +141,7 @@ export default function NavBar({
           <span className="date-center__spacer" />
         )}
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: "8px" }}>
+      <div className="nav-side nav-side--right">
         <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
       </div>
 
