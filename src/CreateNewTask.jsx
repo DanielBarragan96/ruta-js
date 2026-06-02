@@ -11,6 +11,16 @@ const TIPOS = [
   { code: "B", label: "Bodega",    color: "#00a550" },
 ];
 
+// Fields shown per type. clienteLabel: shown + label text. obra/equipo/notas: boolean.
+const FIELDS = {
+  E: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
+  S: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
+  M: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
+  P: { clienteLabel: "Proveedor",  equipo: true },
+  D: { clienteLabel: "Separador" },
+  B: {},
+};
+
 export default function ModalCreateNewTask({
   showModal,
   handleCloseModal,
@@ -43,10 +53,19 @@ export default function ModalCreateNewTask({
   ReactModal.setAppElement("#root");
   let maxYear = currDate.getFullYear() + 1;
 
-  let [formTask, setFormTask] = useState(task);
+  const [formTask, setFormTask] = useState(task);
   const clienteRef = useRef(null);
 
   useEffect(() => { clienteRef.current?.focus(); }, []);
+
+  const fields = FIELDS[formTask.type] ?? FIELDS.E;
+
+  const changeType = (code) => {
+    const updates = { type: code };
+    if (code === "B") updates.clienteMin = "Bodega";
+    else if (formTask.type === "B") updates.clienteMin = "";
+    setFormTask(prev => ({ ...prev, ...updates }));
+  };
 
   useEffect(() => {
     const onKey = (e) => {
@@ -63,7 +82,11 @@ export default function ModalCreateNewTask({
         const next = e.key === "ArrowRight"
           ? (idx + 1) % TIPOS.length
           : (idx - 1 + TIPOS.length) % TIPOS.length;
-        setFormTask({ ...formTask, type: TIPOS[next].code });
+        const newCode = TIPOS[next].code;
+        const updates = { type: newCode };
+        if (newCode === "B") updates.clienteMin = "Bodega";
+        else if (formTask.type === "B") updates.clienteMin = "";
+        setFormTask(prev => ({ ...prev, ...updates }));
       }
     };
     document.addEventListener("keydown", onKey);
@@ -101,7 +124,7 @@ export default function ModalCreateNewTask({
                 type="button"
                 className={"tipo-btn" + (formTask.type === code ? " tipo-btn--active" : "")}
                 style={{ "--tipo-color": color }}
-                onClick={() => setFormTask({ ...formTask, type: code })}
+                onClick={() => changeType(code)}
               >
                 {label}
               </button>
@@ -109,47 +132,56 @@ export default function ModalCreateNewTask({
           </div>
         </div>
 
-        <div className="row">
-          <label htmlFor="cliente">Cliente:</label>
-          <input
-            ref={clienteRef}
-            type="text"
-            id="cliente"
-            placeholder="Cliente"
-            value={formTask.clienteMin}
-            onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
-          />
-        </div>
-        <div className="row">
-          <label htmlFor="obra">Obra:</label>
-          <input
-            type="text"
-            id="obra"
-            placeholder="Obra / Dirección"
-            value={formTask.obraMin}
-            onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
-          />
-        </div>
-        <div className="row">
-          <label htmlFor="equipo">Equipo:</label>
-          <input
-            type="text"
-            id="equipo"
-            placeholder="Equipo"
-            value={formTask.equipo}
-            onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
-          />
-        </div>
-        <div className="row">
-          <label htmlFor="notas">Notas:</label>
-          <input
-            type="text"
-            id="notas"
-            placeholder="Notas"
-            value={formTask.notas}
-            onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
-          />
-        </div>
+        {fields.clienteLabel && (
+          <div className="row">
+            <label htmlFor="cliente">{fields.clienteLabel}:</label>
+            <input
+              ref={clienteRef}
+              type="text"
+              id="cliente"
+              placeholder={fields.clienteLabel}
+              value={formTask.clienteMin}
+              onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
+            />
+          </div>
+        )}
+        {fields.obra && (
+          <div className="row">
+            <label htmlFor="obra">Obra:</label>
+            <input
+              type="text"
+              id="obra"
+              placeholder="Obra / Dirección"
+              value={formTask.obraMin}
+              onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
+            />
+          </div>
+        )}
+        {fields.equipo && (
+          <div className="row">
+            <label htmlFor="equipo">Equipo:</label>
+            <input
+              type="text"
+              id="equipo"
+              placeholder="Equipo"
+              value={formTask.equipo}
+              onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
+            />
+          </div>
+        )}
+        {fields.notas && (
+          <div className="row">
+            <label htmlFor="notas">Notas:</label>
+            <input
+              type="text"
+              id="notas"
+              placeholder="Notas"
+              value={formTask.notas}
+              onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
+            />
+          </div>
+        )}
+
         <div className="modal-actions">
           <button
             className="btn-primary"
