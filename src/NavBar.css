@@ -7,10 +7,51 @@
   align-items: center;
 }
 
+.date-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: 5px;
+}
+
+.date-center__spacer {
+  width: 22px;
+  flex-shrink: 0;
+}
+
 .date {
   text-align: center;
-  justify-self: center;
   padding-top: 0;
+}
+
+.today-icon-btn {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  padding: 0 !important;
+  padding-top: 0 !important;
+  color: var(--accent) !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  opacity: 0.85;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.today-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.today-icon-btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 button {

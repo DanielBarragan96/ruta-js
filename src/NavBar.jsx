@@ -116,9 +116,29 @@ export default function NavBar({
   return (
     <div className="navbar_container">
       <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
-      <button className="date" onClick={() => setShowCal((v) => !v)}>
-        {month + year}
-      </button>
+      <div className="date-center">
+        <span className="date-center__spacer" />
+        <button className="date" onClick={() => setShowCal((v) => !v)}>
+          {month + year}
+        </button>
+        {currWeek && !currWeek.includes(todayStr) ? (
+          <button
+            className="today-icon-btn"
+            onClick={() => onSelectDate(new Date())}
+            title="Ir a hoy"
+          >
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="3" width="14" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+              <line x1="1" y1="7" x2="15" y2="7" stroke="currentColor" strokeWidth="1.5"/>
+              <line x1="5" y1="1" x2="5" y2="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="11" y1="1" x2="11" y2="5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <rect x="6.5" y="9.5" width="3" height="3" rx="0.5" fill="currentColor"/>
+            </svg>
+          </button>
+        ) : (
+          <span className="date-center__spacer" />
+        )}
+      </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "8px", paddingRight: "8px" }}>
         <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
         <button
