@@ -295,6 +295,19 @@ function App() {
         } else {
           shiftWeek(-1);
         }
+      } else if (e.key === 'Enter') {
+        setEditingTask({
+          date: formatDate(new Date()),
+          id: crypto.randomUUID(),
+          clienteMin: "",
+          obraMin: "",
+          index: 0,
+          type: "E",
+          equipo: "",
+          notas: "",
+          _isNew: true,
+        });
+        setShowModal(true);
       }
     };
     document.addEventListener('keydown', handleKey);
