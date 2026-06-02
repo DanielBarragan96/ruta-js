@@ -95,6 +95,38 @@ button:disabled {
   color: #0f0f1a;
 }
 
+.signout-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-elevated) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-muted) !important;
+  font-size: 1.1rem;
+  padding: 0 !important;
+  padding-top: 0 !important;
+  cursor: pointer;
+  z-index: 49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.signout-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.signout-btn--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Calendar overlay */
 .cal-overlay {
   position: fixed;

@@ -115,7 +115,9 @@ export default function NavBar({
 
   return (
     <div className="navbar_container">
-      <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", paddingLeft: "8px" }}>
+        <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
+      </div>
       <div className="date-center">
         <span className="date-center__spacer" />
         <button className="date" onClick={() => setShowCal((v) => !v)}>
@@ -139,17 +141,17 @@ export default function NavBar({
           <span className="date-center__spacer" />
         )}
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "8px", paddingRight: "8px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: "8px" }}>
         <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
-        <button
-          className="nav-btn"
-          onClick={onSignOut}
-          style={{ fontSize: "1rem", opacity: 0.7 }}
-          title="Sign out"
-        >
-          ↩
-        </button>
       </div>
+
+      <button
+        className={"signout-btn" + (isDragging ? " signout-btn--hidden" : "")}
+        onClick={onSignOut}
+        title="Sign out"
+      >
+        ↩
+      </button>
 
       {showCal && (
         <div className="cal-overlay">
