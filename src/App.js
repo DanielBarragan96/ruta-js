@@ -366,8 +366,9 @@ function App() {
       restartIndexes();
       saveTasks([...data.flat(), task]); // cross-week task survives the currWeek delete
       setData([...data]);
-      // Navigate after save completes so the DB read for the new week sees the inserted task
-      saveQueue.current.then(() => {
+      // Navigate after save completes. Keep saveQueue.current updated so any subsequent
+      // save (e.g. delete) chains AFTER navigate — prevents delete running with stale currWeek.
+      saveQueue.current = saveQueue.current.then(() => {
         shiftWeek(navDir === "next" ? 1 : -1);
         setSelectedDayIndex(navDir === "next" ? 0 : 6); // Monday for next, Sunday for prev
       });
