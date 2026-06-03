@@ -168,6 +168,14 @@ function castData(tasks, anchorDate) {
   return week;
 }
 
+function genId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
 function App() {
 
   function restartIndexes() {
@@ -300,7 +308,7 @@ function App() {
       } else if (e.key === 'Enter') {
         setEditingTask({
           date: formatDate(new Date()),
-          id: crypto.randomUUID(),
+          id: genId(),
           clienteMin: "",
           obraMin: "",
           index: 0,
@@ -456,7 +464,7 @@ function App() {
   let openCreate = (dayIndex) => {
     setEditingTask({
       date: currWeek[dayIndex],
-      id: crypto.randomUUID(),
+      id: genId(),
       clienteMin: "",
       obraMin: "",
       index: data[dayIndex].length,
