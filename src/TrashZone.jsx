@@ -4,21 +4,19 @@ import "./TrashZone.css";
 
 export default function TrashZone({ isDragging }) {
   return (
-    <Droppable droppableId="trash">
-      {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-          className={
-            "trash-zone" +
-            (isDragging ? " trash-zone--dragging" : "") +
-            (snapshot.isDraggingOver ? " trash-zone--over" : "")
-          }
-        >
-          🗑
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
+    <div className={"trash-wrapper" + (isDragging ? " trash-wrapper--visible" : "")}>
+      <Droppable droppableId="trash">
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={"trash-zone" + (snapshot.isDraggingOver ? " trash-zone--over" : "")}
+          >
+            🗑
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </div>
   );
 }
