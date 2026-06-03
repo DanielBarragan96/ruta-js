@@ -5,10 +5,10 @@ import "./CreateNewTask.css";
 const TIPOS = [
   { code: "E", label: "Entrada",   color: "#a6d46f" },
   { code: "S", label: "Salida",    color: "#f58e6c" },
-  { code: "P", label: "Proveedor", color: "#48abcf" },
-  { code: "M", label: "Mantenim.", color: "#b88a16" },
-  { code: "D", label: "Divisor",   color: "#ff1500" },
   { code: "B", label: "Bodega",    color: "#00a550" },
+  { code: "D", label: "Divisor",   color: "#ff1500" },
+  { code: "P", label: "Proveedor", color: "#48abcf" },
+  { code: "M", label: "Mmto",      color: "#b88a16" },
 ];
 
 // Fields shown per type. clienteLabel: shown + label text. obra/equipo/notas: boolean.
@@ -54,12 +54,23 @@ export default function ModalCreateNewTask({
   let maxYear = currDate.getFullYear() + 1;
 
   const [formTask, setFormTask] = useState(task);
+  const [shake, setShake] = useState(false);
   // Fixed-index refs: [cliente, obra, equipo, notas]. Null when field is hidden.
   const inputRefs = useRef([null, null, null, null]);
 
   useEffect(() => { inputRefs.current.find(Boolean)?.focus(); }, []);
 
   const saveTask = () => {
+    if (formTask.type !== "B") {
+      const hasValue = [formTask.clienteMin, formTask.obraMin, formTask.equipo, formTask.notas]
+        .some(v => v && v.trim() !== "");
+      if (!hasValue) {
+        setShake(true);
+        setTimeout(() => setShake(false), 400);
+        inputRefs.current.find(Boolean)?.focus();
+        return;
+      }
+    }
     const { _isNew, ...taskToSave } = formTask;
     insertTask(taskToSave);
     handleCloseModal();
@@ -106,7 +117,7 @@ export default function ModalCreateNewTask({
       overlayClassName="Overlay"
       className="Modal"
     >
-      <div className="InnerModal">
+      <div className={"InnerModal" + (shake ? " InnerModal--shake" : "")}>
         <h2>TAREA</h2>
         <div className="row">
           <label htmlFor="date">Fecha:</label>
