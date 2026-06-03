@@ -116,7 +116,11 @@ export default function NavBar({
   return (
     <div className="navbar_container">
       <div className="nav-side nav-side--left">
-        <button className="nav-btn" onClick={onPrevWeek}>&#8249;</button>
+        <button
+          className={"nav-btn" + (isDragging ? " nav-btn--drag-target" : "")}
+          data-nav-week="prev"
+          onClick={onPrevWeek}
+        >&#8249;</button>
       </div>
       <div className="date-center">
         <span className="date-center__spacer" />
@@ -142,7 +146,11 @@ export default function NavBar({
         )}
       </div>
       <div className="nav-side nav-side--right">
-        <button className="nav-btn" onClick={onNextWeek}>&#8250;</button>
+        <button
+          className={"nav-btn" + (isDragging ? " nav-btn--drag-target" : "")}
+          data-nav-week="next"
+          onClick={onNextWeek}
+        >&#8250;</button>
       </div>
 
       <button

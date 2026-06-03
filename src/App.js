@@ -204,10 +204,11 @@ function App() {
 
   function saveTasks(flatTasks) {
     if (!session) return;
+    const weekSnapshot = [...currWeek];
     saveQueue.current = saveQueue.current.then(async () => {
       localMutating.current = true;
       const rows = flatTasks.map(t => ({ id: t.id || undefined, fecha: t.date, index: t.index, tipo: t.type, clientemin: t.clienteMin, obramin: t.obraMin, equipo: t.equipo, notas: t.notas }));
-      await supabase.from('Rutas').delete().in('fecha', currWeek);
+      await supabase.from('Rutas').delete().in('fecha', weekSnapshot);
       if (rows.length > 0) {
         const { error } = await supabase.from('Rutas').insert(rows);
         if (error) { console.error('saveTasks error:', error); }
@@ -320,24 +321,58 @@ function App() {
     lastPointerPos.current = { x: -1, y: -1 };
   };
 
-  // Check if the last pointer position is over any day tab element
-  function getDayTabUnderPointer() {
+  // Generic pointer hit-test helper for any selector
+  function getElementUnderPointer(selector) {
     const { x, y } = lastPointerPos.current;
-    const tabs = document.querySelectorAll("[data-day-tab]");
-    for (const tab of tabs) {
-      const r = tab.getBoundingClientRect();
-      if (r.width === 0 && r.height === 0) continue; // hidden on desktop
+    const elements = document.querySelectorAll(selector);
+    for (const el of elements) {
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) continue;
       if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
-        return parseInt(tab.getAttribute("data-day-tab"), 10);
+        return el;
       }
     }
-    return -1;
+    return null;
+  }
+
+  // Check if the last pointer position is over any day tab element
+  function getDayTabUnderPointer() {
+    const el = getElementUnderPointer("[data-day-tab]");
+    return el ? parseInt(el.getAttribute("data-day-tab"), 10) : -1;
+  }
+
+  function getNavWeekButtonUnderPointer() {
+    const el = getElementUnderPointer("[data-nav-week]");
+    return el ? el.getAttribute("data-nav-week") : null;
   }
 
   let onDragEnd = (result) => {
     setIsDragging(false);
     setTimeout(() => { wasDragging.current = false; }, 0);
     const { destination, source } = result;
+
+    const navDir = getNavWeekButtonUnderPointer();
+    if (navDir !== null) {
+      const srcDayIndex = parseInt(source.droppableId, 10);
+      const task = data[srcDayIndex][source.index];
+      const shift = navDir === "next" ? 7 : -1;
+      // task.date uses JS field name (maps to Supabase 'fecha' column in saveTasks)
+      const base = new Date(currWeek[0] + "T00:00:00");
+      base.setDate(base.getDate() + shift);
+      task.date = formatDate(base);
+      // splice first — restartIndexes only iterates data (now without task), so 999 sentinel is safe
+      task.index = 999;
+      data[srcDayIndex].splice(source.index, 1);
+      restartIndexes();
+      saveTasks([...data.flat(), task]); // cross-week task survives the currWeek delete
+      setData([...data]);
+      // Navigate after save completes so the DB read for the new week sees the inserted task
+      saveQueue.current.then(() => {
+        shiftWeek(navDir === "next" ? 1 : -1);
+        setSelectedDayIndex(navDir === "next" ? 0 : 6); // Monday for next, Sunday for prev
+      });
+      return;
+    }
 
     // Pointer-based day tab detection — works on mobile where rbd Droppable
     // hit detection is unreliable (hidden columns corrupt the Droppable registry)

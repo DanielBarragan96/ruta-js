@@ -118,6 +118,11 @@ button:disabled {
   color: #0f0f1a;
 }
 
+.nav-btn--drag-target {
+  outline: 2px dashed var(--accent);
+  color: var(--accent);
+}
+
 .signout-btn {
   position: fixed;
   bottom: 28px;
