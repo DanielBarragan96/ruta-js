@@ -59,16 +59,10 @@ export default function ModalCreateNewTask({
 
   useEffect(() => { inputRefs.current.find(Boolean)?.focus(); }, []);
 
-  const advanceOrSubmit = (target) => {
-    const visible = inputRefs.current.filter(Boolean);
-    const i = visible.indexOf(target);
-    if (i >= 0 && i < visible.length - 1) {
-      visible[i + 1].focus();
-    } else {
-      const { _isNew, ...taskToSave } = formTask;
-      insertTask(taskToSave);
-      handleCloseModal();
-    }
+  const saveTask = () => {
+    const { _isNew, ...taskToSave } = formTask;
+    insertTask(taskToSave);
+    handleCloseModal();
   };
 
   const fields = FIELDS[formTask.type] ?? FIELDS.E;
@@ -83,11 +77,7 @@ export default function ModalCreateNewTask({
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Enter") {
-        const tag = document.activeElement?.tagName;
-        if (tag === "INPUT" || tag === "TEXTAREA") return;
-        const { _isNew, ...taskToSave } = formTask;
-        insertTask(taskToSave);
-        handleCloseModal();
+        saveTask();
       }
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         const tag = document.activeElement?.tagName;
@@ -123,6 +113,7 @@ export default function ModalCreateNewTask({
           <input
             type="date"
             id="date"
+            tabIndex={-1}
             min="2017-01-01"
             max={maxYear + "-12-31"}
             onChange={(e) => setFormTask({ ...formTask, date: e.target.value })}
@@ -137,6 +128,7 @@ export default function ModalCreateNewTask({
               <button
                 key={code}
                 type="button"
+                tabIndex={formTask.type === code ? 0 : -1}
                 className={"tipo-btn" + (formTask.type === code ? " tipo-btn--active" : "")}
                 style={{ "--tipo-color": color }}
                 onClick={() => changeType(code)}
@@ -157,7 +149,6 @@ export default function ModalCreateNewTask({
               placeholder={fields.clienteLabel}
               value={formTask.clienteMin}
               onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
-              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -171,7 +162,6 @@ export default function ModalCreateNewTask({
               placeholder="Obra / Dirección"
               value={formTask.obraMin}
               onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
-              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -185,7 +175,6 @@ export default function ModalCreateNewTask({
               placeholder="Equipo"
               value={formTask.equipo}
               onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
-              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -199,7 +188,6 @@ export default function ModalCreateNewTask({
               placeholder="Notas"
               value={formTask.notas}
               onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
-              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -207,11 +195,7 @@ export default function ModalCreateNewTask({
         <div className="modal-actions">
           <button
             className="btn-primary"
-            onClick={() => {
-              const { _isNew, ...taskToSave } = formTask;
-              insertTask(taskToSave);
-              handleCloseModal();
-            }}
+            onClick={saveTask}
           >
             GUARDAR
           </button>
