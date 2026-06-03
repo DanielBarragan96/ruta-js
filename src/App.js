@@ -7,6 +7,7 @@ import LoginForm from "./LoginForm";
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import supabase from "./supabaseClient";
+import { createTestCards } from "./createTestCards";
 
 const initialData = [
   {
@@ -477,6 +478,8 @@ function App() {
     setEditingTask(null);
   };
 
+  let fillWeek = () => createTestCards(data, currWeek, restartIndexes, saveTasks, setData);
+
   if (!session) return <LoginForm />;
 
   return (
@@ -494,6 +497,7 @@ function App() {
         onSelectDay={setSelectedDayIndex}
         isDragging={isDragging}
         onSignOut={() => supabase.auth.signOut()}
+        onFillWeek={fillWeek}
       />
       <div className="app">
         {data.map((tasks, i) => (

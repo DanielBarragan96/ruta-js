@@ -26,6 +26,35 @@
   padding-top: 0;
 }
 
+.fill-week-btn {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  padding: 0 !important;
+  padding-top: 0 !important;
+  color: var(--text-muted) !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  opacity: 0.7;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.fill-week-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fill-week-btn:hover {
+  opacity: 1;
+  color: var(--accent) !important;
+  transform: scale(1.15);
+}
+
 .today-icon-btn {
   width: 22px;
   height: 22px;

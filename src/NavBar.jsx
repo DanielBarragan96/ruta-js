@@ -26,6 +26,7 @@ export default function NavBar({
   onSelectDay,
   isDragging,
   onSignOut,
+  onFillWeek,
 }) {
   const [showCal, setShowCal] = useState(false);
   const [hoveredWeek, setHoveredWeek] = useState(null);
@@ -123,7 +124,23 @@ export default function NavBar({
         >&#8249;</button>
       </div>
       <div className="date-center">
-        <span className="date-center__spacer" />
+        <button
+          className="fill-week-btn"
+          onClick={onFillWeek}
+          title="Llenar Mar/Mié/Vie con todos los tipos"
+        >
+          <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1"   y="2" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="1"   y="6.5" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="1"   y="11" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="6.25" y="2" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="6.25" y="6.5" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="6.25" y="11" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="11.5" y="2" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="11.5" y="6.5" width="3.5" height="2.5" rx="0.5"/>
+            <rect x="11.5" y="11" width="3.5" height="2.5" rx="0.5"/>
+          </svg>
+        </button>
         <button className="date" onClick={() => setShowCal((v) => !v)}>
           {month + year}
         </button>
