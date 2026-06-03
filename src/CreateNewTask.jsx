@@ -54,9 +54,22 @@ export default function ModalCreateNewTask({
   let maxYear = currDate.getFullYear() + 1;
 
   const [formTask, setFormTask] = useState(task);
-  const clienteRef = useRef(null);
+  // Fixed-index refs: [cliente, obra, equipo, notas]. Null when field is hidden.
+  const inputRefs = useRef([null, null, null, null]);
 
-  useEffect(() => { clienteRef.current?.focus(); }, []);
+  useEffect(() => { inputRefs.current.find(Boolean)?.focus(); }, []);
+
+  const advanceOrSubmit = (target) => {
+    const visible = inputRefs.current.filter(Boolean);
+    const i = visible.indexOf(target);
+    if (i >= 0 && i < visible.length - 1) {
+      visible[i + 1].focus();
+    } else {
+      const { _isNew, ...taskToSave } = formTask;
+      insertTask(taskToSave);
+      handleCloseModal();
+    }
+  };
 
   const fields = FIELDS[formTask.type] ?? FIELDS.E;
 
@@ -70,6 +83,8 @@ export default function ModalCreateNewTask({
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Enter") {
+        const tag = document.activeElement?.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA") return;
         const { _isNew, ...taskToSave } = formTask;
         insertTask(taskToSave);
         handleCloseModal();
@@ -136,12 +151,13 @@ export default function ModalCreateNewTask({
           <div className="row">
             <label htmlFor="cliente">{fields.clienteLabel}:</label>
             <input
-              ref={clienteRef}
+              ref={(el) => { inputRefs.current[0] = el; }}
               type="text"
               id="cliente"
               placeholder={fields.clienteLabel}
               value={formTask.clienteMin}
               onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -149,11 +165,13 @@ export default function ModalCreateNewTask({
           <div className="row">
             <label htmlFor="obra">Obra:</label>
             <input
+              ref={(el) => { inputRefs.current[1] = el; }}
               type="text"
               id="obra"
               placeholder="Obra / Dirección"
               value={formTask.obraMin}
               onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -161,11 +179,13 @@ export default function ModalCreateNewTask({
           <div className="row">
             <label htmlFor="equipo">Equipo:</label>
             <input
+              ref={(el) => { inputRefs.current[2] = el; }}
               type="text"
               id="equipo"
               placeholder="Equipo"
               value={formTask.equipo}
               onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
@@ -173,11 +193,13 @@ export default function ModalCreateNewTask({
           <div className="row">
             <label htmlFor="notas">Notas:</label>
             <input
+              ref={(el) => { inputRefs.current[3] = el; }}
               type="text"
               id="notas"
               placeholder="Notas"
               value={formTask.notas}
               onChange={(e) => setFormTask({ ...formTask, notas: e.target.value })}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); advanceOrSubmit(e.target); } }}
             />
           </div>
         )}
