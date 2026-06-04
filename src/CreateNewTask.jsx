@@ -83,6 +83,18 @@ export default function ModalCreateNewTask({
   const fields = FIELDS[formTask.type] ?? FIELDS.E;
   const usePicker = PICKER_TYPES.has(formTask.type);
 
+  const selectedObra = usePicker
+    ? obrasList.find(o => o.clienteMin === formTask.clienteMin && o.obraMin === formTask.obraMin)
+    : null;
+
+  const openLocation = () => {
+    if (!selectedObra) return;
+    const url = selectedObra.link
+      ? selectedObra.link
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedObra.obraMax)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const changeType = (code) => {
     const updates = { type: code };
     if (code === "B") updates.clienteMin = "Bodega";
@@ -159,22 +171,34 @@ export default function ModalCreateNewTask({
           <div className="row">
             <label>{fields.clienteLabel}{usePicker && fields.obra ? '/Obra' : ''}:</label>
             {usePicker ? (
-              <Combobox
-                ref={(el) => { inputRefs.current[0] = el; }}
-                value={[formTask.clienteMin, formTask.obraMin].filter(Boolean).join(' · ')}
-                onChange={(val) => {
-                  if (!val) setFormTask(prev => ({ ...prev, clienteMin: '', obraMin: '' }));
-                }}
-                onSelect={(opt) => setFormTask(prev => ({
-                  ...prev,
-                  clienteMin: opt.clienteMin,
-                  obraMin: opt.obraMin,
-                }))}
-                options={obrasList}
-                getLabel={(o) => o.obraMin}
-                getSubLabel={(o) => `${o.clienteMin} · ${o.obraMax}`}
-                placeholder="Cliente / Obra"
-              />
+              <>
+                <Combobox
+                  ref={(el) => { inputRefs.current[0] = el; }}
+                  value={[formTask.clienteMin, formTask.obraMin].filter(Boolean).join(' · ')}
+                  onChange={(val) => {
+                    if (!val) setFormTask(prev => ({ ...prev, clienteMin: '', obraMin: '' }));
+                  }}
+                  onSelect={(opt) => setFormTask(prev => ({
+                    ...prev,
+                    clienteMin: opt.clienteMin,
+                    obraMin: opt.obraMin,
+                  }))}
+                  options={obrasList}
+                  getLabel={(o) => o.obraMin}
+                  getSubLabel={(o) => `${o.clienteMin} · ${o.obraMax}`}
+                  placeholder="Cliente / Obra"
+                />
+                {selectedObra && (
+                  <button
+                    type="button"
+                    className="btn-location"
+                    onClick={openLocation}
+                    title={selectedObra.link ? 'Abrir enlace' : 'Ver en Google Maps'}
+                  >
+                    {selectedObra.link ? '🔗' : '📍'}
+                  </button>
+                )}
+              </>
             ) : (
               <input
                 ref={(el) => { inputRefs.current[0] = el; }}

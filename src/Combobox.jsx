@@ -96,8 +96,9 @@ const Combobox = forwardRef(function Combobox(
       setActiveIndex(i => Math.max(i - 1, 0));
       e.preventDefault();
     } else if (e.key === 'Enter') {
-      if (activeIndex >= 0 && filtered[activeIndex]) {
-        handleSelect(filtered[activeIndex]);
+      const target = activeIndex >= 0 ? filtered[activeIndex] : filtered[0];
+      if (target) {
+        handleSelect(target);
       } else {
         setIsOpen(false);
       }
