@@ -6,7 +6,7 @@ import ModalCreateNewTask from "./CreateNewTask";
 import LoginForm from "./LoginForm";
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import supabase from "./supabaseClient";
+import supabase, { fetchClientes, fetchObras } from "./supabaseClient";
 import { createTestCards } from "./createTestCards";
 
 const initialData = [
@@ -194,6 +194,8 @@ function App() {
   const [selectedDayIndex, setSelectedDayIndex] = useState(getTodayDayIndex);
   const [showModal, setShowModal] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [clientesList, setClientesList] = useState([]);
+  const [obrasList, setObrasList] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
@@ -239,6 +241,12 @@ function App() {
     if (!session) return;
     loadTasksAsync().then(tasks => { setData([...castData(tasks, anchorDate)]); });
   }, [anchorDate, session]);
+
+  useEffect(() => {
+    if (!session) return;
+    fetchClientes().then(setClientesList);
+    fetchObras().then(setObrasList);
+  }, [session]);
 
   useEffect(() => {
     if (!session) return;
@@ -532,6 +540,8 @@ function App() {
           task={editingTask}
           insertTask={insertTask}
           onDelete={editingTask._isNew ? undefined : deleteTask}
+          clientesList={clientesList}
+          obrasList={obrasList}
         />
       )}
     </DragDropContext>

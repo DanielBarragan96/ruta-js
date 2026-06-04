@@ -1,0 +1,55 @@
+.combobox {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.combobox input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.combobox-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--border-radius);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 300;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.combobox-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.combobox-option:hover,
+.combobox-option--active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.combobox-label {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.combobox-sublabel {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}

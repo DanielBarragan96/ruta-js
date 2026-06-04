@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactModal from "react-modal";
+import Combobox from "./Combobox";
 import "./CreateNewTask.css";
+
+const PICKER_TYPES = new Set(['E', 'S', 'M']);
 
 const TIPOS = [
   { code: "E", label: "Entrada",   color: "#a6d46f" },
@@ -27,6 +30,7 @@ export default function ModalCreateNewTask({
   task,
   insertTask,
   onDelete,
+  obrasList = [],
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -77,6 +81,7 @@ export default function ModalCreateNewTask({
   };
 
   const fields = FIELDS[formTask.type] ?? FIELDS.E;
+  const usePicker = PICKER_TYPES.has(formTask.type);
 
   const changeType = (code) => {
     const updates = { type: code };
@@ -152,28 +157,34 @@ export default function ModalCreateNewTask({
 
         {fields.clienteLabel && (
           <div className="row">
-            <label htmlFor="cliente">{fields.clienteLabel}:</label>
-            <input
-              ref={(el) => { inputRefs.current[0] = el; }}
-              type="text"
-              id="cliente"
-              placeholder={fields.clienteLabel}
-              value={formTask.clienteMin}
-              onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
-            />
-          </div>
-        )}
-        {fields.obra && (
-          <div className="row">
-            <label htmlFor="obra">Obra:</label>
-            <input
-              ref={(el) => { inputRefs.current[1] = el; }}
-              type="text"
-              id="obra"
-              placeholder="Obra / Dirección"
-              value={formTask.obraMin}
-              onChange={(e) => setFormTask({ ...formTask, obraMin: e.target.value })}
-            />
+            <label>{fields.clienteLabel}{usePicker && fields.obra ? '/Obra' : ''}:</label>
+            {usePicker ? (
+              <Combobox
+                ref={(el) => { inputRefs.current[0] = el; }}
+                value={[formTask.clienteMin, formTask.obraMin].filter(Boolean).join(' · ')}
+                onChange={(val) => {
+                  if (!val) setFormTask(prev => ({ ...prev, clienteMin: '', obraMin: '' }));
+                }}
+                onSelect={(opt) => setFormTask(prev => ({
+                  ...prev,
+                  clienteMin: opt.clienteMin,
+                  obraMin: opt.obraMin,
+                }))}
+                options={obrasList}
+                getLabel={(o) => o.obraMin}
+                getSubLabel={(o) => `${o.clienteMin} · ${o.obraMax}`}
+                placeholder="Cliente / Obra"
+              />
+            ) : (
+              <input
+                ref={(el) => { inputRefs.current[0] = el; }}
+                type="text"
+                id="cliente"
+                placeholder={fields.clienteLabel}
+                value={formTask.clienteMin}
+                onChange={(e) => setFormTask({ ...formTask, clienteMin: e.target.value })}
+              />
+            )}
           </div>
         )}
         {fields.equipo && (
