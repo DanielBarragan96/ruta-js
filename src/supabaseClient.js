@@ -18,7 +18,7 @@ export async function fetchObras() {
   while (true) {
     const { data, error } = await supabase
       .from('Obras')
-      .select('clienteMin, obraMin, obraMax')
+      .select('clienteMin, obraMin, obraMax, link')
       .order('lastFleteFecha', { ascending: false, nullsFirst: false })
       .range(from, from + PAGE - 1);
     if (error || !data?.length) break;
