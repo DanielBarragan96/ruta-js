@@ -225,13 +225,15 @@ function App() {
   function saveTasks(flatTasks) {
     if (!session) return;
     const weekSnapshot = [...currWeek];
+    if (weekSnapshot.length === 0) return; // never fire a filterless delete
     saveQueue.current = saveQueue.current.then(async () => {
       localMutating.current = true;
       const rows = flatTasks.map(t => ({ id: t.id || undefined, fecha: t.date, index: t.index, tipo: t.type, clientemin: t.clienteMin, obramin: t.obraMin, equipo: t.equipo, notas: t.notas }));
-      await supabase.from('Rutas').delete().in('fecha', weekSnapshot);
+      const { error: delErr } = await supabase.from('Rutas').delete().in('fecha', weekSnapshot);
+      if (delErr) { console.error('saveTasks delete error:', delErr); localMutating.current = false; return; }
       if (rows.length > 0) {
         const { error } = await supabase.from('Rutas').insert(rows);
-        if (error) { console.error('saveTasks error:', error); }
+        if (error) { console.error('saveTasks insert error:', error); }
         else { localStorage.setItem(CACHE_KEY, JSON.stringify(flatTasks)); }
       }
       localMutating.current = false;
@@ -389,6 +391,10 @@ function App() {
     return el ? el.getAttribute("data-nav-week") : null;
   }
 
+  function isPointerOverTrash() {
+    return !!getElementUnderPointer("[data-trash-zone]");
+  }
+
   let onDragEnd = (result) => {
     setIsDragging(false);
     setTimeout(() => { wasDragging.current = false; }, 0);
@@ -424,6 +430,7 @@ function App() {
     if (tabDayIndex !== -1) {
       const srcDayIndex = parseInt(source.droppableId, 10);
       if (tabDayIndex !== srcDayIndex) {
+        // Cross-column: move card to the target day
         const task = data[srcDayIndex][source.index];
         task.date = currWeek[tabDayIndex];
         data[srcDayIndex].splice(source.index, 1);
@@ -431,21 +438,25 @@ function App() {
         restartIndexes();
         saveTasks(data.flat());
         setData([...data]);
+        setSelectedDayIndex(tabDayIndex);
+        return;
       }
-      setSelectedDayIndex(tabDayIndex);
-      return;
+      // Same day: pointer landed in the strip while dragging within this column.
+      // Fall through to rbd's destination — positions are accurate (no layout shift),
+      // so rbd correctly computes index 0 when pointer is above the first card.
     }
 
-    if (!destination) return;
-
-    // Dropped on the trash zone — delete the task
-    if (destination.droppableId === "trash") {
+    // Pointer-based trash detection — TrashZone is position:fixed so it can't
+    // be a rbd Droppable (fixed ancestors make isWindowScrollAllowed=false).
+    if (isPointerOverTrash()) {
       data[source.droppableId].splice(source.index, 1);
       restartIndexes();
       saveTasks(data.flat());
       setData([...data]);
       return;
     }
+
+    if (!destination) return;
 
     if (
       destination.droppableId === source.droppableId &&
@@ -556,7 +567,7 @@ function App() {
         onFillWeek={fillWeek}
       />
       <div
-        className={"app" + ((showDayTabs || isDragging) ? " app--tabs-open" : "")}
+        className={"app" + (showDayTabs ? " app--tabs-open" : "")}
         onTouchStart={(e) => {
           swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }}

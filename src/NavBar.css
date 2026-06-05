@@ -304,10 +304,6 @@ button:disabled {
   display: none;
 }
 
-.fill-week-btn {
-  display: none;
-}
-
 .day-strip-toggle {
   display: none;
 }
@@ -325,6 +321,10 @@ button:disabled {
   }
 
   .nav-side {
+    display: none;
+  }
+
+  .fill-week-btn {
     display: none;
   }
 
