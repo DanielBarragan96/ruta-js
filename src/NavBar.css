@@ -321,6 +321,7 @@ button:disabled {
     position: sticky;
     top: 0;
     z-index: 50;
+    --day-strip-height: 88px;
   }
 
   .nav-side {
@@ -377,11 +378,16 @@ button:disabled {
 
   .day-tab-strip {
     display: flex;
-    grid-column: 1 / -1; /* span all 3 navbar grid columns */
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
     gap: 2px;
-    padding: 4px 0;
+    padding: 4px;
+    background: var(--bg-elevated);
+    z-index: 49;
   }
+
 
   .day-tab-strip--collapsed {
     display: none;

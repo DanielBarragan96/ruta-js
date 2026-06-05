@@ -197,6 +197,14 @@ function App() {
   const [clientesList, setClientesList] = useState([]);
   const [obrasList, setObrasList] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [showDayTabs, setShowDayTabs] = useState(() => {
+    try { return localStorage.getItem("dayTabsOpen") === "1"; } catch { return false; }
+  });
+  const toggleDayTabs = () => setShowDayTabs(v => {
+    const next = !v;
+    try { localStorage.setItem("dayTabsOpen", next ? "1" : "0"); } catch {}
+    return next;
+  });
   const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
   const swipeStart = useRef(null);
@@ -525,11 +533,13 @@ function App() {
         selectedDayIndex={selectedDayIndex}
         onSelectDay={setSelectedDayIndex}
         isDragging={isDragging}
+        showDayTabs={showDayTabs}
+        onToggleDayTabs={toggleDayTabs}
         onSignOut={() => supabase.auth.signOut()}
         onFillWeek={fillWeek}
       />
       <div
-        className="app"
+        className={"app" + ((showDayTabs || isDragging) ? " app--tabs-open" : "")}
         onTouchStart={(e) => {
           swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }}

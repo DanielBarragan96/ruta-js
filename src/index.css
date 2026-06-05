@@ -26,3 +26,9 @@ code {
 .app {
   display: flex;
 }
+
+@media (max-width: 768px) {
+  .app--tabs-open {
+    padding-top: 88px;
+  }
+}

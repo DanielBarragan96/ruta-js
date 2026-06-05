@@ -26,19 +26,12 @@ export default function NavBar({
   selectedDayIndex,
   onSelectDay,
   isDragging,
+  showDayTabs,
+  onToggleDayTabs,
   onSignOut,
   onFillWeek,
 }) {
   const [showCal, setShowCal] = useState(false);
-  const [showDayTabs, setShowDayTabs] = useState(() => {
-    try { return localStorage.getItem("dayTabsOpen") === "1"; } catch { return false; }
-  });
-
-  const toggleDayTabs = () => setShowDayTabs((v) => {
-    const next = !v;
-    try { localStorage.setItem("dayTabsOpen", next ? "1" : "0"); } catch {}
-    return next;
-  });
   const [hoveredWeek, setHoveredWeek] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
   const calRef = useRef(null);
@@ -132,7 +125,7 @@ export default function NavBar({
   const todayStr = todayLocalStr();
 
   return (
-    <div className="navbar_container">
+    <div className="navbar_container" data-tabs-open={showDayTabs || isDragging ? "1" : undefined}>
       <div className="nav-side nav-side--left">
         <button
           className={"nav-btn" + (isDragging ? " nav-btn--drag-target" : "")}
@@ -160,7 +153,7 @@ export default function NavBar({
         </button>
         <button
           className={"day-strip-toggle" + (showDayTabs ? " day-strip-toggle--open" : "")}
-          onClick={toggleDayTabs}
+          onClick={onToggleDayTabs}
         />
         <button className="date" onClick={() => setShowCal((v) => !v)}>
           <span className="date-label--desktop">{month + year}</span>
