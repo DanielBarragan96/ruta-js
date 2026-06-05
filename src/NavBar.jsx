@@ -29,6 +29,7 @@ export default function NavBar({
   onFillWeek,
 }) {
   const [showCal, setShowCal] = useState(false);
+  const [showDayTabs, setShowDayTabs] = useState(false);
   const [hoveredWeek, setHoveredWeek] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
   const calRef = useRef(null);
@@ -198,10 +199,18 @@ export default function NavBar({
         </div>
       )}
 
+      {/* Mobile-only toggle handle for the day tab strip */}
+      <div
+        className="day-strip-handle"
+        onClick={() => setShowDayTabs((v) => !v)}
+      >
+        <span className="day-strip-handle__pip" />
+      </div>
+
       {/* Mobile-only day tab strip — hidden on desktop via CSS.
           Uses data-day-tab attributes for pointer-based drop detection in App.js
           (rbd Droppable hit detection is unreliable on mobile touch). */}
-      <div className="day-tab-strip">
+      <div className={`day-tab-strip${!showDayTabs && !isDragging ? " day-tab-strip--collapsed" : ""}`}>
         {DAY_SHORT.map((name, i) => (
           <div
             key={i}

@@ -199,6 +199,7 @@ function App() {
   const [isDragging, setIsDragging] = useState(false);
   const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
+  const swipeStart = useRef(null);
   const localMutating = useRef(false);
   const anchorDateRef = useRef(anchorDate);
   const saveQueue = useRef(Promise.resolve());
@@ -515,7 +516,26 @@ function App() {
         onSignOut={() => supabase.auth.signOut()}
         onFillWeek={fillWeek}
       />
-      <div className="app">
+      <div
+        className="app"
+        onTouchStart={(e) => {
+          swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }}
+        onTouchEnd={(e) => {
+          if (isDragging || !swipeStart.current) return;
+          const dx = e.changedTouches[0].clientX - swipeStart.current.x;
+          const dy = e.changedTouches[0].clientY - swipeStart.current.y;
+          swipeStart.current = null;
+          if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+          if (dx < 0) {
+            if (selectedDayIndex < 6) setSelectedDayIndex(selectedDayIndex + 1);
+            else { setAnchorDate(prev => { const d = new Date(prev + "T00:00:00"); d.setDate(d.getDate() + 7); return formatDate(d); }); setSelectedDayIndex(0); }
+          } else {
+            if (selectedDayIndex > 0) setSelectedDayIndex(selectedDayIndex - 1);
+            else { setAnchorDate(prev => { const d = new Date(prev + "T00:00:00"); d.setDate(d.getDate() - 7); return formatDate(d); }); setSelectedDayIndex(6); }
+          }
+        }}
+      >
         {data.map((tasks, i) => (
           <Column
             key={i}

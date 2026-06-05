@@ -304,11 +304,32 @@ button:disabled {
   display: none;
 }
 
+.day-strip-handle {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar_container {
     position: sticky;
     top: 0;
     z-index: 50;
+  }
+
+  .day-strip-handle {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-content: center;
+    align-items: center;
+    height: 10px;
+    cursor: pointer;
+  }
+
+  .day-strip-handle__pip {
+    width: 48px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--text-muted);
+    opacity: 0.4;
   }
 
   .day-tab-strip {
@@ -317,6 +338,10 @@ button:disabled {
     width: 100%;
     gap: 2px;
     padding: 4px 0;
+  }
+
+  .day-tab-strip--collapsed {
+    display: none;
   }
 
   .day-tab {
