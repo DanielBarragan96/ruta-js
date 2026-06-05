@@ -505,9 +505,9 @@ function App() {
         date={currWeek[0]}
         onPrevWeek={() => shiftWeek(-1)}
         onNextWeek={() => shiftWeek(1)}
-        onSelectDate={(date) => {
+        onSelectDate={(date, dayIndex = 0) => {
           setAnchorDate(formatDate(getMonday(date)));
-          setSelectedDayIndex(0);
+          setSelectedDayIndex(dayIndex);
         }}
         currWeek={currWeek}
         selectedDayIndex={selectedDayIndex}

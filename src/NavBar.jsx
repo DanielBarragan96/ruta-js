@@ -145,6 +145,10 @@ export default function NavBar({
         <button className="date" onClick={() => setShowCal((v) => !v)}>
           {month + year}
         </button>
+        <button
+          className={"day-strip-toggle" + (showDayTabs ? " day-strip-toggle--open" : "")}
+          onClick={() => setShowDayTabs((v) => !v)}
+        />
         {currWeek && !currWeek.includes(todayStr) ? (
           <button
             className="today-icon-btn"
@@ -189,7 +193,14 @@ export default function NavBar({
             <Calendar
               calendarType="iso8601"
               onClickDay={(date) => {
-                onSelectDate(date);
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                  const js = date.getDay(); // 0=Sun … 6=Sat
+                  const dayIndex = js === 0 ? 6 : js - 1; // 0=Mon … 6=Sun
+                  onSelectDate(date, dayIndex);
+                } else {
+                  onSelectDate(date);
+                }
                 setShowCal(false);
               }}
               tileClassName={tileClassName}
@@ -198,14 +209,6 @@ export default function NavBar({
           </div>
         </div>
       )}
-
-      {/* Mobile-only toggle handle for the day tab strip */}
-      <div
-        className="day-strip-handle"
-        onClick={() => setShowDayTabs((v) => !v)}
-      >
-        <span className="day-strip-handle__pip" />
-      </div>
 
       {/* Mobile-only day tab strip — hidden on desktop via CSS.
           Uses data-day-tab attributes for pointer-based drop detection in App.js
