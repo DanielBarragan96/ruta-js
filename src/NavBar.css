@@ -304,7 +304,7 @@ button:disabled {
   display: none;
 }
 
-.day-strip-toggle {
+.date-left-spacer {
   display: none;
 }
 
@@ -317,7 +317,6 @@ button:disabled {
     position: sticky;
     top: 0;
     z-index: 50;
-    --day-strip-height: 88px;
   }
 
   .nav-side {
@@ -347,33 +346,14 @@ button:disabled {
     align-items: center;
   }
 
-  .day-strip-toggle {
-    display: flex;
-    justify-self: end;
-    margin-right: 8px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: transparent !important;
-    border: 2px solid var(--text-muted) !important;
-    padding: 0 !important;
-    padding-top: 0 !important;
-    flex-shrink: 0;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: background 0.15s, border-color 0.15s, opacity 0.15s;
-  }
-
-  .day-strip-toggle--open {
-    background: var(--accent) !important;
-    border-color: var(--accent) !important;
-    opacity: 1;
-  }
-
   .today-icon-btn,
   .date-center__spacer {
     justify-self: start;
     margin-left: 8px;
+  }
+
+  .date-left-spacer {
+    display: block;
   }
 
   .day-tab-strip {
@@ -386,11 +366,6 @@ button:disabled {
     padding: 4px;
     background: var(--bg-elevated);
     z-index: 49;
-  }
-
-
-  .day-tab-strip--collapsed {
-    display: none;
   }
 
   .day-tab {

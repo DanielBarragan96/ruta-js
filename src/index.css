@@ -28,7 +28,7 @@ code {
 }
 
 @media (max-width: 768px) {
-  .app--tabs-open {
+  .app {
     padding-top: 88px;
   }
 }

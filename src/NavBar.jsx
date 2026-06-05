@@ -26,8 +26,6 @@ export default function NavBar({
   selectedDayIndex,
   onSelectDay,
   isDragging,
-  showDayTabs,
-  onToggleDayTabs,
   onSignOut,
   onFillWeek,
 }) {
@@ -125,7 +123,7 @@ export default function NavBar({
   const todayStr = todayLocalStr();
 
   return (
-    <div className="navbar_container" data-tabs-open={showDayTabs || isDragging ? "1" : undefined}>
+    <div className="navbar_container">
       <div className="nav-side nav-side--left">
         <button
           className={"nav-btn" + (isDragging ? " nav-btn--drag-target" : "")}
@@ -151,10 +149,7 @@ export default function NavBar({
             <rect x="11.5" y="11" width="3.5" height="2.5" rx="0.5"/>
           </svg>
         </button>
-        <button
-          className={"day-strip-toggle" + (showDayTabs ? " day-strip-toggle--open" : "")}
-          onClick={onToggleDayTabs}
-        />
+        <span className="date-left-spacer" />
         <button className="date" onClick={() => setShowCal((v) => !v)}>
           <span className="date-label--desktop">{month + year}</span>
           <span className="date-label--mobile">
@@ -233,7 +228,7 @@ export default function NavBar({
       {/* Mobile-only day tab strip — hidden on desktop via CSS.
           Uses data-day-tab attributes for pointer-based drop detection in App.js
           (rbd Droppable hit detection is unreliable on mobile touch). */}
-      <div className={`day-tab-strip${!showDayTabs && !isDragging ? " day-tab-strip--collapsed" : ""}`}>
+      <div className="day-tab-strip">
         {DAY_SHORT.map((name, i) => (
           <div
             key={i}

@@ -1,7 +1,6 @@
 import "./App.css";
 import Column from "./Column";
 import NavBar from "./NavBar";
-import TrashZone from "./TrashZone";
 import ModalCreateNewTask from "./CreateNewTask";
 import LoginForm from "./LoginForm";
 import React, { useState, useEffect, useRef } from "react";
@@ -197,14 +196,6 @@ function App() {
   const [clientesList, setClientesList] = useState([]);
   const [obrasList, setObrasList] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [showDayTabs, setShowDayTabs] = useState(() => {
-    try { return localStorage.getItem("dayTabsOpen") === "1"; } catch { return false; }
-  });
-  const toggleDayTabs = () => setShowDayTabs(v => {
-    const next = !v;
-    try { localStorage.setItem("dayTabsOpen", next ? "1" : "0"); } catch {}
-    return next;
-  });
   const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
   const swipeStart = useRef(null);
@@ -391,9 +382,6 @@ function App() {
     return el ? el.getAttribute("data-nav-week") : null;
   }
 
-  function isPointerOverTrash() {
-    return !!getElementUnderPointer("[data-trash-zone]");
-  }
 
   let onDragEnd = (result) => {
     setIsDragging(false);
@@ -444,16 +432,6 @@ function App() {
       // Same day: pointer landed in the strip while dragging within this column.
       // Fall through to rbd's destination — positions are accurate (no layout shift),
       // so rbd correctly computes index 0 when pointer is above the first card.
-    }
-
-    // Pointer-based trash detection — TrashZone is position:fixed so it can't
-    // be a rbd Droppable (fixed ancestors make isWindowScrollAllowed=false).
-    if (isPointerOverTrash()) {
-      data[source.droppableId].splice(source.index, 1);
-      restartIndexes();
-      saveTasks(data.flat());
-      setData([...data]);
-      return;
     }
 
     if (!destination) return;
@@ -561,13 +539,11 @@ function App() {
         selectedDayIndex={selectedDayIndex}
         onSelectDay={setSelectedDayIndex}
         isDragging={isDragging}
-        showDayTabs={showDayTabs}
-        onToggleDayTabs={toggleDayTabs}
         onSignOut={() => supabase.auth.signOut()}
         onFillWeek={fillWeek}
       />
       <div
-        className={"app" + (showDayTabs ? " app--tabs-open" : "")}
+        className="app"
         onTouchStart={(e) => {
           swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
         }}
@@ -602,7 +578,6 @@ function App() {
           />
         ))}
       </div>
-      <TrashZone isDragging={isDragging} />
       {showModal && editingTask && (
         <ModalCreateNewTask
           showModal={showModal}
