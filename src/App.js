@@ -499,17 +499,29 @@ function App() {
 
   if (!session) return <LoginForm />;
 
+  // Derive the 7 displayed dates directly from anchorDate state so the UI
+  // is always in sync even before the async loadTasksAsync effect re-runs.
+  // (currWeek is a module-level var set by castData, so it lags one render.)
+  const displayWeek = (() => {
+    const monday = new Date(anchorDate + "T00:00:00");
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(d.getDate() + i);
+      return formatDate(d);
+    });
+  })();
+
   return (
     <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd} enableUserSelectHack={false}>
       <NavBar
-        date={currWeek[0]}
+        date={displayWeek[0]}
         onPrevWeek={() => shiftWeek(-1)}
         onNextWeek={() => shiftWeek(1)}
         onSelectDate={(date, dayIndex = 0) => {
           setAnchorDate(formatDate(getMonday(date)));
           setSelectedDayIndex(dayIndex);
         }}
-        currWeek={currWeek}
+        currWeek={displayWeek}
         selectedDayIndex={selectedDayIndex}
         onSelectDay={setSelectedDayIndex}
         isDragging={isDragging}
@@ -539,14 +551,14 @@ function App() {
         {data.map((tasks, i) => (
           <Column
             key={i}
-            date={currWeek[i]}
+            date={displayWeek[i]}
             tasks={tasks}
             index={i}
             onAddCard={() => openCreate(i)}
             onEdit={openEdit}
             isDragging={isDragging}
             wasDragging={wasDragging}
-            isToday={currWeek[i] === formatDate(new Date())}
+            isToday={displayWeek[i] === formatDate(new Date())}
             isWeekend={i >= 5}
             isActive={i === selectedDayIndex}
           />
