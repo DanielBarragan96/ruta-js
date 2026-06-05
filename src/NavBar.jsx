@@ -142,13 +142,13 @@ export default function NavBar({
             <rect x="11.5" y="11" width="3.5" height="2.5" rx="0.5"/>
           </svg>
         </button>
-        <button className="date" onClick={() => setShowCal((v) => !v)}>
-          {month + year}
-        </button>
         <button
           className={"day-strip-toggle" + (showDayTabs ? " day-strip-toggle--open" : "")}
           onClick={() => setShowDayTabs((v) => !v)}
         />
+        <button className="date" onClick={() => setShowCal((v) => !v)}>
+          {month + year}
+        </button>
         {currWeek && !currWeek.includes(todayStr) ? (
           <button
             className="today-icon-btn"

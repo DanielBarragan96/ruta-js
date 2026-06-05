@@ -304,6 +304,10 @@ button:disabled {
   display: none;
 }
 
+.fill-week-btn {
+  display: none;
+}
+
 .day-strip-toggle {
   display: none;
 }
@@ -315,8 +319,18 @@ button:disabled {
     z-index: 50;
   }
 
+  .date-center {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    justify-self: stretch;
+    gap: 0;
+    align-items: center;
+  }
+
   .day-strip-toggle {
     display: flex;
+    justify-self: end;
+    margin-right: 8px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
@@ -336,8 +350,9 @@ button:disabled {
     opacity: 1;
   }
 
-  .day-strip-toggle + .today-icon-btn,
-  .day-strip-toggle + .date-center__spacer {
+  .today-icon-btn,
+  .date-center__spacer {
+    justify-self: start;
     margin-left: 8px;
   }
 
