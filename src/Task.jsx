@@ -2,6 +2,15 @@ import React from "react";
 import "./Task.css";
 import { Draggable } from "react-beautiful-dnd";
 
+function formatEquipo(equipo) {
+  const parts = equipo.split(/[/,\s]+/).filter(Boolean);
+  const pairs = [];
+  for (let i = 0; i < parts.length; i += 2) {
+    pairs.push(parts.slice(i, i + 2).join("/"));
+  }
+  return pairs;
+}
+
 function getTaskType(taskType) {
   switch (taskType) {
     case "P":
@@ -45,7 +54,14 @@ export default function Task({ task, index, onEdit, wasDragging }) {
         ) : null}
         {task.equipo ? (
           <>
-            {task.equipo}
+            <span className="equipo">
+              {formatEquipo(task.equipo).map((pair, i, arr) => (
+                <React.Fragment key={i}>
+                  {pair}
+                  {i < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </span>
             <br />
           </>
         ) : null}

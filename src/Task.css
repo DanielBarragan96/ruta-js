@@ -4,6 +4,7 @@
   padding: 5px;
   margin-bottom: 8px;
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 
 .task.taskType_entrada {
@@ -33,6 +34,10 @@
 .task.taskType_none {
   background-color: black;
   color: white;
+}
+
+.equipo {
+  font-size: 0.78em;
 }
 
 @media (max-width: 768px) {
