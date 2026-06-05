@@ -312,6 +312,10 @@ button:disabled {
   display: none;
 }
 
+.date-label--mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar_container {
     position: sticky;
@@ -321,6 +325,17 @@ button:disabled {
 
   .nav-side {
     display: none;
+  }
+
+  .date-label--desktop {
+    display: none;
+  }
+
+  .date-label--mobile {
+    display: block;
+    text-align: center;
+    line-height: 1.3;
+    font-size: 0.85rem;
   }
 
   .date-center {

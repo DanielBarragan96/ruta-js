@@ -4,6 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import "./NavBar.css";
 
 const DAY_SHORT = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+const DAY_FULL  = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 // NavBar can't import formatDate from App.js (not exported), so this duplicates
 // the same local-time logic to avoid the UTC-midnight shift.
@@ -29,7 +30,15 @@ export default function NavBar({
   onFillWeek,
 }) {
   const [showCal, setShowCal] = useState(false);
-  const [showDayTabs, setShowDayTabs] = useState(false);
+  const [showDayTabs, setShowDayTabs] = useState(() => {
+    try { return localStorage.getItem("dayTabsOpen") === "1"; } catch { return false; }
+  });
+
+  const toggleDayTabs = () => setShowDayTabs((v) => {
+    const next = !v;
+    try { localStorage.setItem("dayTabsOpen", next ? "1" : "0"); } catch {}
+    return next;
+  });
   const [hoveredWeek, setHoveredWeek] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
   const calRef = useRef(null);
@@ -108,10 +117,17 @@ export default function NavBar({
   // 1 day in negative UTC offsets — +1 corrects for display only
   const displayDate = new Date(date);
   displayDate.setDate(displayDate.getDate() + 1);
-  const month = displayDate
-    .toLocaleString("ES-MX", { month: "short" })
-    .toUpperCase();
-  const year = displayDate.getFullYear().toString().substring(2, 4);
+  const month = displayDate.toLocaleString("ES-MX", { month: "short" }).toUpperCase();
+  const year  = displayDate.getFullYear().toString().substring(2, 4);
+
+  // Mobile title: full day name + day/month/year of the selected day
+  const selDate = new Date(currWeek?.[selectedDayIndex] || date);
+  selDate.setDate(selDate.getDate() + 1);
+  const mobileDayName  = DAY_FULL[selDate.getDay()];
+  const mobileDateLine =
+    selDate.getDate() +
+    selDate.toLocaleString("ES-MX", { month: "short" }).toUpperCase() +
+    selDate.getFullYear().toString().substring(2, 4);
 
   const todayStr = todayLocalStr();
 
@@ -144,10 +160,13 @@ export default function NavBar({
         </button>
         <button
           className={"day-strip-toggle" + (showDayTabs ? " day-strip-toggle--open" : "")}
-          onClick={() => setShowDayTabs((v) => !v)}
+          onClick={toggleDayTabs}
         />
         <button className="date" onClick={() => setShowCal((v) => !v)}>
-          {month + year}
+          <span className="date-label--desktop">{month + year}</span>
+          <span className="date-label--mobile">
+            {mobileDayName} {mobileDateLine}
+          </span>
         </button>
         {currWeek && (window.innerWidth <= 768 ? currWeek[selectedDayIndex] !== todayStr : !currWeek.includes(todayStr)) ? (
           <button

@@ -73,6 +73,9 @@
     flex-direction: column;
     width: 100%;
   }
+  .title {
+    display: none;
+  }
   .draggable {
     /* 100vh on iOS Safari excludes browser chrome; tune during testing if content clips */
     min-height: calc(100vh - 120px);
