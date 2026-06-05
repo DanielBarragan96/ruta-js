@@ -296,6 +296,7 @@ function App() {
     const handleKey = (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
       if (showModal) return;
+      if (document.querySelector('.cal-overlay')) return;
       const isMobile = window.innerWidth <= 768;
       if (e.key === 't') {
         setAnchorDate(formatDate(getMonday(new Date())));
@@ -319,6 +320,22 @@ function App() {
             setAnchorDate(prev => { const d = new Date(prev + "T00:00:00"); d.setDate(d.getDate() - 7); return formatDate(d); });
             setSelectedDayIndex(6);
           }
+        } else {
+          shiftWeek(-1);
+        }
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (isMobile) {
+          if (selectedDayIndex < 6) setSelectedDayIndex(selectedDayIndex + 1);
+          else { setAnchorDate(prev => { const d = new Date(prev + "T00:00:00"); d.setDate(d.getDate() + 7); return formatDate(d); }); setSelectedDayIndex(0); }
+        } else {
+          shiftWeek(1);
+        }
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (isMobile) {
+          if (selectedDayIndex > 0) setSelectedDayIndex(selectedDayIndex - 1);
+          else { setAnchorDate(prev => { const d = new Date(prev + "T00:00:00"); d.setDate(d.getDate() - 7); return formatDate(d); }); setSelectedDayIndex(6); }
         } else {
           shiftWeek(-1);
         }
