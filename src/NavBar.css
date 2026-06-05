@@ -336,6 +336,11 @@ button:disabled {
     opacity: 1;
   }
 
+  .day-strip-toggle + .today-icon-btn,
+  .day-strip-toggle + .date-center__spacer {
+    margin-left: 8px;
+  }
+
   .day-tab-strip {
     display: flex;
     grid-column: 1 / -1; /* span all 3 navbar grid columns */
