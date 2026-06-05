@@ -149,7 +149,7 @@ export default function NavBar({
         <button className="date" onClick={() => setShowCal((v) => !v)}>
           {month + year}
         </button>
-        {currWeek && !currWeek.includes(todayStr) ? (
+        {currWeek && (window.innerWidth <= 768 ? currWeek[selectedDayIndex] !== todayStr : !currWeek.includes(todayStr)) ? (
           <button
             className="today-icon-btn"
             onClick={() => {
