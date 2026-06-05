@@ -152,7 +152,15 @@ export default function NavBar({
         {currWeek && !currWeek.includes(todayStr) ? (
           <button
             className="today-icon-btn"
-            onClick={() => onSelectDate(new Date())}
+            onClick={() => {
+                const today = new Date();
+                if (window.innerWidth <= 768) {
+                  const js = today.getDay();
+                  onSelectDate(today, js === 0 ? 6 : js - 1);
+                } else {
+                  onSelectDate(today);
+                }
+              }}
             title="Ir a hoy"
           >
             <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
