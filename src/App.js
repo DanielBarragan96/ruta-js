@@ -456,15 +456,20 @@ const wasDragging = useRef(false);
   let insertTask = (task) => {
     let currDateIndex = currWeek.indexOf(task.date);
     if (currDateIndex === -1) return;
-    // Remove from whichever column currently holds this id (date may have changed)
+    let oldDayIndex = -1;
     for (let day = 0; day < data.length; day++) {
       const idx = data[day].findIndex((el) => el.id === task.id);
       if (idx !== -1) {
+        oldDayIndex = day;
         data[day].splice(idx, 1);
         break;
       }
     }
-    data[currDateIndex].splice(task.index, 0, task);
+    if (oldDayIndex !== -1 && oldDayIndex !== currDateIndex) {
+      data[currDateIndex].push(task);
+    } else {
+      data[currDateIndex].splice(task.index, 0, task);
+    }
     restartIndexes();
     saveTasks(data.flat());
     setData([...data]);
