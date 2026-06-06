@@ -23,7 +23,7 @@ const TIPOS = [
 
 // Fields shown per type. clienteLabel: shown + label text. obra/equipo/notas: boolean.
 const FIELDS = {
-  E: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
+  E: { clienteLabel: "Cliente",    obra: true, equipo: true, equipoSalida: true, notas: true },
   S: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
   M: { clienteLabel: "Cliente",    obra: true, equipo: true, notas: true },
   P: { clienteLabel: "Proveedor",  equipo: true },
@@ -64,7 +64,17 @@ export default function ModalCreateNewTask({
   ReactModal.setAppElement("#root");
   let maxYear = currDate.getFullYear() + 1;
 
-  const [formTask, setFormTask] = useState(task);
+  const isCombo = task.type === 'C';
+  const sepIdx = isCombo && task.equipo ? task.equipo.indexOf(' --- ') : -1;
+  const initEquipoE = sepIdx >= 0 ? task.equipo.slice(0, sepIdx) : (task.equipo || '');
+  const initEquipoS = sepIdx >= 0 ? task.equipo.slice(sepIdx + 5) : '';
+
+  const [formTask, setFormTask] = useState({
+    ...task,
+    type: isCombo ? 'E' : task.type,
+    equipo: initEquipoE,
+    equipoSalida: initEquipoS,
+  });
   const [shake, setShake] = useState(false);
   // Fixed-index refs: [cliente, obra, equipo, notas]. Null when field is hidden.
   const inputRefs = useRef([null, null, null, null]);
@@ -83,8 +93,11 @@ export default function ModalCreateNewTask({
         return;
       }
     }
-    const { _isNew, ...taskToSave } = formTask;
-    insertTask(taskToSave);
+    const { _isNew, equipoSalida, ...base } = formTask;
+    const salida = equipoSalida?.trim();
+    const type = salida ? 'C' : base.type;
+    const equipo = salida ? `${base.equipo} --- ${salida}` : base.equipo;
+    insertTask({ ...base, type, equipo });
     handleCloseModal();
   };
 
@@ -237,14 +250,26 @@ export default function ModalCreateNewTask({
         )}
         {fields.equipo && (
           <div className="row">
-            <label htmlFor="equipo">Equipo:</label>
+            <label htmlFor="equipo">Eq. Entrada:</label>
             <input
               ref={(el) => { inputRefs.current[2] = el; }}
               type="text"
               id="equipo"
-              placeholder="Equipo"
+              placeholder="Equipo entrada"
               value={formTask.equipo}
               onChange={(e) => setFormTask({ ...formTask, equipo: e.target.value })}
+            />
+          </div>
+        )}
+        {fields.equipoSalida && (
+          <div className="row">
+            <label htmlFor="equipoSalida">Eq. Salida:</label>
+            <input
+              type="text"
+              id="equipoSalida"
+              placeholder="Equipo salida (opcional)"
+              value={formTask.equipoSalida || ''}
+              onChange={(e) => setFormTask({ ...formTask, equipoSalida: e.target.value })}
             />
           </div>
         )}

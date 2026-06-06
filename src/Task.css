@@ -36,6 +36,21 @@
   color: white;
 }
 
+.task.task-combo {
+  padding: 0;
+  overflow: hidden;
+}
+
+.combo-entrada {
+  background-color: #a6d46f;
+  padding: 5px;
+}
+
+.combo-salida {
+  background-color: #f58e6c;
+  padding: 5px;
+}
+
 .equipo {
   font-size: 0.78em;
 }
