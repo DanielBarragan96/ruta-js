@@ -5,6 +5,13 @@ import "./CreateNewTask.css";
 
 const PICKER_TYPES = new Set(['E', 'S', 'M']);
 
+const MONTHS_ES = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+function formatDateLabel(dateStr) {
+  if (!dateStr) return '';
+  const [year, month, day] = dateStr.split('-');
+  return `${day}${MONTHS_ES[parseInt(month, 10) - 1]}${year.slice(2)}`;
+}
+
 const TIPOS = [
   { code: "E", label: "Entrada",   color: "#a6d46f" },
   { code: "S", label: "Salida",    color: "#f58e6c" },
@@ -61,6 +68,7 @@ export default function ModalCreateNewTask({
   const [shake, setShake] = useState(false);
   // Fixed-index refs: [cliente, obra, equipo, notas]. Null when field is hidden.
   const inputRefs = useRef([null, null, null, null]);
+  const dateInputRef = useRef(null);
 
   useEffect(() => { inputRefs.current.find(Boolean)?.focus(); }, []);
 
@@ -138,15 +146,20 @@ export default function ModalCreateNewTask({
         <h2>TAREA</h2>
         <div className="row">
           <label htmlFor="date">Fecha:</label>
-          <input
-            type="date"
-            id="date"
-            tabIndex={-1}
-            min="2017-01-01"
-            max={maxYear + "-12-31"}
-            onChange={(e) => setFormTask({ ...formTask, date: e.target.value })}
-            value={formTask.date}
-          />
+          <div className="date-display-wrap" onClick={() => dateInputRef.current?.showPicker?.()}>
+            <span className="date-label-formatted">{formatDateLabel(formTask.date)}</span>
+            <input
+              ref={dateInputRef}
+              type="date"
+              id="date"
+              tabIndex={-1}
+              min="2017-01-01"
+              max={maxYear + "-12-31"}
+              onChange={(e) => setFormTask({ ...formTask, date: e.target.value })}
+              value={formTask.date}
+              className="date-input-overlay"
+            />
+          </div>
         </div>
 
         <div className="row">

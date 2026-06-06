@@ -109,6 +109,32 @@ input:focus {
   font-weight: 600;
 }
 
+.date-display-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.date-label-formatted {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--text-muted);
+  padding: 4px 0;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.date-input-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  flex: unset;
+}
+
 .btn-location {
   flex-shrink: 0;
   background: transparent;

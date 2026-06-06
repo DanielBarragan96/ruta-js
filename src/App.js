@@ -196,7 +196,7 @@ function App() {
   const [clientesList, setClientesList] = useState([]);
   const [obrasList, setObrasList] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const wasDragging = useRef(false);
+const wasDragging = useRef(false);
   const lastPointerPos = useRef({ x: 0, y: 0 });
   const swipeStart = useRef(null);
   const localMutating = useRef(false);
@@ -570,7 +570,7 @@ function App() {
             index={i}
             onAddCard={() => openCreate(i)}
             onEdit={openEdit}
-            isDragging={isDragging}
+isDragging={isDragging}
             wasDragging={wasDragging}
             isToday={displayWeek[i] === formatDate(new Date())}
             isWeekend={i >= 5}
