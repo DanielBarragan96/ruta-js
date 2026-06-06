@@ -12,7 +12,9 @@ npm test -- --watchAll=false
 
 Weekly task scheduler (Create React App). State in `App.js`, persisted to `localStorage`.
 
-**Task fields:** `id`, `date` (YYYY-MM-DD), `index` (position in day), `type` (E/S/P/M/D/B/N), `clienteMin`, `obraMin`, `equipo`, `notas`
+**Task fields:** `id`, `date` (YYYY-MM-DD), `index` (position in day), `type` (E/S/P/M/D/B/C/N), `clienteMin`, `obraMin`, `equipo`, `notas`
+
+**Type C (Combinado):** Single card combining entrada + salida flete. No extra DB column — both equipos are packed into the `equipo` field as `"equipoEntrada --- equipoSalida"` (e.g. `"1Mod/1Mont --- 1Rev"`). Card renders as green top section (cliente, obra, equipo entrada) + orange bottom section (equipo salida). In the modal, type E shows two equipo fields; if "Eq. Salida" is filled on save the type is set to C automatically. Editing a C card opens as E with both fields pre-populated; clearing salida reverts it to E.
 
 **Key state:**
 - `data` — 2D array `data[dayIndex][taskIndex]`, built by `castData(tasks, anchorDate)`
