@@ -1,25 +1,26 @@
-# Graph Report - .  (2026-06-10)
+# Graph Report - ruta-js  (2026-06-10)
 
 ## Corpus Check
-- Corpus is ~11,052 words - fits in a single context window. You may not need a graph.
+- 13 files · ~11,052 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
 - 85 nodes · 99 edges · 11 communities detected
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.9)
-- Token cost: 3,200 input · 1,800 output
+- Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Supabase Data Layer|Supabase Data Layer]]
-- [[_COMMUNITY_App State & Drag-Drop|App State & Drag-Drop]]
-- [[_COMMUNITY_Core App Functions|Core App Functions]]
-- [[_COMMUNITY_React Assets & CRA|React Assets & CRA]]
-- [[_COMMUNITY_Service Worker|Service Worker]]
-- [[_COMMUNITY_Task Card Rendering|Task Card Rendering]]
-- [[_COMMUNITY_Test Data & Storage|Test Data & Storage]]
-- [[_COMMUNITY_Column Component|Column Component]]
-- [[_COMMUNITY_Task Creation Modal|Task Creation Modal]]
-- [[_COMMUNITY_NavBar Component|NavBar Component]]
-- [[_COMMUNITY_Combobox Search|Combobox Search]]
+- [[_COMMUNITY_Community 0|Community 0]]
+- [[_COMMUNITY_Community 1|Community 1]]
+- [[_COMMUNITY_Community 2|Community 2]]
+- [[_COMMUNITY_Community 3|Community 3]]
+- [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 5|Community 5]]
+- [[_COMMUNITY_Community 6|Community 6]]
+- [[_COMMUNITY_Community 7|Community 7]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 11|Community 11]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Clientes Table (Supabase)` - 8 edges
@@ -52,68 +53,68 @@
 
 ## Communities
 
-### Community 0 - "Supabase Data Layer"
+### Community 0 - "Community 0"
 Cohesion: 0.18
 Nodes (18): clientesList, Combobox Component, CreateNewTask.jsx, LoginForm.jsx, obrasList, Supabase Project, supabaseClient.js, BLoC Cache (+10 more)
 
-### Community 1 - "App State & Drag-Drop"
+### Community 1 - "Community 1"
 Cohesion: 0.18
 Nodes (12): App.js, castData, CSS Variables, localStorage, Mobile Cross-Day Drag, react-beautiful-dnd, Task Fields, Type C (Combinado) (+4 more)
 
-### Community 2 - "Core App Functions"
+### Community 2 - "Community 2"
 Cohesion: 0.29
 Nodes (5): App(), castData(), formatDate(), getMonday(), sortTasks()
 
-### Community 3 - "React Assets & CRA"
+### Community 3 - "Community 3"
 Cohesion: 0.36
 Nodes (7): Atom Icon (3 elliptical orbits + nucleus), Create React App, Light Blue Color (#61DAFB), logo192.png - React Logo Icon (192px), React Framework, React Logo, ruta-js Application
 
-### Community 4 - "Service Worker"
+### Community 4 - "Community 4"
 Cohesion: 0.5
 Nodes (2): register(), registerValidSW()
 
-### Community 5 - "Task Card Rendering"
+### Community 5 - "Community 5"
 Cohesion: 0.6
 Nodes (4): EquipoLines(), formatEquipo(), getTaskType(), Task()
 
-### Community 6 - "Test Data & Storage"
+### Community 6 - "Community 6"
 Cohesion: 0.5
 Nodes (4): saveTasks(), buildCard(), createTestCards(), pick()
 
-### Community 7 - "Column Component"
+### Community 7 - "Community 7"
 Cohesion: 1.0
 Nodes (2): Column(), getColumnParts()
 
-### Community 8 - "Task Creation Modal"
+### Community 8 - "Community 8"
 Cohesion: 1.0
 Nodes (2): formatDateLabel(), ModalCreateNewTask()
 
-### Community 9 - "NavBar Component"
+### Community 9 - "Community 9"
 Cohesion: 1.0
 Nodes (2): NavBar(), todayLocalStr()
 
-### Community 11 - "Combobox Search"
+### Community 11 - "Community 11"
 Cohesion: 1.0
 Nodes (2): matchesSearch(), removeDiacritics()
 
 ## Knowledge Gaps
 - **13 isolated node(s):** `Type C (Combinado)`, `castData`, `CSS Variables`, `localStorage`, `Create React App` (+8 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **Thin community `Service Worker`** (5 nodes): `serviceWorkerRegistration.js`, `checkValidServiceWorker()`, `register()`, `registerValidSW()`, `unregister()`
+- **Thin community `Community 4`** (5 nodes): `serviceWorkerRegistration.js`, `checkValidServiceWorker()`, `register()`, `registerValidSW()`, `unregister()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Column Component`** (3 nodes): `Column.jsx`, `Column()`, `getColumnParts()`
+- **Thin community `Community 7`** (3 nodes): `Column.jsx`, `Column()`, `getColumnParts()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Task Creation Modal`** (3 nodes): `CreateNewTask.jsx`, `formatDateLabel()`, `ModalCreateNewTask()`
+- **Thin community `Community 8`** (3 nodes): `CreateNewTask.jsx`, `formatDateLabel()`, `ModalCreateNewTask()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `NavBar Component`** (3 nodes): `NavBar.jsx`, `NavBar()`, `todayLocalStr()`
+- **Thin community `Community 9`** (3 nodes): `NavBar.jsx`, `NavBar()`, `todayLocalStr()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Combobox Search`** (3 nodes): `Combobox.jsx`, `matchesSearch()`, `removeDiacritics()`
+- **Thin community `Community 11`** (3 nodes): `Combobox.jsx`, `matchesSearch()`, `removeDiacritics()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `App.js` connect `App State & Drag-Drop` to `Supabase Data Layer`?**
+- **Why does `App.js` connect `Community 1` to `Community 0`?**
   _High betweenness centrality (0.044) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `clientesList` (e.g. with `Clientes Table (Supabase)` and `BLoC Cache`) actually correct?**
   _`clientesList` has 2 INFERRED edges - model-reasoned connections that need verification._
