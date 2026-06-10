@@ -200,3 +200,15 @@ input:focus {
     margin-top: 4px;
   }
 }
+
+.btn-nueva-obra {
+  flex-shrink: 0;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}

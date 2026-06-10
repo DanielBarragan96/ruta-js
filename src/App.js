@@ -514,6 +514,14 @@ const wasDragging = useRef(false);
     setEditingTask(null);
   };
 
+  const handleObraCreated = (newObra) => {
+    setObrasList(prev => [newObra, ...prev]);
+  };
+
+  const handleClienteCreated = (newCliente) => {
+    setClientesList(prev => [newCliente, ...prev]);
+  };
+
   let fillWeek = () => createTestCards(data, currWeek, restartIndexes, saveTasks, setData);
 
   if (!session) return <LoginForm />;
@@ -592,6 +600,8 @@ isDragging={isDragging}
           onDelete={editingTask._isNew ? undefined : deleteTask}
           clientesList={clientesList}
           obrasList={obrasList}
+          onObraCreated={handleObraCreated}
+          onClienteCreated={handleClienteCreated}
         />
       )}
     </DragDropContext>

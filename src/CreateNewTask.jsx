@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactModal from "react-modal";
 import Combobox from "./Combobox";
+import CreateObraModal from './CreateObraModal';
 import "./CreateNewTask.css";
 
 const PICKER_TYPES = new Set(['E', 'S', 'M']);
@@ -38,6 +39,9 @@ export default function ModalCreateNewTask({
   insertTask,
   onDelete,
   obrasList = [],
+  clientesList = [],
+  onObraCreated,
+  onClienteCreated,
 }) {
   let currDate = new Date();
   let month = "" + (currDate.getMonth() + 1);
@@ -76,6 +80,7 @@ export default function ModalCreateNewTask({
     equipoSalida: initEquipoS,
   });
   const [shake, setShake] = useState(false);
+  const [showObraModal, setShowObraModal] = useState(false);
   // Fixed-index refs: [cliente, obra, equipo, notas]. Null when field is hidden.
   const inputRefs = useRef([null, null, null, null]);
   const dateInputRef = useRef(null);
@@ -235,6 +240,13 @@ export default function ModalCreateNewTask({
                     )}
                   </button>
                 )}
+                <button
+                  type="button"
+                  className="btn-nueva-obra"
+                  onClick={() => setShowObraModal(true)}
+                >
+                  + Obra
+                </button>
               </>
             ) : (
               <input
@@ -303,6 +315,17 @@ export default function ModalCreateNewTask({
             </button>
           )}
         </div>
+        <CreateObraModal
+          isOpen={showObraModal}
+          onClose={() => setShowObraModal(false)}
+          onCreated={(newObra) => {
+            setShowObraModal(false);
+            setFormTask(prev => ({ ...prev, clienteMin: newObra.clienteMin, obraMin: newObra.obraMin }));
+            onObraCreated?.(newObra);
+          }}
+          clientesList={clientesList}
+          onClienteCreated={(newCliente) => onClienteCreated?.(newCliente)}
+        />
       </div>
     </ReactModal>
   );

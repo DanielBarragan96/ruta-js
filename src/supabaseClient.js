@@ -4,7 +4,7 @@ const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.RE
 export async function fetchClientes() {
   const { data, error } = await supabase
     .from('Clientes')
-    .select('clienteMin, clienteMax')
+    .select('clienteMin, clienteMax, defaultFisc')
     .order('lastFleteFecha', { ascending: false, nullsFirst: false })
     .limit(1000);
   if (error) { console.error('fetchClientes:', error); return []; }
@@ -27,6 +27,18 @@ export async function fetchObras() {
     from += PAGE;
   }
   return all;
+}
+
+export async function insertObra(obra) {
+  const { data, error } = await supabase.from('Obras').insert([obra]).select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function insertCliente(cliente) {
+  const { data, error } = await supabase.from('Clientes').insert([cliente]).select().single();
+  if (error) throw error;
+  return data;
 }
 
 export default supabase
