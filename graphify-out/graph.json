@@ -1066,9 +1066,9 @@
       "source_file": "CreateObraModal.jsx",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "createobramodal_jsx",
-      "target": "src_createobramodal_createobramodal",
-      "confidence_score": 1.0
+      "target": "src_createobramodal_createobramodal"
     },
     {
       "relation": "contains",
@@ -1076,9 +1076,9 @@
       "source_file": "CreateClienteModal.jsx",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "createclientemodal_jsx",
-      "target": "src_createclientemodal_createclientemodal",
-      "confidence_score": 1.0
+      "target": "src_createclientemodal_createclientemodal"
     },
     {
       "relation": "contains",
@@ -1236,9 +1236,9 @@
       "source_file": "supabaseClient.js",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "supabaseclient_js",
-      "target": "src_supabaseclient_insertobra",
-      "confidence_score": 1.0
+      "target": "src_supabaseclient_insertobra"
     },
     {
       "relation": "contains",
@@ -1246,9 +1246,9 @@
       "source_file": "supabaseClient.js",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "supabaseclient_js",
-      "target": "src_supabaseclient_insertcliente",
-      "confidence_score": 1.0
+      "target": "src_supabaseclient_insertcliente"
     },
     {
       "relation": "contains",
