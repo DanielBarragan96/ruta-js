@@ -71,7 +71,7 @@
       "source_file": "Column.jsx",
       "source_location": "L1",
       "id": "column_jsx",
-      "community": 7,
+      "community": 8,
       "norm_label": "column.jsx"
     },
     {
@@ -80,7 +80,7 @@
       "source_file": "Column.jsx",
       "source_location": "L8",
       "id": "src_column_getcolumnparts",
-      "community": 7,
+      "community": 8,
       "norm_label": "getcolumnparts()"
     },
     {
@@ -89,8 +89,44 @@
       "source_file": "Column.jsx",
       "source_location": "L20",
       "id": "src_column_column",
-      "community": 7,
+      "community": 8,
       "norm_label": "column()"
+    },
+    {
+      "label": "CreateObraModal.jsx",
+      "file_type": "code",
+      "source_file": "CreateObraModal.jsx",
+      "source_location": "L1",
+      "id": "createobramodal_jsx",
+      "community": 13,
+      "norm_label": "createobramodal.jsx"
+    },
+    {
+      "label": "CreateObraModal()",
+      "file_type": "code",
+      "source_file": "CreateObraModal.jsx",
+      "source_location": "L27",
+      "id": "src_createobramodal_createobramodal",
+      "community": 13,
+      "norm_label": "createobramodal()"
+    },
+    {
+      "label": "CreateClienteModal.jsx",
+      "file_type": "code",
+      "source_file": "CreateClienteModal.jsx",
+      "source_location": "L1",
+      "id": "createclientemodal_jsx",
+      "community": 14,
+      "norm_label": "createclientemodal.jsx"
+    },
+    {
+      "label": "CreateClienteModal()",
+      "file_type": "code",
+      "source_file": "CreateClienteModal.jsx",
+      "source_location": "L20",
+      "id": "src_createclientemodal_createclientemodal",
+      "community": 14,
+      "norm_label": "createclientemodal()"
     },
     {
       "label": "CreateNewTask.jsx",
@@ -98,25 +134,25 @@
       "source_file": "CreateNewTask.jsx",
       "source_location": "L1",
       "id": "createnewtask_jsx",
-      "community": 8,
+      "community": 9,
       "norm_label": "createnewtask.jsx"
     },
     {
       "label": "formatDateLabel()",
       "file_type": "code",
       "source_file": "CreateNewTask.jsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "id": "src_createnewtask_formatdatelabel",
-      "community": 8,
+      "community": 9,
       "norm_label": "formatdatelabel()"
     },
     {
       "label": "ModalCreateNewTask()",
       "file_type": "code",
       "source_file": "CreateNewTask.jsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "id": "src_createnewtask_modalcreatenewtask",
-      "community": 8,
+      "community": 9,
       "norm_label": "modalcreatenewtask()"
     },
     {
@@ -125,7 +161,7 @@
       "source_file": "index.js",
       "source_location": "L1",
       "id": "index_js",
-      "community": 15,
+      "community": 17,
       "norm_label": "index.js"
     },
     {
@@ -179,7 +215,7 @@
       "source_file": "App.test.js",
       "source_location": "L1",
       "id": "app_test_js",
-      "community": 13,
+      "community": 15,
       "norm_label": "app.test.js"
     },
     {
@@ -188,7 +224,7 @@
       "source_file": "App.test.js",
       "source_location": "L97",
       "id": "src_app_test_hittest",
-      "community": 13,
+      "community": 15,
       "norm_label": "hittest()"
     },
     {
@@ -197,7 +233,7 @@
       "source_file": "LoginForm.jsx",
       "source_location": "L1",
       "id": "loginform_jsx",
-      "community": 14,
+      "community": 16,
       "norm_label": "loginform.jsx"
     },
     {
@@ -206,7 +242,7 @@
       "source_file": "LoginForm.jsx",
       "source_location": "L5",
       "id": "src_loginform_loginform",
-      "community": 14,
+      "community": 16,
       "norm_label": "loginform()"
     },
     {
@@ -215,7 +251,7 @@
       "source_file": "NavBar.jsx",
       "source_location": "L1",
       "id": "navbar_jsx",
-      "community": 9,
+      "community": 10,
       "norm_label": "navbar.jsx"
     },
     {
@@ -224,7 +260,7 @@
       "source_file": "NavBar.jsx",
       "source_location": "L11",
       "id": "src_navbar_todaylocalstr",
-      "community": 9,
+      "community": 10,
       "norm_label": "todaylocalstr()"
     },
     {
@@ -233,7 +269,7 @@
       "source_file": "NavBar.jsx",
       "source_location": "L20",
       "id": "src_navbar_navbar",
-      "community": 9,
+      "community": 10,
       "norm_label": "navbar()"
     },
     {
@@ -242,7 +278,7 @@
       "source_file": "supabaseClient.js",
       "source_location": "L1",
       "id": "supabaseclient_js",
-      "community": 10,
+      "community": 5,
       "norm_label": "supabaseclient.js"
     },
     {
@@ -251,7 +287,7 @@
       "source_file": "supabaseClient.js",
       "source_location": "L4",
       "id": "src_supabaseclient_fetchclientes",
-      "community": 10,
+      "community": 5,
       "norm_label": "fetchclientes()"
     },
     {
@@ -260,8 +296,26 @@
       "source_file": "supabaseClient.js",
       "source_location": "L14",
       "id": "src_supabaseclient_fetchobras",
-      "community": 10,
+      "community": 5,
       "norm_label": "fetchobras()"
+    },
+    {
+      "label": "insertObra()",
+      "file_type": "code",
+      "source_file": "supabaseClient.js",
+      "source_location": "L32",
+      "id": "src_supabaseclient_insertobra",
+      "community": 5,
+      "norm_label": "insertobra()"
+    },
+    {
+      "label": "insertCliente()",
+      "file_type": "code",
+      "source_file": "supabaseClient.js",
+      "source_location": "L38",
+      "id": "src_supabaseclient_insertcliente",
+      "community": 5,
+      "norm_label": "insertcliente()"
     },
     {
       "label": "createTestCards.js",
@@ -332,7 +386,7 @@
       "source_file": "Task.jsx",
       "source_location": "L1",
       "id": "task_jsx",
-      "community": 5,
+      "community": 7,
       "norm_label": "task.jsx"
     },
     {
@@ -341,7 +395,7 @@
       "source_file": "Task.jsx",
       "source_location": "L5",
       "id": "src_task_formatequipo",
-      "community": 5,
+      "community": 7,
       "norm_label": "formatequipo()"
     },
     {
@@ -350,7 +404,7 @@
       "source_file": "Task.jsx",
       "source_location": "L14",
       "id": "src_task_gettasktype",
-      "community": 5,
+      "community": 7,
       "norm_label": "gettasktype()"
     },
     {
@@ -359,7 +413,7 @@
       "source_file": "Task.jsx",
       "source_location": "L33",
       "id": "src_task_equipolines",
-      "community": 5,
+      "community": 7,
       "norm_label": "equipolines()"
     },
     {
@@ -368,7 +422,7 @@
       "source_file": "Task.jsx",
       "source_location": "L46",
       "id": "src_task_task",
-      "community": 5,
+      "community": 7,
       "norm_label": "task()"
     },
     {
@@ -377,7 +431,7 @@
       "source_file": "App.js",
       "source_location": "L1",
       "id": "app_js",
-      "community": 2,
+      "community": 1,
       "norm_label": "app.js"
     },
     {
@@ -386,7 +440,7 @@
       "source_file": "App.js",
       "source_location": "L93",
       "id": "src_app_loadtasks",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadtasks()"
     },
     {
@@ -404,7 +458,7 @@
       "source_file": "App.js",
       "source_location": "L109",
       "id": "src_app_loadcache",
-      "community": 2,
+      "community": 1,
       "norm_label": "loadcache()"
     },
     {
@@ -413,7 +467,7 @@
       "source_file": "App.js",
       "source_location": "L118",
       "id": "src_app_formatdate",
-      "community": 2,
+      "community": 1,
       "norm_label": "formatdate()"
     },
     {
@@ -422,7 +476,7 @@
       "source_file": "App.js",
       "source_location": "L130",
       "id": "src_app_getmonday",
-      "community": 2,
+      "community": 1,
       "norm_label": "getmonday()"
     },
     {
@@ -431,7 +485,7 @@
       "source_file": "App.js",
       "source_location": "L138",
       "id": "src_app_gettodaydayindex",
-      "community": 2,
+      "community": 1,
       "norm_label": "gettodaydayindex()"
     },
     {
@@ -440,7 +494,7 @@
       "source_file": "App.js",
       "source_location": "L143",
       "id": "src_app_sorttasks",
-      "community": 2,
+      "community": 1,
       "norm_label": "sorttasks()"
     },
     {
@@ -449,7 +503,7 @@
       "source_file": "App.js",
       "source_location": "L155",
       "id": "src_app_castdata",
-      "community": 2,
+      "community": 1,
       "norm_label": "castdata()"
     },
     {
@@ -458,7 +512,7 @@
       "source_file": "App.js",
       "source_location": "L170",
       "id": "src_app_genid",
-      "community": 2,
+      "community": 1,
       "norm_label": "genid()"
     },
     {
@@ -467,7 +521,7 @@
       "source_file": "App.js",
       "source_location": "L178",
       "id": "src_app_app",
-      "community": 2,
+      "community": 1,
       "norm_label": "app()"
     },
     {
@@ -479,7 +533,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "weekly task scheduler",
       "id": "claude_weekly_task_scheduler"
     },
@@ -492,7 +546,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "app.js",
       "id": "claude_appjs"
     },
@@ -505,7 +559,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 0,
       "norm_label": "task fields",
       "id": "claude_task_fields"
     },
@@ -518,7 +572,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 0,
       "norm_label": "type c (combinado)",
       "id": "claude_type_c_combinado"
     },
@@ -531,7 +585,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "castdata",
       "id": "claude_castdata"
     },
@@ -544,7 +598,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "react-beautiful-dnd",
       "id": "claude_react_beautiful_dnd"
     },
@@ -557,7 +611,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "mobile cross-day drag",
       "id": "claude_mobile_cross_day_drag"
     },
@@ -570,7 +624,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "css variables",
       "id": "claude_css_variables"
     },
@@ -583,7 +637,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "localstorage",
       "id": "claude_localstorage"
     },
@@ -596,7 +650,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "create react app",
       "id": "readme_create_react_app"
     },
@@ -843,7 +897,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "index.html root entry point",
       "id": "index_html_root"
     },
@@ -856,7 +910,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "web app manifest",
       "id": "index_html_manifest"
     },
@@ -1009,6 +1063,26 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "CreateObraModal.jsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "createobramodal_jsx",
+      "target": "src_createobramodal_createobramodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CreateClienteModal.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "createclientemodal_jsx",
+      "target": "src_createclientemodal_createclientemodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "CreateNewTask.jsx",
       "source_location": "L9",
       "weight": 1.0,
@@ -1155,6 +1229,26 @@
       "confidence_score": 1.0,
       "source": "supabaseclient_js",
       "target": "src_supabaseclient_fetchobras"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabaseClient.js",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "supabaseclient_js",
+      "target": "src_supabaseclient_insertobra",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabaseClient.js",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "supabaseclient_js",
+      "target": "src_supabaseclient_insertcliente",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",

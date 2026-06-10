@@ -7,9 +7,17 @@
     "mtime": 1780704753.9543097,
     "hash": "cd781db39e52bbce50f7fc24621e9cc0"
   },
+  "/Users/dabarrag/projects/javascript/ruta-js/src/CreateObraModal.jsx": {
+    "mtime": 1781122979.0272195,
+    "hash": "8f99f98e666835d4b09ebe6d975481d6"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src/CreateClienteModal.jsx": {
+    "mtime": 1781122929.559294,
+    "hash": "1cf2c08539c07b673be7dd9ec0f11d55"
+  },
   "/Users/dabarrag/projects/javascript/ruta-js/src/CreateNewTask.jsx": {
-    "mtime": 1780705571.2134476,
-    "hash": "92353ef6514358293b1efcd10adbbed4"
+    "mtime": 1781122994.7740262,
+    "hash": "7e67b562ca19e32464513abaf71b8c32"
   },
   "/Users/dabarrag/projects/javascript/ruta-js/src/index.js": {
     "mtime": 1780706981.783518,
@@ -32,8 +40,8 @@
     "hash": "1b8c5fa0fef1044dfe6a854660e6dd4c"
   },
   "/Users/dabarrag/projects/javascript/ruta-js/src/supabaseClient.js": {
-    "mtime": 1780606438.738768,
-    "hash": "61ab701c413e48d0939c3db37c37a3f8"
+    "mtime": 1781122874.0956695,
+    "hash": "6e9a612a98fc6aa83688ea56ddd84949"
   },
   "/Users/dabarrag/projects/javascript/ruta-js/src/createTestCards.js": {
     "mtime": 1780509459.217458,
@@ -48,8 +56,8 @@
     "hash": "731367dcce54fdb68845e23d7558f221"
   },
   "/Users/dabarrag/projects/javascript/ruta-js/src/App.js": {
-    "mtime": 1780704975.172613,
-    "hash": "0fd06514276b6e6a3e7df0fbf8d44c6e"
+    "mtime": 1781123016.188666,
+    "hash": "b38b5a4dbcd17be984c681847932432e"
   },
   "/Users/dabarrag/projects/javascript/ruta-js/PROMPT_SELECT_CLIENTE_OBRA.md": {
     "mtime": 1780602819.965874,
