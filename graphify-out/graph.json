@@ -1,0 +1,2003 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "he_combobox_data_flow",
+        "label": "Combobox Data Flow: App.js loads Supabase data and passes to CreateNewTask via Combobox",
+        "nodes": [
+          "claude_appjs",
+          "plan_supabaseclient",
+          "plan_createnextask",
+          "plan_combobox_component"
+        ],
+        "relation": "data_pipeline",
+        "confidence": "INFERRED",
+        "confidence_score": 0.95,
+        "source_file": "PLAN_CLIENTE_OBRA_SELECT.md"
+      },
+      {
+        "id": "he_cliente_obra_fk_pattern",
+        "label": "Cliente-Obra FK Pattern: clienteMin links clientes/obras tables using Min/Max naming convention",
+        "nodes": [
+          "prompt_clientes_table",
+          "prompt_obras_table",
+          "prompt_min_max_naming",
+          "claude_task_fields"
+        ],
+        "relation": "shared_schema_pattern",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md"
+      },
+      {
+        "id": "he_supabase_shared_project",
+        "label": "Shared Supabase project between Flutter app and ruta-js React app",
+        "nodes": [
+          "plan_supabase_project",
+          "plan_loginform",
+          "plan_supabaseclient"
+        ],
+        "relation": "shared_backend",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "PLAN_CLIENTE_OBRA_SELECT.md"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "reportWebVitals.js",
+      "file_type": "code",
+      "source_file": "reportWebVitals.js",
+      "source_location": "L1",
+      "id": "reportwebvitals_js",
+      "community": 12,
+      "norm_label": "reportwebvitals.js"
+    },
+    {
+      "label": "reportWebVitals()",
+      "file_type": "code",
+      "source_file": "reportWebVitals.js",
+      "source_location": "L1",
+      "id": "src_reportwebvitals_reportwebvitals",
+      "community": 12,
+      "norm_label": "reportwebvitals()"
+    },
+    {
+      "label": "Column.jsx",
+      "file_type": "code",
+      "source_file": "Column.jsx",
+      "source_location": "L1",
+      "id": "column_jsx",
+      "community": 7,
+      "norm_label": "column.jsx"
+    },
+    {
+      "label": "getColumnParts()",
+      "file_type": "code",
+      "source_file": "Column.jsx",
+      "source_location": "L8",
+      "id": "src_column_getcolumnparts",
+      "community": 7,
+      "norm_label": "getcolumnparts()"
+    },
+    {
+      "label": "Column()",
+      "file_type": "code",
+      "source_file": "Column.jsx",
+      "source_location": "L20",
+      "id": "src_column_column",
+      "community": 7,
+      "norm_label": "column()"
+    },
+    {
+      "label": "CreateNewTask.jsx",
+      "file_type": "code",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L1",
+      "id": "createnewtask_jsx",
+      "community": 8,
+      "norm_label": "createnewtask.jsx"
+    },
+    {
+      "label": "formatDateLabel()",
+      "file_type": "code",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L9",
+      "id": "src_createnewtask_formatdatelabel",
+      "community": 8,
+      "norm_label": "formatdatelabel()"
+    },
+    {
+      "label": "ModalCreateNewTask()",
+      "file_type": "code",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L34",
+      "id": "src_createnewtask_modalcreatenewtask",
+      "community": 8,
+      "norm_label": "modalcreatenewtask()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L1",
+      "id": "index_js",
+      "community": 15,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "serviceWorkerRegistration.js",
+      "file_type": "code",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L1",
+      "id": "serviceworkerregistration_js",
+      "community": 4,
+      "norm_label": "serviceworkerregistration.js"
+    },
+    {
+      "label": "register()",
+      "file_type": "code",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L7",
+      "id": "src_serviceworkerregistration_register",
+      "community": 4,
+      "norm_label": "register()"
+    },
+    {
+      "label": "registerValidSW()",
+      "file_type": "code",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L26",
+      "id": "src_serviceworkerregistration_registervalidsw",
+      "community": 4,
+      "norm_label": "registervalidsw()"
+    },
+    {
+      "label": "checkValidServiceWorker()",
+      "file_type": "code",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L49",
+      "id": "src_serviceworkerregistration_checkvalidserviceworker",
+      "community": 4,
+      "norm_label": "checkvalidserviceworker()"
+    },
+    {
+      "label": "unregister()",
+      "file_type": "code",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L64",
+      "id": "src_serviceworkerregistration_unregister",
+      "community": 4,
+      "norm_label": "unregister()"
+    },
+    {
+      "label": "App.test.js",
+      "file_type": "code",
+      "source_file": "App.test.js",
+      "source_location": "L1",
+      "id": "app_test_js",
+      "community": 13,
+      "norm_label": "app.test.js"
+    },
+    {
+      "label": "hitTest()",
+      "file_type": "code",
+      "source_file": "App.test.js",
+      "source_location": "L97",
+      "id": "src_app_test_hittest",
+      "community": 13,
+      "norm_label": "hittest()"
+    },
+    {
+      "label": "LoginForm.jsx",
+      "file_type": "code",
+      "source_file": "LoginForm.jsx",
+      "source_location": "L1",
+      "id": "loginform_jsx",
+      "community": 14,
+      "norm_label": "loginform.jsx"
+    },
+    {
+      "label": "LoginForm()",
+      "file_type": "code",
+      "source_file": "LoginForm.jsx",
+      "source_location": "L5",
+      "id": "src_loginform_loginform",
+      "community": 14,
+      "norm_label": "loginform()"
+    },
+    {
+      "label": "NavBar.jsx",
+      "file_type": "code",
+      "source_file": "NavBar.jsx",
+      "source_location": "L1",
+      "id": "navbar_jsx",
+      "community": 9,
+      "norm_label": "navbar.jsx"
+    },
+    {
+      "label": "todayLocalStr()",
+      "file_type": "code",
+      "source_file": "NavBar.jsx",
+      "source_location": "L11",
+      "id": "src_navbar_todaylocalstr",
+      "community": 9,
+      "norm_label": "todaylocalstr()"
+    },
+    {
+      "label": "NavBar()",
+      "file_type": "code",
+      "source_file": "NavBar.jsx",
+      "source_location": "L20",
+      "id": "src_navbar_navbar",
+      "community": 9,
+      "norm_label": "navbar()"
+    },
+    {
+      "label": "supabaseClient.js",
+      "file_type": "code",
+      "source_file": "supabaseClient.js",
+      "source_location": "L1",
+      "id": "supabaseclient_js",
+      "community": 10,
+      "norm_label": "supabaseclient.js"
+    },
+    {
+      "label": "fetchClientes()",
+      "file_type": "code",
+      "source_file": "supabaseClient.js",
+      "source_location": "L4",
+      "id": "src_supabaseclient_fetchclientes",
+      "community": 10,
+      "norm_label": "fetchclientes()"
+    },
+    {
+      "label": "fetchObras()",
+      "file_type": "code",
+      "source_file": "supabaseClient.js",
+      "source_location": "L14",
+      "id": "src_supabaseclient_fetchobras",
+      "community": 10,
+      "norm_label": "fetchobras()"
+    },
+    {
+      "label": "createTestCards.js",
+      "file_type": "code",
+      "source_file": "createTestCards.js",
+      "source_location": "L1",
+      "id": "createtestcards_js",
+      "community": 6,
+      "norm_label": "createtestcards.js"
+    },
+    {
+      "label": "pick()",
+      "file_type": "code",
+      "source_file": "createTestCards.js",
+      "source_location": "L7",
+      "id": "src_createtestcards_pick",
+      "community": 6,
+      "norm_label": "pick()"
+    },
+    {
+      "label": "buildCard()",
+      "file_type": "code",
+      "source_file": "createTestCards.js",
+      "source_location": "L11",
+      "id": "src_createtestcards_buildcard",
+      "community": 6,
+      "norm_label": "buildcard()"
+    },
+    {
+      "label": "createTestCards()",
+      "file_type": "code",
+      "source_file": "createTestCards.js",
+      "source_location": "L26",
+      "id": "src_createtestcards_createtestcards",
+      "community": 6,
+      "norm_label": "createtestcards()"
+    },
+    {
+      "label": "Combobox.jsx",
+      "file_type": "code",
+      "source_file": "Combobox.jsx",
+      "source_location": "L1",
+      "id": "combobox_jsx",
+      "community": 11,
+      "norm_label": "combobox.jsx"
+    },
+    {
+      "label": "removeDiacritics()",
+      "file_type": "code",
+      "source_file": "Combobox.jsx",
+      "source_location": "L4",
+      "id": "src_combobox_removediacritics",
+      "community": 11,
+      "norm_label": "removediacritics()"
+    },
+    {
+      "label": "matchesSearch()",
+      "file_type": "code",
+      "source_file": "Combobox.jsx",
+      "source_location": "L8",
+      "id": "src_combobox_matchessearch",
+      "community": 11,
+      "norm_label": "matchessearch()"
+    },
+    {
+      "label": "Task.jsx",
+      "file_type": "code",
+      "source_file": "Task.jsx",
+      "source_location": "L1",
+      "id": "task_jsx",
+      "community": 5,
+      "norm_label": "task.jsx"
+    },
+    {
+      "label": "formatEquipo()",
+      "file_type": "code",
+      "source_file": "Task.jsx",
+      "source_location": "L5",
+      "id": "src_task_formatequipo",
+      "community": 5,
+      "norm_label": "formatequipo()"
+    },
+    {
+      "label": "getTaskType()",
+      "file_type": "code",
+      "source_file": "Task.jsx",
+      "source_location": "L14",
+      "id": "src_task_gettasktype",
+      "community": 5,
+      "norm_label": "gettasktype()"
+    },
+    {
+      "label": "EquipoLines()",
+      "file_type": "code",
+      "source_file": "Task.jsx",
+      "source_location": "L33",
+      "id": "src_task_equipolines",
+      "community": 5,
+      "norm_label": "equipolines()"
+    },
+    {
+      "label": "Task()",
+      "file_type": "code",
+      "source_file": "Task.jsx",
+      "source_location": "L46",
+      "id": "src_task_task",
+      "community": 5,
+      "norm_label": "task()"
+    },
+    {
+      "label": "App.js",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L1",
+      "id": "app_js",
+      "community": 2,
+      "norm_label": "app.js"
+    },
+    {
+      "label": "loadTasks()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L93",
+      "id": "src_app_loadtasks",
+      "community": 2,
+      "norm_label": "loadtasks()"
+    },
+    {
+      "label": "saveTasks()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L105",
+      "id": "src_app_savetasks",
+      "community": 6,
+      "norm_label": "savetasks()"
+    },
+    {
+      "label": "loadCache()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L109",
+      "id": "src_app_loadcache",
+      "community": 2,
+      "norm_label": "loadcache()"
+    },
+    {
+      "label": "formatDate()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L118",
+      "id": "src_app_formatdate",
+      "community": 2,
+      "norm_label": "formatdate()"
+    },
+    {
+      "label": "getMonday()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L130",
+      "id": "src_app_getmonday",
+      "community": 2,
+      "norm_label": "getmonday()"
+    },
+    {
+      "label": "getTodayDayIndex()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L138",
+      "id": "src_app_gettodaydayindex",
+      "community": 2,
+      "norm_label": "gettodaydayindex()"
+    },
+    {
+      "label": "sortTasks()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L143",
+      "id": "src_app_sorttasks",
+      "community": 2,
+      "norm_label": "sorttasks()"
+    },
+    {
+      "label": "castData()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L155",
+      "id": "src_app_castdata",
+      "community": 2,
+      "norm_label": "castdata()"
+    },
+    {
+      "label": "genId()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L170",
+      "id": "src_app_genid",
+      "community": 2,
+      "norm_label": "genid()"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "App.js",
+      "source_location": "L178",
+      "id": "src_app_app",
+      "community": 2,
+      "norm_label": "app()"
+    },
+    {
+      "label": "Weekly Task Scheduler",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_weekly_task_scheduler",
+      "community": 1,
+      "norm_label": "weekly task scheduler"
+    },
+    {
+      "label": "App.js",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_appjs",
+      "community": 1,
+      "norm_label": "app.js"
+    },
+    {
+      "label": "Task Fields",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Task fields",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_task_fields",
+      "community": 1,
+      "norm_label": "task fields"
+    },
+    {
+      "label": "Type C (Combinado)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Type C",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_type_c_combinado",
+      "community": 1,
+      "norm_label": "type c (combinado)"
+    },
+    {
+      "label": "castData",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Key state",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_castdata",
+      "community": 1,
+      "norm_label": "castdata"
+    },
+    {
+      "label": "react-beautiful-dnd",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Drag-and-drop",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_react_beautiful_dnd",
+      "community": 1,
+      "norm_label": "react-beautiful-dnd"
+    },
+    {
+      "label": "Mobile Cross-Day Drag",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Mobile cross-day drag",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_mobile_cross_day_drag",
+      "community": 1,
+      "norm_label": "mobile cross-day drag"
+    },
+    {
+      "label": "CSS Variables",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "CSS variables",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_css_variables",
+      "community": 1,
+      "norm_label": "css variables"
+    },
+    {
+      "label": "localStorage",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "claude_localstorage",
+      "community": 1,
+      "norm_label": "localstorage"
+    },
+    {
+      "label": "Create React App",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_create_react_app",
+      "community": 1,
+      "norm_label": "create react app"
+    },
+    {
+      "label": "Combobox Component",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Components",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_combobox_component",
+      "community": 0,
+      "norm_label": "combobox component"
+    },
+    {
+      "label": "CreateNewTask.jsx",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_createnextask",
+      "community": 0,
+      "norm_label": "createnewtask.jsx"
+    },
+    {
+      "label": "supabaseClient.js",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Steps",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_supabaseclient",
+      "community": 0,
+      "norm_label": "supabaseclient.js"
+    },
+    {
+      "label": "clientesList",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_clienteslist",
+      "community": 0,
+      "norm_label": "clienteslist"
+    },
+    {
+      "label": "obrasList",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_obraslist",
+      "community": 0,
+      "norm_label": "obraslist"
+    },
+    {
+      "label": "Supabase Project",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_supabase_project",
+      "community": 0,
+      "norm_label": "supabase project"
+    },
+    {
+      "label": "LoginForm.jsx",
+      "file_type": "document",
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "plan_loginform",
+      "community": 0,
+      "norm_label": "loginform.jsx"
+    },
+    {
+      "label": "ClienteSelect",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Overview",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_clienteselect",
+      "community": 0,
+      "norm_label": "clienteselect"
+    },
+    {
+      "label": "ObraSelect",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Overview",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_obraselect",
+      "community": 0,
+      "norm_label": "obraselect"
+    },
+    {
+      "label": "Clientes Table (Supabase)",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_clientes_table",
+      "community": 0,
+      "norm_label": "clientes table (supabase)"
+    },
+    {
+      "label": "Obras Table (Supabase)",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_obras_table",
+      "community": 0,
+      "norm_label": "obras table (supabase)"
+    },
+    {
+      "label": "Cliente Model",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_cliente_model",
+      "community": 0,
+      "norm_label": "cliente model"
+    },
+    {
+      "label": "Obra Model",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_obra_model",
+      "community": 0,
+      "norm_label": "obra model"
+    },
+    {
+      "label": "PostgresDB (postgres_db.dart)",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "API helpers",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_postgres_db",
+      "community": 0,
+      "norm_label": "postgresdb (postgres_db.dart)"
+    },
+    {
+      "label": "Fiscal Regime",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Fiscal regime values",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_fiscal_regime",
+      "community": 0,
+      "norm_label": "fiscal regime"
+    },
+    {
+      "label": "BLoC Cache",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Loading",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_bloc_cache",
+      "community": 0,
+      "norm_label": "bloc cache"
+    },
+    {
+      "label": "lastFleteFecha DB Trigger",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_lastfletefecha_trigger",
+      "community": 0,
+      "norm_label": "lastfletefecha db trigger"
+    },
+    {
+      "label": "Min/Max Naming Convention",
+      "file_type": "document",
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Naming convention",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "prompt_min_max_naming",
+      "community": 0,
+      "norm_label": "min/max naming convention"
+    },
+    {
+      "label": "index.html Root Entry Point",
+      "file_type": "document",
+      "source_file": "public/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_html_root",
+      "community": 1,
+      "norm_label": "index.html root entry point"
+    },
+    {
+      "label": "Web App Manifest",
+      "file_type": "document",
+      "source_file": "public/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_html_manifest",
+      "community": 1,
+      "norm_label": "web app manifest"
+    },
+    {
+      "label": "logo512.png",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "logo512_png",
+      "community": 3,
+      "norm_label": "logo512.png"
+    },
+    {
+      "label": "React Logo",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "react_logo",
+      "community": 3,
+      "norm_label": "react logo"
+    },
+    {
+      "label": "React Framework",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "react_framework",
+      "community": 3,
+      "norm_label": "react framework"
+    },
+    {
+      "label": "ruta-js Application",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ruta_js_app",
+      "community": 3,
+      "norm_label": "ruta-js application"
+    },
+    {
+      "label": "Light Blue Color (#61DAFB)",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "light_blue_color",
+      "community": 3,
+      "norm_label": "light blue color (#61dafb)"
+    },
+    {
+      "label": "Atom Icon (3 elliptical orbits + nucleus)",
+      "file_type": "image",
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "atom_icon",
+      "community": 3,
+      "norm_label": "atom icon (3 elliptical orbits + nucleus)"
+    },
+    {
+      "label": "logo192.png - React Logo Icon (192px)",
+      "file_type": "image",
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "logo192_image",
+      "community": 3,
+      "norm_label": "logo192.png - react logo icon (192px)"
+    },
+    {
+      "label": "Create React App",
+      "file_type": null,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "create_react_app",
+      "community": 3,
+      "norm_label": "create react app"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "reportWebVitals.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "reportwebvitals_js",
+      "target": "src_reportwebvitals_reportwebvitals",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Column.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "column_jsx",
+      "target": "src_column_getcolumnparts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Column.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "column_jsx",
+      "target": "src_column_column",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "Column.jsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "src_column_column",
+      "target": "src_column_getcolumnparts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "createnewtask_jsx",
+      "target": "src_createnewtask_formatdatelabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "createnewtask_jsx",
+      "target": "src_createnewtask_modalcreatenewtask",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "CreateNewTask.jsx",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "src_createnewtask_modalcreatenewtask",
+      "target": "src_createnewtask_formatdatelabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "serviceworkerregistration_js",
+      "target": "src_serviceworkerregistration_register",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "serviceworkerregistration_js",
+      "target": "src_serviceworkerregistration_registervalidsw",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "serviceworkerregistration_js",
+      "target": "src_serviceworkerregistration_checkvalidserviceworker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "serviceworkerregistration_js",
+      "target": "src_serviceworkerregistration_unregister",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "serviceWorkerRegistration.js",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "src_serviceworkerregistration_registervalidsw",
+      "target": "src_serviceworkerregistration_register",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.test.js",
+      "source_location": "L216",
+      "weight": 1.0,
+      "source": "app_test_js",
+      "target": "src_app_test_hittest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "LoginForm.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "loginform_jsx",
+      "target": "src_loginform_loginform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "NavBar.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "navbar_jsx",
+      "target": "src_navbar_todaylocalstr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "NavBar.jsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "navbar_jsx",
+      "target": "src_navbar_navbar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "NavBar.jsx",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "src_navbar_navbar",
+      "target": "src_navbar_todaylocalstr",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabaseClient.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "supabaseclient_js",
+      "target": "src_supabaseclient_fetchclientes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabaseClient.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "supabaseclient_js",
+      "target": "src_supabaseclient_fetchobras",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "createTestCards.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "createtestcards_js",
+      "target": "src_createtestcards_pick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "createTestCards.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "createtestcards_js",
+      "target": "src_createtestcards_buildcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "createTestCards.js",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "createtestcards_js",
+      "target": "src_createtestcards_createtestcards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "createTestCards.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "src_createtestcards_buildcard",
+      "target": "src_createtestcards_pick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "createTestCards.js",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "src_createtestcards_createtestcards",
+      "target": "src_app_savetasks"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Combobox.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "combobox_jsx",
+      "target": "src_combobox_removediacritics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Combobox.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "combobox_jsx",
+      "target": "src_combobox_matchessearch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "Combobox.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "src_combobox_matchessearch",
+      "target": "src_combobox_removediacritics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "task_jsx",
+      "target": "src_task_formatequipo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "task_jsx",
+      "target": "src_task_gettasktype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "task_jsx",
+      "target": "src_task_equipolines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "task_jsx",
+      "target": "src_task_task",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "src_task_equipolines",
+      "target": "src_task_formatequipo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "Task.jsx",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "src_task_task",
+      "target": "src_task_gettasktype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_loadtasks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_savetasks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_loadcache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_getmonday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_gettodaydayindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_sorttasks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_castdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_genid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L178",
+      "weight": 1.0,
+      "source": "app_js",
+      "target": "src_app_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "src_app_castdata",
+      "target": "src_app_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_app_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_app_getmonday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "App.js",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "src_app_castdata",
+      "target": "src_app_sorttasks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "state_managed_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "claude_weekly_task_scheduler",
+      "target": "claude_appjs"
+    },
+    {
+      "relation": "has_schema",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Task fields",
+      "weight": 1.0,
+      "source": "claude_weekly_task_scheduler",
+      "target": "claude_task_fields"
+    },
+    {
+      "relation": "uses_library",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Drag-and-drop",
+      "weight": 1.0,
+      "source": "claude_weekly_task_scheduler",
+      "target": "claude_react_beautiful_dnd"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "CSS variables",
+      "weight": 1.0,
+      "source": "claude_weekly_task_scheduler",
+      "target": "claude_css_variables"
+    },
+    {
+      "relation": "bootstraps",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_create_react_app",
+      "target": "claude_weekly_task_scheduler"
+    },
+    {
+      "relation": "entry_point_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "index_html_root",
+      "target": "claude_weekly_task_scheduler"
+    },
+    {
+      "relation": "persists_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "claude_appjs",
+      "target": "claude_localstorage"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Key state",
+      "weight": 1.0,
+      "source": "claude_appjs",
+      "target": "claude_castdata"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Mobile cross-day drag",
+      "weight": 1.0,
+      "source": "claude_appjs",
+      "target": "claude_mobile_cross_day_drag"
+    },
+    {
+      "relation": "loads_and_owns",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Data loading",
+      "weight": 1.0,
+      "source": "claude_appjs",
+      "target": "plan_clienteslist"
+    },
+    {
+      "relation": "loads_and_owns",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Data loading",
+      "weight": 1.0,
+      "source": "claude_appjs",
+      "target": "plan_obraslist"
+    },
+    {
+      "relation": "includes_type",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Type C",
+      "weight": 1.0,
+      "source": "claude_task_fields",
+      "target": "claude_type_c_combinado"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "CLAUDE.md",
+      "source_location": "Task fields",
+      "weight": 1.0,
+      "source": "claude_task_fields",
+      "target": "prompt_min_max_naming"
+    },
+    {
+      "relation": "workaround_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "Mobile cross-day drag",
+      "weight": 1.0,
+      "source": "claude_mobile_cross_day_drag",
+      "target": "claude_react_beautiful_dnd"
+    },
+    {
+      "relation": "used_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Components",
+      "weight": 1.0,
+      "source": "plan_combobox_component",
+      "target": "plan_createnextask"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "prompt_clienteselect",
+      "target": "plan_combobox_component"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": null,
+      "weight": 0.85,
+      "source": "prompt_obraselect",
+      "target": "plan_combobox_component"
+    },
+    {
+      "relation": "receives_prop",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "plan_createnextask",
+      "target": "plan_clienteslist"
+    },
+    {
+      "relation": "receives_prop",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "plan_createnextask",
+      "target": "plan_obraslist"
+    },
+    {
+      "relation": "fetches",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Steps",
+      "weight": 1.0,
+      "source": "plan_supabaseclient",
+      "target": "plan_clienteslist"
+    },
+    {
+      "relation": "fetches",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Steps",
+      "weight": 1.0,
+      "source": "plan_supabaseclient",
+      "target": "plan_obraslist"
+    },
+    {
+      "relation": "connects_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "weight": 1.0,
+      "source": "plan_supabaseclient",
+      "target": "plan_supabase_project"
+    },
+    {
+      "relation": "data_from",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "plan_clienteslist",
+      "target": "prompt_clientes_table"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": null,
+      "weight": 0.75,
+      "source": "prompt_bloc_cache",
+      "target": "plan_clienteslist"
+    },
+    {
+      "relation": "data_from",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Architecture",
+      "weight": 1.0,
+      "source": "plan_obraslist",
+      "target": "prompt_obras_table"
+    },
+    {
+      "relation": "authenticates_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "weight": 1.0,
+      "source": "plan_loginform",
+      "target": "plan_supabase_project"
+    },
+    {
+      "relation": "hosts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "weight": 1.0,
+      "source": "plan_supabase_project",
+      "target": "prompt_clientes_table"
+    },
+    {
+      "relation": "hosts",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md",
+      "source_location": "Decisions",
+      "weight": 1.0,
+      "source": "plan_supabase_project",
+      "target": "prompt_obras_table"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Loading",
+      "weight": 1.0,
+      "source": "prompt_clienteselect",
+      "target": "prompt_clientes_table"
+    },
+    {
+      "relation": "reads_from",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Loading",
+      "weight": 1.0,
+      "source": "prompt_clienteselect",
+      "target": "prompt_bloc_cache"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Loading",
+      "weight": 1.0,
+      "source": "prompt_obraselect",
+      "target": "prompt_obras_table"
+    },
+    {
+      "relation": "calls_directly",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Loading",
+      "weight": 1.0,
+      "source": "prompt_obraselect",
+      "target": "prompt_postgres_db"
+    },
+    {
+      "relation": "mapped_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "weight": 1.0,
+      "source": "prompt_clientes_table",
+      "target": "prompt_cliente_model"
+    },
+    {
+      "relation": "has_trigger",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "weight": 1.0,
+      "source": "prompt_clientes_table",
+      "target": "prompt_lastfletefecha_trigger"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Fiscal regime values",
+      "weight": 1.0,
+      "source": "prompt_clientes_table",
+      "target": "prompt_fiscal_regime"
+    },
+    {
+      "relation": "follows_convention",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Naming convention",
+      "weight": 1.0,
+      "source": "prompt_clientes_table",
+      "target": "prompt_min_max_naming"
+    },
+    {
+      "relation": "foreign_key_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "weight": 1.0,
+      "source": "prompt_obras_table",
+      "target": "prompt_clientes_table"
+    },
+    {
+      "relation": "mapped_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "weight": 1.0,
+      "source": "prompt_obras_table",
+      "target": "prompt_obra_model"
+    },
+    {
+      "relation": "has_trigger",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Data Schema",
+      "weight": 1.0,
+      "source": "prompt_obras_table",
+      "target": "prompt_lastfletefecha_trigger"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Fiscal regime values",
+      "weight": 1.0,
+      "source": "prompt_obras_table",
+      "target": "prompt_fiscal_regime"
+    },
+    {
+      "relation": "follows_convention",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md",
+      "source_location": "Naming convention",
+      "weight": 1.0,
+      "source": "prompt_obras_table",
+      "target": "prompt_min_max_naming"
+    },
+    {
+      "relation": "links",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "index_html_root",
+      "target": "index_html_manifest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "logo512_png",
+      "target": "react_logo"
+    },
+    {
+      "relation": "app_icon_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "logo512_png",
+      "target": "ruta_js_app"
+    },
+    {
+      "relation": "default_cra_asset_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "logo512_png",
+      "target": "react_framework"
+    },
+    {
+      "relation": "represents",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "react_logo",
+      "target": "react_framework"
+    },
+    {
+      "relation": "uses_visual_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "react_logo",
+      "target": "atom_icon"
+    },
+    {
+      "relation": "styled_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo512.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "react_logo",
+      "target": "light_blue_color"
+    },
+    {
+      "relation": "visual_style_cyan_blue",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "react_logo",
+      "target": "logo192_image"
+    },
+    {
+      "relation": "built_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "ruta_js_app",
+      "target": "react_framework"
+    },
+    {
+      "relation": "is_app_icon_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "logo192_image",
+      "target": "ruta_js_app"
+    },
+    {
+      "relation": "generated_by",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "public/logo192.png",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "logo192_image",
+      "target": "create_react_app"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "he_combobox_data_flow",
+      "label": "Combobox Data Flow: App.js loads Supabase data and passes to CreateNewTask via Combobox",
+      "nodes": [
+        "claude_appjs",
+        "plan_supabaseclient",
+        "plan_createnextask",
+        "plan_combobox_component"
+      ],
+      "relation": "data_pipeline",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md"
+    },
+    {
+      "id": "he_cliente_obra_fk_pattern",
+      "label": "Cliente-Obra FK Pattern: clienteMin links clientes/obras tables using Min/Max naming convention",
+      "nodes": [
+        "prompt_clientes_table",
+        "prompt_obras_table",
+        "prompt_min_max_naming",
+        "claude_task_fields"
+      ],
+      "relation": "shared_schema_pattern",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PROMPT_SELECT_CLIENTE_OBRA.md"
+    },
+    {
+      "id": "he_supabase_shared_project",
+      "label": "Shared Supabase project between Flutter app and ruta-js React app",
+      "nodes": [
+        "plan_supabase_project",
+        "plan_loginform",
+        "plan_supabaseclient"
+      ],
+      "relation": "shared_backend",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PLAN_CLIENTE_OBRA_SELECT.md"
+    }
+  ]
+}
