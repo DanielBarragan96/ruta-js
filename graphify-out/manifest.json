@@ -1,4 +1,16 @@
 {
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/build.rs": {
+    "mtime": 1781141202.373864,
+    "hash": "9e949d967099bcc42cfa6f8765a6c938"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/src/lib.rs": {
+    "mtime": 1781141202.3787837,
+    "hash": "855db0da2ef4c69f1fe17db61a7859f1"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/src/main.rs": {
+    "mtime": 1781141202.3788788,
+    "hash": "744d17489cc4e580f67879b318b79029"
+  },
   "/Users/dabarrag/projects/javascript/ruta-js/src/reportWebVitals.js": {
     "mtime": 1679610339.2433503,
     "hash": "240e2381f826a9bb84d178b29b7b9abe"
@@ -90,5 +102,61 @@
   "/Users/dabarrag/projects/javascript/ruta-js/public/logo192.png": {
     "mtime": 1679610339.2411637,
     "hash": "33dbdd0177549353eeeb785d02c294af"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/icon.png": {
+    "mtime": 1781141202.3786051,
+    "hash": "9fdc4367276aafdd2c05ac214e9553c7"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square30x30Logo.png": {
+    "mtime": 1781141202.3756187,
+    "hash": "011e9cb456309157a9fc78c978248e00"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square150x150Logo.png": {
+    "mtime": 1781141202.3751829,
+    "hash": "084d20bce8096367fc694dfdf72c8ac5"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/StoreLogo.png": {
+    "mtime": 1781141202.376618,
+    "hash": "387b412d411bbd532dd3302d3948bf0e"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square107x107Logo.png": {
+    "mtime": 1781141202.3745673,
+    "hash": "d4bc38359e2c01daa08354c55fa4df7c"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square89x89Logo.png": {
+    "mtime": 1781141202.3765333,
+    "hash": "9f91ee8e1c1232ebde61c64d7923038f"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square310x310Logo.png": {
+    "mtime": 1781141202.3762505,
+    "hash": "832231852e8e683e6aa2b690d194bdd2"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square142x142Logo.png": {
+    "mtime": 1781141202.3746545,
+    "hash": "1e9c0358705085439e5c989fcbd6e988"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/128x128.png": {
+    "mtime": 1781141202.3742533,
+    "hash": "3a0071e4ad670fad0329d3a5e83d0bf9"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square284x284Logo.png": {
+    "mtime": 1781141202.3754952,
+    "hash": "6a936fe84398f24b7a63a36bddfd58d7"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/32x32.png": {
+    "mtime": 1781141202.3744764,
+    "hash": "faf8ee6541b945b98db35239b8a75715"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square44x44Logo.png": {
+    "mtime": 1781141202.37634,
+    "hash": "a06297a35014e770cc33756fafa3b3a8"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/Square71x71Logo.png": {
+    "mtime": 1781141202.3764393,
+    "hash": "a3c80a0af688359094aa685881570eed"
+  },
+  "/Users/dabarrag/projects/javascript/ruta-js/src-tauri/icons/128x128@2x.png": {
+    "mtime": 1781141202.3743887,
+    "hash": "eab2be12c5f8aeaf104a4695dd9171df"
   }
 }
